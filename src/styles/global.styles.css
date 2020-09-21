@@ -1,0 +1,59 @@
+@import url("https://fonts.googleapis.com/css2?family=Dosis:wght@200;300;400;500;600;700;800&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@300;400;700&display=swap");
+:root {
+  --primaryColor: #1b1b1b;
+  --mainWhite: #fff;
+  --offWhite: #f7f7f7;
+  --mainBlack: #222;
+  --mainGray: #ececec;
+  --darkGray: #afafaf;
+  --mainTransition: all 0.3s linear;
+  --lightShadow: 2px 5px 3px 0px rgba(0, 0, 0, 0.5);
+  --darkShadow: 4px 10px 5px 0px rgba(0, 0, 0, 0.5);
+  --mainBorderRadius: 0.25rem;
+  --maxWidth: 40rem;
+  --smallWidth: 85vw;
+  --fullWidth: 1170px;
+  --mainSpacing: 0.3rem;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: "Roboto Condensed", sans-serif;
+  color: var(--mainBlack);
+  line-height: 1.4;
+  font-size: 1rem;
+  font-weight: 300;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: Dosis, sans-serif;
+  font-weight: 300;
+  margin-bottom: 1.25rem;
+  letter-spacing: var(--mainSpacing);
+}
+
+a {
+  text-decoration: none;
+  color: black;
+}
+
+ul, li {
+  list-style-type: none;
+}
+
+img {
+  width: 100%;
+  display: block;
+}
+
+@media screen and (max-width: 800px) {
+  body {
+    padding: 0px;
+  }
+}
