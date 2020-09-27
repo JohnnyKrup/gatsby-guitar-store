@@ -39,9 +39,6 @@ const CategoryPreview = () => {
     allStrapiCategory: { categories },
   } = data
 
-  // console.log(categories)
-
-  // const { id, title, slug, isImageLarge, image: {sharp: {fluid}} } = categories
   return (
     <CategoryPreviewStyle>
       <Title title="Shop" />
@@ -70,7 +67,7 @@ const CategoryPreview = () => {
               {/* <Img fluid={fluid} /> */}
               <ContentStyle>
                 <h1 className="title">{title}</h1>
-                <span className="subtitle">DETAILS</span>
+                <span className="subtitle">- DETAILS -</span>
               </ContentStyle>
             </CategoryItemStyle>
           )

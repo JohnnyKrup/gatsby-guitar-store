@@ -1,10 +1,9 @@
 import React from "react"
-import { graphql } from "gatsby"
+import { graphql, navigate } from "gatsby"
 
 import Layout from "../components/layout.component"
 import Hero from "../components/hero/hero.component"
 import Banner from "../components/banner/banner.component"
-import CategoryList from "../components/category-list/category-list.component"
 
 import styled from "styled-components"
 import BackgroundImage from "gatsby-background-image"
@@ -31,15 +30,25 @@ const categoryListsTemplate = ({ data }) => {
       </Hero>
       <ItemsStyle>
         {products.map(product => {
+          // console.log(product)
+          const {
+            strapiId,
+            price,
+            title,
+            slug,
+            brand: { brandTitle },
+          } = product
+
+          const prodImg = product.images[0].localFile.childImageSharp.fluid
           return (
-            <ItemStyle>
-              <BackgroundImage
-                fluid={
-                  product.images[0].formats.thumbnail.childImageSharp.fluid
-                }
-              >
-                <div>Details</div>
-              </BackgroundImage>
+            <ItemStyle key={strapiId} onClick={() => navigate(`/${slug}`)}>
+              <BGImageStyle fluid={prodImg}>
+                <TextStyle>
+                  <div className="brand">- {brandTitle} -</div>
+                  <div className="title">{title}</div>
+                  <div className="title">CHF {price}</div>
+                </TextStyle>
+              </BGImageStyle>
             </ItemStyle>
           )
         })}
@@ -49,11 +58,13 @@ const categoryListsTemplate = ({ data }) => {
 }
 
 export const ItemsStyle = styled.div`
-  width: 100%;
+  width: 95vw;
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
   margin: 30px 0;
+  padding: 0 2%;
+  cursor: pointer;
 
   @media screen and (max-width: 800px) {
     display: grid;
@@ -61,15 +72,45 @@ export const ItemsStyle = styled.div`
     grid-gap: 15px;
   }
 `
-
 export const ItemStyle = styled.div`
-  width: 30vw;
-  height: 350px;
-  margin: 10px;
-  margin-bottom: 20px;
+  width: 26vw;
+  height: 450px;
+  margin: 15px;
 
-  & div {
-    height: 100%;
+  flex: 1 1 auto;
+  align-items: center;
+  border: 1px solid black;
+`
+
+export const BGImageStyle = styled(BackgroundImage)`
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`
+
+export const TextStyle = styled.div`
+  height: 90px;
+  padding: 0 25px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid black;
+  opacity: 0.85;
+  /* thanks to this positioning the content div remains in the middle of the 
+  parent container no matter what */
+  position: absolute;
+  background: #fff;
+
+  & .brand {
+    text-align: center;
+    text-transform: uppercase;
+  }
+
+  & .title {
+    font-weight: 700;
+    text-align: center;
   }
 `
 
@@ -95,16 +136,14 @@ export const query = graphql`
         price
         slug
         brand {
-          title
+          brandTitle: title
           slug
         }
         images {
-          formats {
-            thumbnail {
-              childImageSharp {
-                fluid {
-                  ...GatsbyImageSharpFluid_withWebp
-                }
+          localFile {
+            childImageSharp {
+              fluid {
+                ...GatsbyImageSharpFluid_withWebp
               }
             }
           }
