@@ -2,19 +2,15 @@ import React from "react"
 
 import CategoryListItem from "./category-list-item/category-list-item.component"
 
-import { CategoryListStyle, ItemsStyle } from "./category-list.styles"
+import { ItemsStyle } from "./category-list.styles"
 
 const CategoryList = ({ products }) => {
   return (
-    // <CategoryListStyle>
-    <div>
+    <ItemsStyle>
       {products.map(product => {
-        const { strapiId, ...otherProps } = product
-        console.log({ ...otherProps })
-        return <CategoryListItem key={strapiId} {...otherProps} />
+        return <CategoryListItem product={product} />
       })}
-    </div>
-    // </CategoryListStyle>
+    </ItemsStyle>
   )
 }
 

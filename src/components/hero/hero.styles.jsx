@@ -3,7 +3,7 @@ import BackgroundImage from "gatsby-background-image"
 import styled from "styled-components"
 
 export const BackgroundImageStyle = styled(BackgroundImage)`
-  min-height: ${({ home }) => (home ? "calc(100vh - 85px)" : "35vh")};
+  min-height: ${({ home }) => (home ? "calc(100vh - 85px)" : "45vh")};
   width: 100%;
   background: ${props =>
     props.home
@@ -15,4 +15,8 @@ export const BackgroundImageStyle = styled(BackgroundImage)`
   display: flex;
   justify-content: center;
   align-items: center;
+
+  -webkit-box-shadow: inset 0px -15px 5px -16px rgba(0, 0, 0, 0.75);
+  -moz-box-shadow: inset 0px -15px 5px -16px rgba(0, 0, 0, 0.75);
+  box-shadow: inset 0px -15px 5px -16px rgba(0, 0, 0, 0.75);
 `

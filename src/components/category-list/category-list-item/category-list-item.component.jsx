@@ -1,27 +1,28 @@
 import { navigate } from "gatsby"
 import React from "react"
 
-import {
-  ListItemFooterStyle,
-  ListItemImageStyle,
-  ListItemStyle,
-  ListItemButtonStyle,
-} from "./category-list-item.styles"
+import { ItemStyle, BGImageStyle, TextStyle } from "./category-list-item.styles"
 
-const CategoryListItem = ({ title, price, images, slug }) => {
-  const img = images[0].formats.thumbnail.childImageSharp.fluid
+const CategoryListItem = ({ product }) => {
+  const {
+    strapiId,
+    price,
+    title,
+    slug,
+    brand: { brandTitle },
+  } = product
+
+  const prodImg = product.images[0].localFile.childImageSharp.fluid
   return (
-    <ListItemStyle>
-      <ListItemImageStyle fluid={img}>
-        <ListItemFooterStyle>
-          <div className="name">{title}</div>
-          <div className="price">{price}</div>
-        </ListItemFooterStyle>
-        <ListItemButtonStyle onClick={() => navigate(`/${slug}`)}>
-          MEHR
-        </ListItemButtonStyle>
-      </ListItemImageStyle>
-    </ListItemStyle>
+    <ItemStyle key={strapiId} onClick={() => navigate(`/${slug}`)}>
+      <BGImageStyle fluid={prodImg}>
+        <TextStyle>
+          <div className="brand">- {brandTitle} -</div>
+          <div className="title">{title}</div>
+          <div className="title">CHF {price}</div>
+        </TextStyle>
+      </BGImageStyle>
+    </ItemStyle>
   )
 }
 

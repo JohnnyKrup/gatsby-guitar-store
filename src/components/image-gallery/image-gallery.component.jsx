@@ -16,6 +16,7 @@ const ImageGallery = ({ images, imgWidth }) => {
             <MainImageStyle
               id="prevImg"
               fluid={mainImage === null ? images[0] : mainImage}
+              imgWidth={imgWidth}
             />
           </MainImageContainerStyle>
           <ThumbnailsContainerStyle len={len} imgWidth={imgWidth}>
@@ -48,7 +49,7 @@ export const MainImageContainerStyle = styled.div`
 `
 
 export const MainImageStyle = styled(Img)`
-  height: 600px;
+  height: ${({ imgWidth }) => imgWidth || "300px"};
 `
 
 export const ThumbnailsContainerStyle = styled.div`

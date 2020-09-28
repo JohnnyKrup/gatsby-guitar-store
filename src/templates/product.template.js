@@ -32,13 +32,13 @@ const productTemplate = ({ data: { strapiProduct } }) => {
     return image.localFile.childImageSharp.fluid
   })
 
+  const headerImg = strapiProduct.ImageHeader.childImageSharp.fluid
+
   // console.log(strapiProduct)
 
   return (
     <Layout>
-      <Hero>
-        <Title title={brandTitle} />
-      </Hero>
+      <Hero img={headerImg}></Hero>
       <BreadcrumbContainerStyle>
         <span>
           <span>.. / </span>
@@ -56,7 +56,7 @@ const productTemplate = ({ data: { strapiProduct } }) => {
         </span>
       </BreadcrumbContainerStyle>
       <SectionStyle>
-        <ImageGallery images={images} imgWidth="600px" />
+        <ImageGallery images={images} imgWidth="500px" />
 
         <ArticleInfoStyle>
           <h1 className="title">{title}</h1>
@@ -121,6 +121,7 @@ const productTemplate = ({ data: { strapiProduct } }) => {
 export const SectionStyle = styled.section`
   display: flex;
   padding: 40px 5%;
+  max-width: 1200px;
 `
 
 export const BreadcrumbContainerStyle = styled.div`
@@ -136,6 +137,7 @@ export const ArticleInfoStyle = styled.article`
   display: flex;
   flex-direction: column;
   align-items: center;
+  margin-left: 25px;
 
   & .title {
     font-size: 2rem;
@@ -179,6 +181,13 @@ export const query = graphql`
             fluid {
               ...GatsbyImageSharpFluid_withWebp
             }
+          }
+        }
+      }
+      ImageHeader {
+        childImageSharp {
+          fluid {
+            ...GatsbyImageSharpFluid_withWebp
           }
         }
       }

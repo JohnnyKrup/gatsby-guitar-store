@@ -2,12 +2,20 @@ import styled from "styled-components"
 import { Link } from "gatsby"
 
 export const NavbarStyle = styled.div`
-  height: 70px;
+  position: fixed;
+  top: 0;
   width: 100%;
+  height: 70px;
+  z-index: 1000000000000000000000;
   display: flex;
   justify-content: space-between;
   margin-bottom: 25px;
   padding: 0 100px;
+  background: #fff;
+
+  -webkit-box-shadow: 0px -3px 3px 3px rgba(0, 0, 0, 0.75);
+  -moz-box-shadow: 0px -3px 3px 3px rgba(0, 0, 0, 0.75);
+  box-shadow: 0px -3px 3px 3px rgba(0, 0, 0, 0.75);
 
   @media screen and (max-width: 800px) {
     height: 60px;
@@ -19,11 +27,11 @@ export const NavbarStyle = styled.div`
 export const LogoStyle = styled(Link)`
   height: 100%;
   width: 70px;
-  padding: 25px;
+  padding-top: 15px;
 
   img {
-    width: 48px;
-    height: 48px;
+    width: 42px;
+    height: 42px;
   }
 
   @media screen and (max-width: 800px) {

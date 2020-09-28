@@ -1,9 +1,7 @@
 import React from "react"
 import { graphql, useStaticQuery, navigate } from "gatsby"
 
-// import CategoryItem from "./category-item/category-item.component"
 import Title from "../title/title.component"
-import Img from "gatsby-background-image"
 
 import {
   CategoryPreviewStyle,
@@ -28,6 +26,13 @@ const query = graphql`
             }
           }
         }
+        image_header {
+          childImageSharp {
+            header: fluid {
+              ...GatsbyImageSharpFluid
+            }
+          }
+        }
       }
     }
   }
@@ -44,7 +49,6 @@ const CategoryPreview = () => {
       <Title title="Shop" />
       <TileLayoutStyle>
         {categories.map(category => {
-          // <CategoryItem key={id} {...otherCategoryProps} />
           const {
             id,
             title,
@@ -52,6 +56,9 @@ const CategoryPreview = () => {
             isImageLarge,
             image: {
               sharp: { fluid },
+            },
+            image_header: {
+              childImageSharp: { header },
             },
           } = category
 
@@ -62,9 +69,9 @@ const CategoryPreview = () => {
               onClick={() => navigate(`/${slug}`)}
               isImageLarge={isImageLarge}
             >
-              {/* style={{ backgroundImage: `url(${fluid.src})` }} */}
-              <CategoryBackgroundImageStyle fluid={fluid} />
-              {/* <Img fluid={fluid} /> */}
+              <CategoryBackgroundImageStyle
+                fluid={isImageLarge ? header : fluid}
+              />
               <ContentStyle>
                 <h1 className="title">{title}</h1>
                 <span className="subtitle">- DETAILS -</span>
