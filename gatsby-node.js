@@ -61,7 +61,7 @@ exports.onCreateNode = async ({
 }) => {
   const { createNode } = actions
 
-  let multiImages = node.images
+  let multiImages = node.gallery_images
 
   //console.log("node.internal.type: ", node.internal.type)
   if (node.internal.type === "StrapiProduct") {

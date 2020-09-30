@@ -1,15 +1,18 @@
-import React from "react"
+import React, { useContext } from "react"
 import { graphql, navigate } from "gatsby"
+
+import { CartContext } from "../context/Cart.Context"
 
 import styled from "styled-components"
 
 import Hero from "../components/hero/hero.component"
 import Layout from "../components/layout.component"
-import Title from "../components/title/title.component"
+// import Title from "../components/title/title.component"
 import CustomButton from "../components/custom-button/custom-button.component"
 import ImageGallery from "../components/image-gallery/image-gallery.component"
 
-const productTemplate = ({ data: { strapiProduct } }) => {
+const ProductTemplate = ({ data: { strapiProduct } }) => {
+  const { addItem } = useContext(CartContext)
   const {
     title,
     slug,
@@ -28,7 +31,7 @@ const productTemplate = ({ data: { strapiProduct } }) => {
       Sattel,
     },
   } = strapiProduct
-  const images = strapiProduct.images.map(image => {
+  const images = strapiProduct.gallery_images.map(image => {
     return image.localFile.childImageSharp.fluid
   })
 
@@ -111,7 +114,9 @@ const productTemplate = ({ data: { strapiProduct } }) => {
               )}
             </ul>
           </div>
-          <CustomButton>In den Warenkorb</CustomButton>
+          <CustomButton onClick={() => addItem(strapiProduct)}>
+            In den Warenkorb
+          </CustomButton>
         </ArticleInfoStyle>
       </SectionStyle>
     </Layout>
@@ -175,7 +180,7 @@ export const query = graphql`
       description
       slug
       price
-      images {
+      gallery_images {
         localFile {
           childImageSharp {
             fluid {
@@ -185,6 +190,13 @@ export const query = graphql`
         }
       }
       ImageHeader {
+        childImageSharp {
+          fluid {
+            ...GatsbyImageSharpFluid_withWebp
+          }
+        }
+      }
+      product_image {
         childImageSharp {
           fluid {
             ...GatsbyImageSharpFluid_withWebp
@@ -214,4 +226,4 @@ export const query = graphql`
   }
 `
 
-export default productTemplate
+export default ProductTemplate

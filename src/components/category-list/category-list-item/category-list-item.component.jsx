@@ -9,13 +9,15 @@ const CategoryListItem = ({ product }) => {
     price,
     title,
     slug,
+    product_image: {
+      childImageSharp: { fluid },
+    },
     brand: { brandTitle },
   } = product
 
-  const prodImg = product.images[0].localFile.childImageSharp.fluid
   return (
     <ItemStyle key={strapiId} onClick={() => navigate(`/${slug}`)}>
-      <BGImageStyle fluid={prodImg}>
+      <BGImageStyle fluid={fluid}>
         <TextStyle>
           <div className="brand">- {brandTitle} -</div>
           <div className="title">{title}</div>

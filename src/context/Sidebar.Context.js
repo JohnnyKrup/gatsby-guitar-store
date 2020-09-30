@@ -1,9 +1,9 @@
 import React, { useState } from "react"
 import sublinks from "../constants/links"
 
-const GatsbyContext = React.createContext()
+const SidebarContext = React.createContext()
 
-const GatsbyProvider = ({ children }) => {
+const SidebarProvider = ({ children }) => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false)
   const [links, setLinks] = useState(sublinks)
 
@@ -16,12 +16,12 @@ const GatsbyProvider = ({ children }) => {
   }
 
   return (
-    <GatsbyContext.Provider
+    <SidebarContext.Provider
       value={{ isSidebarOpen, links, showSidebar, hideSidebar }}
     >
       {children}
-    </GatsbyContext.Provider>
+    </SidebarContext.Provider>
   )
 }
 
-export { GatsbyContext, GatsbyProvider }
+export { SidebarContext, SidebarProvider }

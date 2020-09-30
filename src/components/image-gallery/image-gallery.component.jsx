@@ -9,12 +9,11 @@ const ImageGallery = ({ images, imgWidth }) => {
   // console.log({ imgWidth })
 
   return (
-    <ArticleImageStyle>
+    <>
       {len > 0 && (
-        <>
+        <ArticleImageStyle>
           <MainImageContainerStyle imgWidth={imgWidth}>
             <MainImageStyle
-              id="prevImg"
               fluid={mainImage === null ? images[0] : mainImage}
               imgWidth={imgWidth}
             />
@@ -28,9 +27,9 @@ const ImageGallery = ({ images, imgWidth }) => {
               )
             })}
           </ThumbnailsContainerStyle>
-        </>
+        </ArticleImageStyle>
       )}
-    </ArticleImageStyle>
+    </>
   )
 }
 

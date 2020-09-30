@@ -24,7 +24,7 @@ const categoryListsTemplate = ({
       <Hero img={cat[0].image_header.childImageSharp.catImg}>
         <Banner title={cat[0].catTitle} />
       </Hero>
-      <CategoryList products={products} />
+      <CategoryList products={products} key={products.strapiId} />
     </Layout>
   )
 }
@@ -54,12 +54,19 @@ export const query = graphql`
           brandTitle: title
           slug
         }
-        images {
+        gallery_images {
           localFile {
             childImageSharp {
               fluid {
                 ...GatsbyImageSharpFluid_withWebp
               }
+            }
+          }
+        }
+        product_image {
+          childImageSharp {
+            fluid {
+              ...GatsbyImageSharpFluid_withWebp
             }
           }
         }
