@@ -12,12 +12,19 @@ import {
 } from "./cart-dropdown.styles"
 
 const CartDropdown = () => {
-  const { cartItems, toggleCartHidden } = useContext(CartContext)
+  const { cartItems, toggleCartDropdown } = useContext(CartContext)
+
+  const navAndToggle = () => {
+    navigate("/cart")
+    toggleCartDropdown()
+  }
+
   return (
     <CartDropdownStyle>
       <CartItemsContainerStyle>
         {cartItems.length ? (
           cartItems.map(cartItem => {
+            console.log({ cartItem })
             return <CartDropdownItem item={cartItem} key={cartItem.strapiId} />
           })
         ) : (
@@ -25,13 +32,7 @@ const CartDropdown = () => {
         )}
       </CartItemsContainerStyle>
       {cartItems.length ? (
-        <CustomButton
-          onClick={() => {
-            navigate("/cart")
-          }}
-        >
-          ZUR KASSE
-        </CustomButton>
+        <CustomButton onClick={() => navAndToggle()}>ZUR KASSE</CustomButton>
       ) : null}
     </CartDropdownStyle>
   )

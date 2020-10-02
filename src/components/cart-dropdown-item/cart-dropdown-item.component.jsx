@@ -11,7 +11,7 @@ const CartDropdownItem = ({
   } = product_image
   return (
     <CartDropdownItemStyle>
-      <Img fluid={fluid} alt={title} />
+      <CartImageStyle fluid={fluid} alt={title} />
       <ItemDetailsStyle>
         <span className="name">{title}</span>
         <span>
@@ -25,14 +25,14 @@ const CartDropdownItem = ({
 export const CartDropdownItemStyle = styled.div`
   width: 100%;
   display: flex;
-  height: 80px;
+  height: 100px;
   margin-bottom: 15px;
+`
 
-  img {
-    width: 30%;
-    height: 75%;
-    margin-top: 5px;
-  }
+export const CartImageStyle = styled(Img)`
+  width: 25%;
+  height: 100%;
+  margin-top: 5px;
 `
 
 export const ItemDetailsStyle = styled.div`

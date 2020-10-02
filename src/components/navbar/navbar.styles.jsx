@@ -51,6 +51,10 @@ export const LinksStyle = styled.div`
     transition: var(--mainTransition);
     height: 0;
     /* overflow: hidden; */
+
+    div {
+      padding-top: 0;
+    }
   }
 
   @media screen and (max-width: 800px) {

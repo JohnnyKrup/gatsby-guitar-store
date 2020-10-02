@@ -38,7 +38,7 @@ const CartPage = () => {
         <CartTotalStyle className="total">
           <span>TOTAL: CHF {cartTotal}</span>
         </CartTotalStyle>
-        <div className="test-data">
+        <TestDataStyle>
           <h4>TEST CREDIT CARD DATA:</h4>
           <div className="payment">
             <span>Mastercard: </span> 5200 8282 8282 8210 / EXP: 01/25 / CVC:
@@ -47,7 +47,7 @@ const CartPage = () => {
           <div className="payment">
             <span>Visa: </span> 4000 0566 5566 5556 / EXP: 01/25 / CVC: 123
           </div>
-        </div>
+        </TestDataStyle>
 
         {/* <StripeCheckoutButton price={total} /> */}
       </CartPageStyle>
@@ -56,7 +56,7 @@ const CartPage = () => {
 }
 
 export const CartPageStyle = styled.div`
-  width: 55%;
+  width: 70%;
   min-height: 90vh;
   display: flex;
   flex-direction: column;

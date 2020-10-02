@@ -14,6 +14,7 @@ import ImageGallery from "../components/image-gallery/image-gallery.component"
 const ProductTemplate = ({ data: { strapiProduct } }) => {
   const { addItem } = useContext(CartContext)
   const {
+    strapiId,
     title,
     slug,
     description,
@@ -37,7 +38,7 @@ const ProductTemplate = ({ data: { strapiProduct } }) => {
 
   const headerImg = strapiProduct.ImageHeader.childImageSharp.fluid
 
-  // console.log(strapiProduct)
+  console.log(strapiProduct)
 
   return (
     <Layout>
@@ -176,6 +177,7 @@ export const ArticleInfoStyle = styled.article`
 export const query = graphql`
   query SingleProduct($slug: String!) {
     strapiProduct(slug: { eq: $slug }) {
+      strapiId
       title
       description
       slug

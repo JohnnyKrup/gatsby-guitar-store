@@ -11,7 +11,7 @@ const CartItem = ({ cartItem }) => {
     childImageSharp: { fluid },
   } = product_image
 
-  const { addItem, removeItem } = useContext(CartContext)
+  const { addItem, removeItem, clearItem } = useContext(CartContext)
 
   return (
     <CartItemStyle>
@@ -30,8 +30,9 @@ const CartItem = ({ cartItem }) => {
         </div>
       </QuantityStyle>
       <ColumnStyle>{price}</ColumnStyle>
-      {/* <RemoveButtonStyle onClick={() => clearItem(cartItem)}> */}
-      <RemoveButtonStyle>&#10005;</RemoveButtonStyle>
+      <RemoveButtonStyle onClick={() => clearItem(cartItem)}>
+        &#10005;
+      </RemoveButtonStyle>
     </CartItemStyle>
   )
 }
