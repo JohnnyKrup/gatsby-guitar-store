@@ -5,8 +5,8 @@ const getUserFromLocalStorage = () => {
     ? JSON.parse(localStorage.getItem("user"))
     : { username: null, token: null }
 }
-
-const UserContext = createContext()
+const initialState = { user: { username: null, token: null } }
+const UserContext = createContext(initialState)
 
 const UserProvider = ({ children }) => {
   // const [user, setUser] = useState({ username: null, token: null })

@@ -1,6 +1,7 @@
 import React, { useState } from "react"
 
-const ProductContext = React.createContext()
+const initialState = { loading: false, products: [], featuredProducts: [] }
+const ProductContext = React.createContext(initialState)
 
 const ProductProvider = ({ children }) => {
   const [loading, setLoading] = useState(false)

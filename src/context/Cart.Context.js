@@ -10,8 +10,13 @@ const getCartItemsFromStorage = () => {
     ? JSON.parse(localStorage.getItem("cartItems"))
     : []
 }
-
-const CartContext = createContext()
+const initailState = {
+  cartHidden: true,
+  cartItems: [],
+  cartTotal: 0,
+  cartItemQuantity: 0,
+}
+const CartContext = createContext(initailState)
 
 const CartProvider = ({ children }) => {
   const [cartHidden, setCartHidden] = useState(true)

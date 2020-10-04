@@ -72,10 +72,10 @@ const CategoryPreview = () => {
               <CategoryBackgroundImageStyle
                 fluid={isImageLarge ? header : fluid}
               />
-              <ContentStyle>
+              <div className="content">
                 <h1 className="title">{title}</h1>
                 <span className="subtitle">- DETAILS -</span>
-              </ContentStyle>
+              </div>
             </CategoryItemStyle>
           )
         })}

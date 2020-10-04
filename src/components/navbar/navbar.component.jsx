@@ -8,10 +8,11 @@ import CartDropdown from "../cart-dropdown/cart-dropdown.component"
 
 import { NavbarStyle, LogoStyle, LinksStyle, LinkStyle } from "./navbar.styles"
 
-import links from "../../constants/links"
 import logo from "../../images/LogoClose_128.svg"
 
 const Navbar = () => {
+  //const cContext = useContext(CartContext)
+  //const uContext = useContext(UserContext)
   const { cartHidden, clearCart, cartItems } = useContext(CartContext)
   const { user, userLogout } = useContext(UserContext)
 

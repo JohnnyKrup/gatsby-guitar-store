@@ -76,6 +76,34 @@ export const CategoryItemStyle = styled.article`
   bigger than the size of the this container */
   overflow: hidden;
 
+  .content {
+    height: 90px;
+    padding: 0 25px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid black;
+    opacity: 0.7;
+    /* thanks to this positioning the content div remains in the middle of the 
+  parent container no matter what */
+    position: absolute;
+    background: #fff;
+
+    .title {
+      font-weight: bold;
+      margin-bottom: 6px;
+      font-size: 22px;
+      color: #4a4a4a;
+      text-transform: uppercase;
+    }
+
+    .subtitle {
+      font-weight: lighter;
+      font-size: 16px;
+    }
+  }
+
   &:hover {
     cursor: pointer;
 
@@ -84,7 +112,7 @@ export const CategoryItemStyle = styled.article`
       transition: transform 6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
     } */
 
-    & ${ContentStyle} {
+    & .content {
       opacity: 0.9;
     }
   }
