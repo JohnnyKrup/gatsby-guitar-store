@@ -10,12 +10,11 @@ const submitOrder = async ({
   stripeTokenId,
   userToken,
 }) => {
-  console.log(name)
-  console.log(total)
-  console.log(purchase_date)
-  console.log(items)
-  console.log(stripeTokenId)
-  console.log(userToken)
+  console.log({ name })
+  console.log({ total })
+  console.log({ items })
+  console.log({ stripeTokenId })
+  console.log({ userToken })
 
   const response = await axios
     .post(
