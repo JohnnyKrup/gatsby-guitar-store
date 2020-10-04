@@ -93,7 +93,7 @@ exports.onCreateNode = async ({
       const images = await Promise.all(
         multiImages.map(img =>
           createRemoteFileNode({
-            url: `http://localhost:1337${img.url}`,
+            url: `https://strapi-guitar-store.herokuapp.com${img.url}`,
             parentNodeId: node.id,
             store,
             cache,
