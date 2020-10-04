@@ -6,7 +6,7 @@ export const BackgroundImageStyle = styled(BackgroundImage)`
   top: 90px;
   min-height: ${({ fullscreen }) =>
     fullscreen ? "calc(100vh - 90px)" : "25vh"};
-  width: 100%;
+  width: 100vw;
   background: ${props =>
     props.fullscreen
       ? "linear-gradient(rgba(256, 256, 256, 1), rgba(256, 256, 256, 0.7))"

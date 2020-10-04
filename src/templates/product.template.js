@@ -131,6 +131,7 @@ export const SectionStyle = styled.section`
 `
 
 export const BreadcrumbContainerStyle = styled.div`
+  margin-top: 70px;
   padding-top: 20px;
 `
 export const BreadcrumbLinkStyle = styled.span`

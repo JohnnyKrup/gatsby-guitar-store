@@ -6,6 +6,7 @@ import Hero from "../components/hero/hero.component"
 import Banner from "../components/banner/banner.component"
 
 import CategoryList from "../components/category-list/category-list.component"
+import styled from "styled-components"
 
 const categoryListsTemplate = ({
   data: {
@@ -24,10 +25,16 @@ const categoryListsTemplate = ({
       <Hero img={cat[0].image_header.childImageSharp.catImg}>
         <Banner title={cat[0].catTitle} />
       </Hero>
-      <CategoryList products={products} key={products.strapiId} />
+      <CategoryListContainerStyle>
+        <CategoryList products={products} key={products.strapiId} />
+      </CategoryListContainerStyle>
     </Layout>
   )
 }
+
+export const CategoryListContainerStyle = styled.div`
+  margin-top: 70px;
+`
 
 export const query = graphql`
   query CategoryLists($slug: String!) {

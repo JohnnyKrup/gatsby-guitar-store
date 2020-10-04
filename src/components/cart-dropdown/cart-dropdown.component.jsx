@@ -32,7 +32,9 @@ const CartDropdown = () => {
         )}
       </CartItemsContainerStyle>
       {cartItems.length ? (
-        <CustomButton onClick={() => navAndToggle()}>ZUR KASSE</CustomButton>
+        <CustomButton onClick={() => navAndToggle()}>
+          ZUM WARENKORB
+        </CustomButton>
       ) : null}
     </CartDropdownStyle>
   )

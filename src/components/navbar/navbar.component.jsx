@@ -12,7 +12,7 @@ import links from "../../constants/links"
 import logo from "../../images/LogoClose_128.svg"
 
 const Navbar = () => {
-  const { cartHidden, clearCart } = useContext(CartContext)
+  const { cartHidden, clearCart, cartItems } = useContext(CartContext)
   const { user, userLogout } = useContext(UserContext)
 
   return (
@@ -44,13 +44,19 @@ const Navbar = () => {
           </li>
         ) : (
           <li>
-            <LinkStyle to="/login">anmelden</LinkStyle>
+            <LinkStyle to="/app/login">anmelden</LinkStyle>
           </li>
         )}
 
         {user.token && (
           <li>
-            <LinkStyle to="/checkout">kasse</LinkStyle>
+            {cartItems.length < 1 ? (
+              <LinkStyle as="div" className="inactive">
+                kasse
+              </LinkStyle>
+            ) : (
+              <LinkStyle to="/app/checkout">kasse</LinkStyle>
+            )}
           </li>
         )}
         <li>

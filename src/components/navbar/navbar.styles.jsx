@@ -55,6 +55,11 @@ export const LinksStyle = styled.div`
     div {
       padding-top: 0;
     }
+
+    & .inactive {
+      color: gray;
+      cursor: default;
+    }
   }
 
   @media screen and (max-width: 800px) {

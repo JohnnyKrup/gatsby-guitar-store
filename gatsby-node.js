@@ -9,6 +9,24 @@
 const path = require(`path`)
 const { createRemoteFileNode } = require(`gatsby-source-filesystem`)
 
+exports.onCreatePage = async ({ page, actions }) => {
+  const { createPage } = actions
+
+  console.log("******************************")
+  console.log(page.path)
+  console.log("******************************")
+  // page.matchPath is a special key that's used for matching pages
+  // only on the client.
+  if (page.path.match(/^\/app/)) {
+    console.log("########################")
+    console.log(page)
+    console.log("########################")
+    page.matchPath = "/app/*"
+    // Update the page.
+    createPage(page)
+  }
+}
+
 exports.createPages = async ({ graphql, actions }) => {
   const { createPage } = actions
   const { data } = await graphql(`
@@ -27,6 +45,9 @@ exports.createPages = async ({ graphql, actions }) => {
     }
   `)
 
+  /**
+   * Creation of product pages and category lists
+   */
   console.log(data)
 
   data &&

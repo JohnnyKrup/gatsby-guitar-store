@@ -4,6 +4,7 @@ import { CartContext } from "../context/Cart.Context"
 
 import Layout from "../components/layout.component"
 import CartItem from "../components/cart-item/cart-item.component"
+import StripeCheckoutButton from "../components/stripe-button/stripe-checkout-button.component"
 import styled from "styled-components"
 
 const CartPage = () => {
@@ -31,7 +32,7 @@ const CartPage = () => {
           </div>
         </CartHeaderStyle>
         {cartItems.map(cartItem => {
-          console.log({ cartItem })
+          // console.log({ cartItem })
           return <CartItem key={cartItem.strapiId} cartItem={cartItem} />
         })}
 
@@ -49,7 +50,7 @@ const CartPage = () => {
           </div>
         </TestDataStyle>
 
-        {/* <StripeCheckoutButton price={total} /> */}
+        <StripeCheckoutButton price={cartTotal} />
       </CartPageStyle>
     </Layout>
   )

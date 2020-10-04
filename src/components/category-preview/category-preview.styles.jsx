@@ -2,8 +2,10 @@ import styled from "styled-components"
 import Img from "gatsby-background-image"
 
 export const CategoryPreviewStyle = styled.section`
-  background: var(--lightGray);
+  background: var(--mainGray);
   padding: 5rem 0;
+  margin-top: 70px;
+  width: 100%;
 `
 export const TileLayoutStyle = styled.div`
   margin-top: 2rem;
