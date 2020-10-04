@@ -24,7 +24,7 @@ module.exports = {
     {
       resolve: `gatsby-source-strapi`,
       options: {
-        apiURL: `http://localhost:1337`,
+        apiURL: `https://strapi-guitar-store.herokuapp.com`,
         queryLimit: 1000, // Default to 100
         contentTypes: [`brand`, `category`, `product`, `order`],
         // Possibility to login with a strapi user, when content types are not publically available (optional).
