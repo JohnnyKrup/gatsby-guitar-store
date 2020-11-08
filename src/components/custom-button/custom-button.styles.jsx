@@ -62,8 +62,10 @@ export const CustomButtonStyle = styled.button`
   padding: 0 35px;
   font-size: 15px;
   text-transform: uppercase;
-  font-family: "Open Sans Condensed";
-  font-weight: bolder;
+  font-family: Dosis, sans-serif;
+  font-weight: 400;
+  word-spacing: normal;
+  letter-spacing: .2rem;
   cursor: pointer;
   display: flex;
   justify-content: center;

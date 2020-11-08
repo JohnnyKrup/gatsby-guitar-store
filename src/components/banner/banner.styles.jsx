@@ -12,9 +12,14 @@ export const BannerSubTitleStyle = styled.span`
   width: 50%;
   font-size: 1.5rem;
 
-  @media screen and (max-width: 800px) {
+  @media screen and (max-width: 420px) {
     width: 30%;
-    font-size: 0.8rem;
+    font-size: 0.7rem;
+  }
+
+  @media screen and (min-width: 768px) {
+    width: 40%;
+    font-size: 1rem;
   }
 `
 
@@ -24,9 +29,11 @@ export const BannerTitleStyle = styled.h1`
   padding: 0 1rem;
   letter-spacing: 6px;
 
-  @media screen and (max-width: 800px) {
-    font-size: 3.3rem;
-  }
+  @media screen and (max-width: 420px) {
+    font-size: 3.0rem;
+    padding: 0 auto;
+    letter-spacing: 4px;
+  }  
 `
 
 export const BannerParagraphStyle = styled.p`
@@ -34,7 +41,13 @@ export const BannerParagraphStyle = styled.p`
   margin: 0 auto;
   margin-bottom: 2rem;
 
-  @media screen and (max-width: 800px) {
+  @media screen and (max-width: 420px) {
+    width: 80%;
+    font-size: 1.0rem;
+  }
+
+  @media screen and (min-width: 768px) {
     width: 70%;
+    font-size: 1.2rem;
   }
 `

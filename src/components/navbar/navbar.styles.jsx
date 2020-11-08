@@ -6,7 +6,7 @@ export const NavbarStyle = styled.div`
   top: 0;
   width: 100%;
   height: 70px;
-  z-index: 1000000000000000000000;
+  z-index: 100;
   display: flex;
   justify-content: space-between;
   margin-bottom: 25px;
@@ -17,8 +17,8 @@ export const NavbarStyle = styled.div`
   -moz-box-shadow: 0px -3px 3px 3px rgba(0, 0, 0, 0.75);
   box-shadow: 0px -3px 3px 3px rgba(0, 0, 0, 0.75);
 
-  @media screen and (max-width: 800px) {
-    height: 60px;
+  @media screen and (max-width: 768px) {
+    height: 68px;
     padding: 10px;
     margin-bottom: 20px;
   }
@@ -36,38 +36,68 @@ export const LogoStyle = styled(Link)`
 
   @media screen and (max-width: 800px) {
     width: 50px;
-    padding: 0;
+    padding-top: 3px;
   }
 `
 
 export const LinksStyle = styled.div`
-  width: 50%;
-  height: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: flex-end;
+  display: none;
 
-  li {
-    transition: var(--mainTransition);
-    height: 0;
-    /* overflow: hidden; */
-
-    div {
-      padding-top: 0;
-    }
-
-    & .inactive {
-      color: gray;
-      cursor: default;
-    }
-  }
-
-  @media screen and (max-width: 800px) {
+  @media screen and (min-width: 800px) {  
     width: 80%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+
+    li {
+      transition: var(--mainTransition);
+      height: 0;
+      /* overflow: hidden; */
+
+      div {
+        padding-top: 0;
+      }
+
+      & .inactive {
+        color: var(--lightGray);
+        cursor: default;
+      }
+    }    
   }
 `
-export const LinkStyle = styled(Link)`
+export const LinkStyle = styled(Link)`  
   padding: 10px 15px;
   text-transform: uppercase;
+  color: var(--darkGray);
   cursor: pointer;
+
+  &:hover {
+    color: var(--mainBlack);
+  }
+`
+export const MenuButtonStyle = styled.button`
+  width: 3.5rem;
+  height: 3.25rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;      
+  border: transparent;
+  color: var(--mainBlack);  
+  transition: var(--mainTransition);
+  background-color: var(--mainWhite);
+  cursor: pointer;
+
+  @media (min-width: 800px){
+    display: none;
+  }
+`
+
+export const CartListItemStyle = styled.div`
+  padding-top: 37px;
+
+  @media (max-width: 800px){
+    padding-top: 18px;
+  }
 `

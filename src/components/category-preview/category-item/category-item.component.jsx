@@ -15,7 +15,7 @@ const CategoryItem = ({ title, image, slug, isImageLarge }) => {
   return (
     <CategoryItemStyle
       className={`item-${id}`}
-      onClick={() => navigate(`/${slug}`)}
+      onClick={() => navigate(`/shop/${slug}`)}
     >
       <CategoryBackgroundImageStyle />
       <ContentStyle>

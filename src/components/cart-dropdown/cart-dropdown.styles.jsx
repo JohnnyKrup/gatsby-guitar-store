@@ -11,7 +11,23 @@ export const CartDropdownStyle = styled.div`
   background-color: white;
   top: 71px;
   right: 40px;
-  z-index: 5;
+  z-index: 5;  
+
+  @media (min-width: 320px){        
+    width: 300px;
+    height: 400px;
+    right: calc(50% - 150px);
+  }
+
+  @media (min-width: 375px){
+    width: 340px;
+    height: 480px;
+    right: calc(50% - 170px);
+  }
+
+  @media (min-width: 992px){
+    right: 40px;
+  }
 `
 
 export const CartItemsContainerStyle = styled.div`

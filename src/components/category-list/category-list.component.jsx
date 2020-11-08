@@ -2,16 +2,16 @@ import React from "react"
 
 import CategoryListItem from "./category-list-item/category-list-item.component"
 
-import { ItemsStyle } from "./category-list.styles"
+import { TileLayoutStyle } from "./category-list.styles"
 
 const CategoryList = ({ products }) => {
-  // console.log({ products })
+  console.log({ products })
   return (
-    <ItemsStyle>
+    <TileLayoutStyle>
       {products.map(product => {
         return <CategoryListItem product={product} key={product.strapiId} />
       })}
-    </ItemsStyle>
+    </TileLayoutStyle>
   )
 }
 

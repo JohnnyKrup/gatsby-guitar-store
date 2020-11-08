@@ -40,7 +40,7 @@ export const CategoryItemStyle = styled.div`
 
   /* Media Queries have a higher specificity 
   than anything else within the same space */
-  @media screen and (max-width: 800px) {
+  @media screen and (max-width: 600px) {
     height: 200px;
   }
 `

@@ -11,7 +11,7 @@ export const TileLayoutStyle = styled.div`
   margin-top: 2rem;
   display: grid;
   width: 90vw;
-  max-width: var(--max-width);
+  max-width: var(--fullWidth);
   margin: 0 auto;
   gap: 1rem;
   /* safari workaround */
@@ -19,7 +19,11 @@ export const TileLayoutStyle = styled.div`
   grid-template-rows: auto auto;
   grid-auto-rows: auto;
 
-  @media (min-width: 800px) {
+  @media (max-width: 600px) {
+    grid-template-columns: 1fr;
+  }
+
+  @media (min-width: 768px) {
     grid-template-columns: 1fr 1fr;
   }
 
@@ -133,6 +137,14 @@ export const CategoryItemStyle = styled.article`
   than anything else within the same space */
   @media screen and (max-width: 800px) {
     height: 300px;
+  }
+
+  @media screen and (min-width: 992px) {
+    height: 200px;
+  }
+
+  @media screen and (min-width: 1200px) {
+    height: ${({ isImageLarge }) => (isImageLarge ? "380px" : "600px")};
   }
 `
 

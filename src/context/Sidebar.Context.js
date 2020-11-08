@@ -1,11 +1,10 @@
 import React, { useState } from "react"
-import sublinks from "../constants/links"
 
-const SidebarContext = React.createContext()
+const initialState = {isSidebarOpen: false}
+const SidebarContext = React.createContext(initialState)
 
 const SidebarProvider = ({ children }) => {
-  const [isSidebarOpen, setIsSidebarOpen] = useState(false)
-  const [links, setLinks] = useState(sublinks)
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false)  
 
   const showSidebar = () => {
     setIsSidebarOpen(true)
@@ -17,7 +16,7 @@ const SidebarProvider = ({ children }) => {
 
   return (
     <SidebarContext.Provider
-      value={{ isSidebarOpen, links, showSidebar, hideSidebar }}
+      value={{ isSidebarOpen, showSidebar, hideSidebar }}
     >
       {children}
     </SidebarContext.Provider>

@@ -6,6 +6,7 @@ import Hero from "../components/hero/hero.component"
 import Banner from "../components/banner/banner.component"
 import CustomButton from "../components/custom-button/custom-button.component"
 import CategoryPreview from "../components/category-preview/category-preview.component"
+import FeaturedProducts from "../components/featured-products/featured.component"
 
 const HomePage = () => {
   return (
@@ -21,6 +22,7 @@ const HomePage = () => {
           </CustomButton>
         </Banner>
       </Hero>
+      <FeaturedProducts />
       <CategoryPreview />
     </Layout>
   )

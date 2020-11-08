@@ -5,11 +5,12 @@ import { CartContext } from "../context/Cart.Context"
 
 import styled from "styled-components"
 
-import Hero from "../components/hero/hero.component"
+import HeroProduct from "../components/hero/hero-product.component"
 import Layout from "../components/layout.component"
-// import Title from "../components/title/title.component"
 import CustomButton from "../components/custom-button/custom-button.component"
 import ImageGallery from "../components/image-gallery/image-gallery.component"
+
+import {HeroBarContainerStyle, HeroBarTableStyle, HeroBarTableCellStyle, HeroBarTableCellInnerStyle, HeroBarTitleWrapperStyle, HeroBarTitleStyle, BreadcrumbContainerStyle, BreadcrumbLinkStyle} from './template.styles'
 
 const ProductTemplate = ({ data: { strapiProduct } }) => {
   const { addItem } = useContext(CartContext)
@@ -42,23 +43,33 @@ const ProductTemplate = ({ data: { strapiProduct } }) => {
 
   return (
     <Layout>
-      <Hero img={headerImg}></Hero>
-      <BreadcrumbContainerStyle>
-        <span>
-          <span>.. / </span>
-          <BreadcrumbLinkStyle
-            onClick={() => navigate(`/${categories[0].catSlug}`)}
-          >
-            {categories[0].catSlug}
-          </BreadcrumbLinkStyle>
-          <span> / </span>
-          <BreadcrumbLinkStyle onClick={() => navigate(`/${brandSlug}`)}>
-            {brandSlug}
-          </BreadcrumbLinkStyle>
-          <span> / </span>
-          <span>{slug}</span>
-        </span>
-      </BreadcrumbContainerStyle>
+
+    <SectionWrapperStyle>
+      <HeroProduct topMargin="0">
+        <HeroBarContainerStyle>
+          <HeroBarTableStyle>
+            <HeroBarTableCellStyle>
+              <HeroBarTableCellInnerStyle>
+                <HeroBarTitleWrapperStyle>
+                  <HeroBarTitleStyle>{title}</HeroBarTitleStyle>
+                </HeroBarTitleWrapperStyle>
+                <BreadcrumbContainerStyle>
+                  <BreadcrumbLinkStyle to={`/shop`}>shop</BreadcrumbLinkStyle>
+                  <span>&nbsp; / &nbsp;</span>
+                  <BreadcrumbLinkStyle to={`/shop/${categories[0].catSlug}`}>{categories[0].catSlug}</BreadcrumbLinkStyle>
+                  <span>&nbsp; / &nbsp;</span>
+                  <BreadcrumbLinkStyle to={`/shop/${categories[0].catSlug}/${brandSlug}`}>{brandSlug}</BreadcrumbLinkStyle>
+                  <span>&nbsp; / &nbsp;</span>
+                  <span>{title}</span>
+                </BreadcrumbContainerStyle>
+              </HeroBarTableCellInnerStyle>
+            </HeroBarTableCellStyle>
+          </HeroBarTableStyle>
+        </HeroBarContainerStyle>
+      </HeroProduct>
+
+
+      
       <SectionStyle>
         <ImageGallery images={images} imgWidth="500px" />
 
@@ -75,42 +86,42 @@ const ProductTemplate = ({ data: { strapiProduct } }) => {
             <ul>
               {Mensur && (
                 <li>
-                  <b>Mensur:</b> {Mensur}
+                  <span className="product-details-title">Mensur:</span> {Mensur}
                 </li>
               )}
               {Sattel && (
                 <li>
-                  <b>Sattel:</b> {Sattel}
+                  <span className="product-details-title">Sattel:</span> {Sattel}
                 </li>
               )}
               {Hals && (
                 <li>
-                  <b>Hals:</b> {Hals}
+                  <span className="product-details-title">Hals:</span> {Hals}
                 </li>
               )}
               {Griffbrett && (
                 <li>
-                  <b>Griffbrett:</b> {Griffbrett}
+                  <span className="product-details-title">Griffbrett:</span> {Griffbrett}
                 </li>
               )}
               {Boden_Zargen && (
                 <li>
-                  <b>Boden &amp; Zargen:</b> {Boden_Zargen}
+                  <span className="product-details-title">Boden &amp; Zargen:</span> {Boden_Zargen}
                 </li>
               )}
               {Decke && (
                 <li>
-                  <b>Decke:</b> {Decke}
+                  <span className="product-details-title">Decke:</span> {Decke}
                 </li>
               )}
               {Pickup && (
                 <li>
-                  <b>Pickup:</b> {Pickup}
+                  <span className="product-details-title">Pickup:</span> {Pickup}
                 </li>
               )}
               {Huelle && (
                 <li>
-                  <b>Hülle:</b> {Huelle}
+                  <span className="product-details-title">Hülle:</span> {Huelle}
                 </li>
               )}
             </ul>
@@ -120,26 +131,41 @@ const ProductTemplate = ({ data: { strapiProduct } }) => {
           </CustomButton>
         </ArticleInfoStyle>
       </SectionStyle>
+      <div id="SimilarProducts">
+        <h2>Ähnliche Produkte</h2>
+        {/* <CategoryList products={similarProducts} key={similarProducts.strapiId} /> */}
+      </div>
+      </SectionWrapperStyle>
     </Layout>
   )
 }
 
-export const SectionStyle = styled.section`
+// Styled Components
+const SectionWrapperStyle = styled.div`
+  width: 100%;
+  display: block;
+  margin-top: 70px;
+  align-items: center;
+`
+
+const SectionStyle = styled.section`
   display: flex;
   padding: 40px 5%;
+  width: 100%;
   max-width: 1200px;
+  margin: 0 auto;
 `
 
-export const BreadcrumbContainerStyle = styled.div`
-  margin-top: 70px;
-  padding-top: 20px;
-`
-export const BreadcrumbLinkStyle = styled.span`
-  cursor: pointer;
-  font-weight: 500;
-`
+// const BreadcrumbContainerStyle = styled.div`
+//   margin-top: 70px;
+//   padding-top: 20px;
+// `
+// const BreadcrumbLinkStyle = styled.span`
+//   cursor: pointer;
+//   font-weight: 500;
+// `
 
-export const ArticleInfoStyle = styled.article`
+const ArticleInfoStyle = styled.article`
   width: 100%;
   display: flex;
   flex-direction: column;
@@ -148,16 +174,20 @@ export const ArticleInfoStyle = styled.article`
 
   & .title {
     font-size: 2rem;
+    line-height: 1;
   }
 
   & .price {
-    font-size: 1.4rem;
+    font-size: 30px;
     margin-bottom: 25px;
+    font-family: Dosis, sans-serif;
+    font-weight: 200;
   }
 
   & .description {
     text-align: justify;
     margin-bottom: 25px;
+    font-weight: 300;
   }
 
   & .ruler {
@@ -171,10 +201,26 @@ export const ArticleInfoStyle = styled.article`
 
     & ul li {
       margin-bottom: 5px;
+      /* font-family: "Times New Roman"; */
+      font-style: italic;
+      font-size: 16px;      
+      letter-spacing: 0;
+      line-height: 26px;
+      font-weight: 200;
+
+      .product-details-title {
+        font-family: Dosis, sans-serif;
+        text-transform: uppercase;font-size: 14px;
+        letter-spacing: 0.15rem;
+        font-style:normal;
+        font-weight: 300;
+      }
     }
   }
 `
 
+
+// QUERY
 export const query = graphql`
   query SingleProduct($slug: String!) {
     strapiProduct(slug: { eq: $slug }) {

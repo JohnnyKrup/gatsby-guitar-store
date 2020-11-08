@@ -40,6 +40,21 @@ exports.createPages = async ({ graphql, actions }) => {
       allStrapiProduct {
         products: nodes {
           slug
+          categories {
+            slug
+          }
+          brand {
+            slug
+          }
+        }
+      }
+
+      all: allStrapiCategory {
+        categories: nodes {
+          cSlug: slug
+          brands {
+            bSlug: slug
+          }
         }
       }
     }
@@ -50,23 +65,47 @@ exports.createPages = async ({ graphql, actions }) => {
    */
   console.log(data)
 
+  data && 
+    data.all.categories.forEach(category => {
+      category.brands.forEach(brand => {
+        createPage({
+          path: `shop/${category.cSlug}/${brand.bSlug}`,
+          component: path.resolve('./src/templates/brand-lists.template.js'),
+          context: {slug: brand.bSlug},
+        })
+      })
+    })
+
   data &&
     data.allStrapiCategory.categories.forEach(category => {
       createPage({
-        path: category.slug,
+        path: `shop/${category.slug}`,
         component: path.resolve("./src/templates/category-lists.template.js"),
         context: { slug: category.slug },
       })
     })
 
-  data &&
+  data && 
     data.allStrapiProduct.products.forEach(product => {
-      createPage({
-        path: product.slug,
-        component: path.resolve("./src/templates/product.template.js"),
-        context: { slug: product.slug },
+      product.categories.forEach(category => {
+        createPage({
+          path: `shop/${category.slug}/${product.brand.slug}/${product.slug}`,
+          component: path.resolve("./src/templates/product.template.js"),
+          context: { slug: product.slug },
+        })
       })
     })
+
+  // data &&
+  //   data.allStrapiProduct.products.forEach(product => {
+  //     createPage({
+  //       path: product.slug,
+  //       component: path.resolve("./src/templates/product.template.js"),
+  //       context: { slug: product.slug },
+  //     })
+  //   })
+
+    
 }
 
 /**
@@ -94,6 +133,7 @@ exports.onCreateNode = async ({
         multiImages.map(img =>
           createRemoteFileNode({
             url: `https://strapi-guitar-store.herokuapp.com${img.url}`,
+            // url: `localhost/1337${img.url}`,
             parentNodeId: node.id,
             store,
             cache,

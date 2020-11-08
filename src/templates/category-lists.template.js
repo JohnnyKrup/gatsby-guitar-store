@@ -1,40 +1,64 @@
 import React from "react"
-import { graphql } from "gatsby"
+import { graphql, Link } from "gatsby"
 
 import Layout from "../components/layout.component"
-import Hero from "../components/hero/hero.component"
-import Banner from "../components/banner/banner.component"
+import ZGridList from "../components/z-grid-list/z-grid-list.component"
+import HeroProduct from '../components/hero/hero-product.component'
 
-import CategoryList from "../components/category-list/category-list.component"
-import styled from "styled-components"
+import {HeroBarContainerStyle, HeroBarTableStyle, HeroBarTableCellStyle, HeroBarTableCellInnerStyle, HeroBarTitleWrapperStyle, HeroBarTitleStyle, BreadcrumbContainerStyle, BreadcrumbLinkStyle, CategoryListContainerStyle, CategoryListRowStyle, GridListTitleStyle} from './template.styles'
 
 const categoryListsTemplate = ({
   data: {
     allStrapiProduct: { products },
+    allStrapiCategory: {nodes}
   },
   pageContext,
-}) => {
-  // console.log(products)
-
-  const cat = products[0].categories.filter(c => c.slug === pageContext.slug)
-  console.log(cat[0])
-  console.log(cat[0].catTitle)
+}) => {  
+  const cat = products[0].categories.filter(c => c.slug === pageContext.slug) 
+  console.log({nodes})
+  console.log({products})
 
   return (
     <Layout>
-      <Hero img={cat[0].image_header.childImageSharp.catImg}>
-        <Banner title={cat[0].catTitle} />
-      </Hero>
+      <HeroProduct>
+        <HeroBarContainerStyle>
+          <HeroBarTableStyle>
+            <HeroBarTableCellStyle>
+              <HeroBarTableCellInnerStyle>
+                <HeroBarTitleWrapperStyle>
+                  <HeroBarTitleStyle>{cat[0].catTitle}</HeroBarTitleStyle>
+                </HeroBarTitleWrapperStyle>
+                <BreadcrumbContainerStyle>
+                  <BreadcrumbLinkStyle to={`/shop`}>shop</BreadcrumbLinkStyle>
+                  <span>&nbsp; / &nbsp;</span>                  
+                  <span>{cat[0].catTitle}</span>
+                </BreadcrumbContainerStyle>
+              </HeroBarTableCellInnerStyle>
+            </HeroBarTableCellStyle>
+          </HeroBarTableStyle>
+        </HeroBarContainerStyle>
+      </HeroProduct> 
+
+
       <CategoryListContainerStyle>
-        <CategoryList products={products} key={products.strapiId} />
-      </CategoryListContainerStyle>
+      {
+        nodes[0].brands.map((brand, idx) => {
+          const prods = products.filter(product => product.brand.slug === brand.slug)
+          
+          return (
+            <CategoryListRowStyle key={idx}>
+              {/* <GridListTitleStyle>
+                <Link to={`/shop/${pageContext.slug}/${brand.slug}`}>{brand.title}</Link>
+                </GridListTitleStyle> */}
+              <ZGridList products={prods} categorySlug={pageContext.slug} showTitle linkUrl={`/shop/${pageContext.slug}/${brand.slug}`} titleName={brand.title} />
+            </CategoryListRowStyle>
+          )
+        })        
+      }
+      </CategoryListContainerStyle>      
     </Layout>
   )
 }
-
-export const CategoryListContainerStyle = styled.div`
-  margin-top: 70px;
-`
 
 export const query = graphql`
   query CategoryLists($slug: String!) {
@@ -76,6 +100,16 @@ export const query = graphql`
               ...GatsbyImageSharpFluid_withWebp
             }
           }
+        }
+      }
+    }
+
+    allStrapiCategory(filter: {slug: {eq: $slug}}) {
+      nodes {
+        slug
+        brands {
+          title
+          slug
         }
       }
     }

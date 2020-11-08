@@ -4,6 +4,10 @@
  * See: https://www.gatsbyjs.org/docs/gatsby-config/
  */
 
+ require("dotenv").config({
+  path: `.env.${process.env.NODE_ENV}`,
+})
+
 module.exports = {
   /* Your site config here */
   plugins: [
@@ -24,14 +28,14 @@ module.exports = {
     {
       resolve: `gatsby-source-strapi`,
       options: {
-        apiURL: `https://strapi-guitar-store.herokuapp.com`,
+        apiURL: process.env.GATSBY_API_URL,
         queryLimit: 5000, // Default to 100
         contentTypes: [`brand`, `category`, `product`],
         // Possibility to login with a strapi user, when content types are not publically available (optional).
         // loginData: {
-        //   identifier: "",
-        //   password: "",
-        // },
+        //    identifier: "Billi",
+        //    password: "123456",
+        //  },
       },
     },
   ],

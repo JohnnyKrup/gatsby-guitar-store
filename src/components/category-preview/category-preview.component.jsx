@@ -1,5 +1,5 @@
 import React from "react"
-import { graphql, useStaticQuery, navigate } from "gatsby"
+import { graphql, useStaticQuery, navigate, Link } from "gatsby"
 
 import Title from "../title/title.component"
 
@@ -38,7 +38,7 @@ const query = graphql`
   }
 `
 
-const CategoryPreview = () => {
+const CategoryPreview = ({title}) => {
   const data = useStaticQuery(query)
   const {
     allStrapiCategory: { categories },
@@ -46,7 +46,7 @@ const CategoryPreview = () => {
 
   return (
     <CategoryPreviewStyle>
-      <Title title="Shop" />
+      <Title title={title || `Shop`} />
       <TileLayoutStyle>
         {categories.map(category => {
           const {
@@ -63,10 +63,11 @@ const CategoryPreview = () => {
           } = category
 
           return (
+            // <Link to={`/shop/${slug}`}>
             <CategoryItemStyle
               key={id}
               className={`item-${id}`}
-              onClick={() => navigate(`/${slug}`)}
+              onClick={() => navigate(`/shop/${slug}`)}
               isImageLarge={isImageLarge}
             >
               <CategoryBackgroundImageStyle
@@ -77,6 +78,7 @@ const CategoryPreview = () => {
                 <span className="subtitle">- DETAILS -</span>
               </div>
             </CategoryItemStyle>
+            // </Link>
           )
         })}
       </TileLayoutStyle>

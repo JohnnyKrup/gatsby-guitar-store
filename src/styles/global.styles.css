@@ -1,12 +1,14 @@
 @import url("https://fonts.googleapis.com/css2?family=Dosis:wght@200;300;400;500;600;700;800&display=swap");
-@import url("https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@300;400;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@200;300;400;700&display=swap");
 :root {
   --primaryColor: #1b1b1b;
   --mainWhite: #fff;
   --offWhite: #f7f7f7;
   --mainBlack: #222;
+  --lightBlack: #3d3d3d;
   --mainGray: #ececec;
-  --darkGray: #afafaf;
+  --lightGray: #afafaf;
+  --darkGray: #808080;
   --mainTransition: all 0.3s linear;
   --lightShadow: 2px 5px 3px 0px rgba(0, 0, 0, 0.5);
   --darkShadow: 4px 10px 5px 0px rgba(0, 0, 0, 0.5);
@@ -14,7 +16,7 @@
   --maxWidth: 40rem;
   --smallWidth: 85vw;
   --fullWidth: 1170px;
-  --mainSpacing: 0.3rem;
+  --mainSpacing: 0.2rem;
 }
 
 * {
@@ -28,19 +30,21 @@ body {
   color: var(--mainBlack);
   line-height: 1.4;
   font-size: 1rem;
-  font-weight: 300;
+  font-weight: 400;
 }
 
 h1, h2, h3, h4, h5, h6 {
   font-family: Dosis, sans-serif;
-  font-weight: 300;
+  font-weight: 200;
   margin-bottom: 1.25rem;
   letter-spacing: var(--mainSpacing);
+  text-transform: uppercase;
 }
 
 a {
   text-decoration: none;
   color: black;
+  transition: color .2s ease-out;
 }
 
 ul, li {
@@ -50,6 +54,58 @@ ul, li {
 img {
   width: 100%;
   display: block;
+}
+
+input:focus, select:focus, textarea:focus, button:focus {
+  outline: none;
+}
+
+.noscroll-y {
+  overflow-y: hidden;
+}
+
+button {
+  -webkit-appearance: button;
+     -moz-appearance: button;
+          appearance: button;
+  -webkit-writing-mode: horizontal-tb !important;
+      -ms-writing-mode: lr-tb !important;
+          writing-mode: horizontal-tb !important;
+  text-rendering: auto;
+  color: -internal-light-dark(black, white);
+  letter-spacing: normal;
+  word-spacing: normal;
+  text-transform: none;
+  text-indent: 0px;
+  text-shadow: none;
+  display: inline-block;
+  text-align: center;
+  align-items: flex-start;
+  cursor: default;
+  background-color: -internal-light-dark(rgb(239, 239, 239), rgb(59, 59, 59));
+  box-sizing: border-box;
+  margin: 0em;
+  font: 400 13.3333px Arial;
+  padding: 1px 6px;
+  border-width: 2px;
+  border-style: outset;
+  border-color: -internal-light-dark(rgb(118, 118, 118), rgb(133, 133, 133));
+  -o-border-image: initial;
+     border-image: initial;
+}
+
+.noselect {
+  -webkit-touch-callout: none;
+  /* iOS Safari */
+  -webkit-user-select: none;
+  /* Safari */
+  /* Konqueror HTML */
+  -moz-user-select: none;
+  /* Old versions of Firefox */
+  -ms-user-select: none;
+  /* Internet Explorer/Edge */
+  user-select: none;
+  /* Non-prefixed version, currently supported by Chrome, Edge, Opera and Firefox */
 }
 
 @media screen and (max-width: 800px) {
