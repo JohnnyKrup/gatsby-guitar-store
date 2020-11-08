@@ -12,6 +12,10 @@ const { createRemoteFileNode } = require(`gatsby-source-filesystem`)
 exports.onCreatePage = async ({ page, actions }) => {
   const { createPage } = actions
 
+  console.log("@@@@@@@@@@@@@@")
+  console.log(`You are running this application in ${process.env.NODE_ENV}-mode.`)
+  console.log("@@@@@@@@@@@@@@")
+
   console.log("******************************")
   console.log(page.path)
   console.log("******************************")
