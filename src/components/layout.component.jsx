@@ -11,7 +11,7 @@ import Sidebar from "./sidebar/sidebar.component"
 
 const Layout = ({ children }) => {
   const {isSidebarOpen} = useContext(SidebarContext)
-  console.log({isSidebarOpen})
+  // console.log({isSidebarOpen})
 
   return (
     <>

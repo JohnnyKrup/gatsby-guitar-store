@@ -15,8 +15,8 @@ const categoryListsTemplate = ({
   pageContext,
 }) => {  
   const cat = products[0].categories.filter(c => c.slug === pageContext.slug) 
-  console.log({nodes})
-  console.log({products})
+  // console.log({nodes})
+  // console.log({products})
 
   return (
     <Layout>

@@ -39,7 +39,7 @@ const BrandListsTemplate = ({data: {
       
         
       <BrandListContainerStyle>
-        <GridList products={products} key={products.strapiId} />
+        <GridList products={products} key={products.strapiId} categorySlug={slug}/>
       </BrandListContainerStyle>
     </Layout>
   )

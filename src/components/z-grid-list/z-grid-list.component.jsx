@@ -1,33 +1,84 @@
-import React from "react"
+import React, { useContext } from "react"
 import {Link} from 'gatsby'
+import {UtilityContext} from '../../context/Utility.Context'
 
 import styled from "styled-components"
 
 import ZGridListItem from "../z-grid-list-item/z-grid-list-item.component"
+import {Swiper, SwiperSlide} from "swiper/react"
+import SwiperCore, {Navigation} from 'swiper'
 
+import 'swiper/swiper-bundle.css'
 
-const ZGridList = ({ products, categorySlug, showTitle, linkUrl, titleName }) => {  
-  console.log({ products })
+SwiperCore.use([Navigation]);
+
+const ZGridList = ({ products, categorySlug, showTitle, linkUrl, titleName }) => {   
+  const {windowWidth} = useContext(UtilityContext)
+
+  let itemsPerView = 3
+  windowWidth <=600 ? itemsPerView = 1 : itemsPerView = 3
+  console.log({windowWidth})
+
   return (
     <>
       {
         showTitle && 
           <ListTitleStyle><Link to={linkUrl || `/`}>{titleName || `Home`}</Link></ListTitleStyle>
-      }    
-      <ListContainerStyle>
-        {products.map(product => {        
-            return <ZGridListItem product={product} key={product.strapiId} categorySlug={categorySlug} />        
-        })}
-      </ListContainerStyle>          
+      }      
+
+      <SwiperStyle id="main" tag="section" wrapperTag="ul" navigation spaceBetween={0} slidesPerView={itemsPerView}>
+        {
+          products.map(product => {
+            return <SwiperSlide key={product.strapiId} tag="li">
+              <ZGridListItem product={product} categorySlug={categorySlug}/>
+            </SwiperSlide>
+          })
+        }
+      </SwiperStyle>
+
     </>
   )
 }
 
+const SwiperStyle = styled(Swiper)`
+  padding-left: 10%;
+
+  & .swiper-button-prev{
+    color: black;
+    left: 40px;
+  }
+
+  & .swiper-button-next{
+    color: black;
+    right: 40px;
+  }
+
+  @media (max-width: 600px) {    
+
+    & .swiper-button-prev{    
+      left: 10px;
+    }
+
+    & .swiper-button-next{    
+      right: 10px;
+    }
+  }
+
+  /* @media (min-width: 768px) {      
+  }
+
+  @media (min-width: 992px) {    
+  }
+
+  @media (min-width: 1200px) {
+  } */
+`
+
 const ListTitleStyle = styled.h1`
-  padding-left: 3%;
+  padding-left: 10%;
   padding-right: 3%;
 
-  @media screen and (min-width: 480px){
+  /* @media screen and (min-width: 480px){
     padding-left: 18px;
     padding-right: 18px;    
   }
@@ -45,7 +96,7 @@ const ListTitleStyle = styled.h1`
   @media screen and (min-width: 1280px){
     padding-left: calc(50vw - 608px);
     padding-right: calc(50vw - 608px);    
-  }
+  } */
 `
 
  const ListContainerStyle = styled.ul`
@@ -80,35 +131,4 @@ const ListTitleStyle = styled.h1`
     padding-right: calc(50vw - 608px);    
   }
 `
-
-//  const TileLayoutStyle = styled.div`
-//   /* margin-top: 2rem; */
-//   margin: 0 auto;
-//   display: grid;
-//   width: 100%;
-//   max-width: var(--fullWidth);
-//   padding: 0 2%;
-//   gap: 1rem;
-//   /* safari workaround */
-//   grid-gap: 1rem;
-//   grid-template-rows: auto auto;
-//   grid-auto-rows: auto;
-//   justify-items: center;
-
-//   @media (max-width: 600px) {
-//     grid-template-columns: 1fr;        
-//   }
-
-//   @media (min-width: 768px) {
-//     grid-template-columns: 1fr 1fr;
-//     width: 92%;
-//   }
-
-//   @media (min-width: 992px) {
-//     grid-template-columns: 1fr 1fr 1fr;
-//     grid-template-rows: auto;
-//   }
-// `
-
-
 export default ZGridList

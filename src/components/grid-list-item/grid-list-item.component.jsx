@@ -12,9 +12,10 @@ const GridListItem = ({ product, categorySlug }) => {
     product_image: {
       childImageSharp: { fluid },
     },
-    brand: { brandTitle, slug: brandSlug },
+    brand: { title: brandTitle, slug: brandSlug },
   } = product
   console.log({product})
+  console.log({categorySlug})
 
   return (
     <ItemStyle key={strapiId} onClick={() => navigate(`/shop/${categorySlug}/${brandSlug}/${slug}`)}>
