@@ -10,10 +10,9 @@ import {HeroBarContainerStyle, HeroBarTableStyle, HeroBarTableCellStyle, HeroBar
 const BrandListsTemplate = ({data: {
     allStrapiProduct: { nodes: products },
   }, pageContext}) => {                    
-    // console.log({products})    
-    // console.log(pageContext)
-
-    const {title} = products[0].brand
+    console.log({products})    
+    console.log(pageContext)
+    
     const filteredProducts = []
     products.forEach(product => 
       product.categories.forEach(cat => cat.slug === pageContext.categorySlug ? filteredProducts.push(product) : null)
@@ -27,14 +26,14 @@ const BrandListsTemplate = ({data: {
             <HeroBarTableCellStyle>
               <HeroBarTableCellInnerStyle>
                 <HeroBarTitleWrapperStyle>
-                  <HeroBarTitleStyle>{title}</HeroBarTitleStyle>
+                  <HeroBarTitleStyle>{pageContext.brandTitle}</HeroBarTitleStyle>
                 </HeroBarTitleWrapperStyle>
                 <BreadcrumbContainerStyle>
                   <BreadcrumbLinkStyle to={`/shop`}>shop</BreadcrumbLinkStyle>
                   <span>&nbsp; / &nbsp;</span>
                   <BreadcrumbLinkStyle to={`/shop/${pageContext.categorySlug}`}>{pageContext.categorySlug}</BreadcrumbLinkStyle>
                   <span>&nbsp; / &nbsp;</span>
-                  <span>{title}</span>
+                  <span>{pageContext.brandTitle}</span>
                 </BreadcrumbContainerStyle>
               </HeroBarTableCellInnerStyle>
             </HeroBarTableCellStyle>
@@ -75,7 +74,7 @@ export const query = graphql`
         }
         id
         slug
-        title
+        brandTitle: title
       }
       categories {
         slug

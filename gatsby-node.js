@@ -58,6 +58,7 @@ exports.createPages = async ({ graphql, actions }) => {
           cSlug: slug
           brands {
             bSlug: slug
+            title
           }
         }
       }
@@ -75,7 +76,7 @@ exports.createPages = async ({ graphql, actions }) => {
         createPage({
           path: `shop/${category.cSlug}/${brand.bSlug}`,
           component: path.resolve('./src/templates/brand-lists.template.js'),
-          context: {slug: brand.bSlug, categorySlug: category.cSlug},
+          context: {slug: brand.bSlug, brandTitle: brand.title, categorySlug: category.cSlug},
         })
       })
     })
