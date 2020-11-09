@@ -75,7 +75,7 @@ exports.createPages = async ({ graphql, actions }) => {
         createPage({
           path: `shop/${category.cSlug}/${brand.bSlug}`,
           component: path.resolve('./src/templates/brand-lists.template.js'),
-          context: {slug: brand.bSlug},
+          context: {slug: brand.bSlug, categorySlug: category.cSlug},
         })
       })
     })

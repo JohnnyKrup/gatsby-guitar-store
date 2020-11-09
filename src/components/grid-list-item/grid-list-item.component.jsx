@@ -14,8 +14,8 @@ const GridListItem = ({ product, categorySlug }) => {
     },
     brand: { title: brandTitle, slug: brandSlug },
   } = product
-  console.log({product})
-  console.log({categorySlug})
+  // console.log({product})
+  // console.log({categorySlug})
 
   return (
     <ItemStyle key={strapiId} onClick={() => navigate(`/shop/${categorySlug}/${brandSlug}/${slug}`)}>

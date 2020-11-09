@@ -17,7 +17,7 @@ const ZGridList = ({ products, categorySlug, showTitle, linkUrl, titleName }) =>
 
   let itemsPerView = 3
   windowWidth <=600 ? itemsPerView = 1 : itemsPerView = 3
-  console.log({windowWidth})
+  // console.log({windowWidth})
 
   return (
     <>

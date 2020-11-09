@@ -9,10 +9,15 @@ import {HeroBarContainerStyle, HeroBarTableStyle, HeroBarTableCellStyle, HeroBar
 
 const BrandListsTemplate = ({data: {
     allStrapiProduct: { nodes: products },
-  }}) => {        
-    const {BrandLogo: {childImageSharp: {fluid}}, title} = products[0].brand
-    const {slug} = products[0].categories[0]
-    console.log(slug)
+  }, pageContext}) => {                    
+    // console.log({products})    
+    // console.log(pageContext)
+
+    const {title} = products[0].brand
+    const filteredProducts = []
+    products.forEach(product => 
+      product.categories.forEach(cat => cat.slug === pageContext.categorySlug ? filteredProducts.push(product) : null)
+    )    
 
   return (
     <Layout>
@@ -27,7 +32,7 @@ const BrandListsTemplate = ({data: {
                 <BreadcrumbContainerStyle>
                   <BreadcrumbLinkStyle to={`/shop`}>shop</BreadcrumbLinkStyle>
                   <span>&nbsp; / &nbsp;</span>
-                  <BreadcrumbLinkStyle to={`/shop/${slug}`}>{slug}</BreadcrumbLinkStyle>
+                  <BreadcrumbLinkStyle to={`/shop/${pageContext.categorySlug}`}>{pageContext.categorySlug}</BreadcrumbLinkStyle>
                   <span>&nbsp; / &nbsp;</span>
                   <span>{title}</span>
                 </BreadcrumbContainerStyle>
@@ -39,7 +44,7 @@ const BrandListsTemplate = ({data: {
       
         
       <BrandListContainerStyle>
-        <GridList products={products} key={products.strapiId} categorySlug={slug}/>
+        <GridList products={filteredProducts} key={products.strapiId} categorySlug={pageContext.categorySlug}/>
       </BrandListContainerStyle>
     </Layout>
   )
