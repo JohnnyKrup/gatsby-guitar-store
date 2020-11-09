@@ -37,8 +37,8 @@ const Sidebar = () => {
         </CloseButtonStyle>
         <LinksContainerStyle>
         <LinksStyle>
-          <MainLinkStyle to="/">home</MainLinkStyle>
-          <MainLinkStyle to="/about">über uns</MainLinkStyle>          
+          <MainLinkStyle to="/" onClick={hideSidebar}>home</MainLinkStyle>
+          <MainLinkStyle to="/about" onClick={hideSidebar}>über uns</MainLinkStyle>          
 
           {user.token ? (          
             <MainLinkStyle
@@ -51,23 +51,23 @@ const Sidebar = () => {
               abmelden
             </MainLinkStyle>          
           ) : (          
-            <MainLinkStyle to="/app/login">anmelden</MainLinkStyle>          
+            <MainLinkStyle to="/app/login" onClick={hideSidebar}>anmelden</MainLinkStyle>          
           )}
 
-          <MainLinkStyle to="/shop">shop</MainLinkStyle>
+          <MainLinkStyle to="/shop" onClick={hideSidebar}>shop</MainLinkStyle>
           {
             nodes.map((link, index) => {
              const {title, slug, brands} = link;
              const links = (
              <>
-               <LinkStyle to={`/${slug}`} onClick={hideSidebar} key={index}>
+               <LinkStyle to={`/shop/${slug}`} onClick={hideSidebar} key={index}>
                 {title}                
                 </LinkStyle>
                 <SubLinkListStyle>
                 {
                   brands.map((subLink, index) => {
-                    const {title, slug} = subLink;
-                    return <SubLinkStyle to={`/${slug}`} onClick={hideSidebar} key={index}>
+                    const {title, slug: brandSlug} = subLink;
+                    return <SubLinkStyle to={`/shop/${slug}/${brandSlug}`} onClick={hideSidebar} key={index}>
                     {title}
                     </SubLinkStyle>
                   })

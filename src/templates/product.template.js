@@ -2,6 +2,7 @@ import React, { useContext } from "react"
 import { graphql, navigate } from "gatsby"
 
 import { CartContext } from "../context/Cart.Context"
+import {UtilityContext} from '../context/Utility.Context'
 
 import styled from "styled-components"
 
@@ -14,6 +15,13 @@ import {HeroBarContainerStyle, HeroBarTableStyle, HeroBarTableCellStyle, HeroBar
 
 const ProductTemplate = ({ data: { strapiProduct } }) => {
   const { addItem } = useContext(CartContext)
+  const {windowWidth} = useContext(UtilityContext)
+
+  let imageWidth = 0
+  windowWidth < 600 ? imageWidth = windowWidth - (windowWidth/10) : imageWidth = 500
+  console.log(windowWidth)
+  console.log(imageWidth)
+
   const {
     strapiId,
     title,
@@ -71,9 +79,15 @@ const ProductTemplate = ({ data: { strapiProduct } }) => {
 
       
       <SectionStyle>
-        <ImageGallery images={images} imgWidth="500px" />
+        <ImageGallery images={images} imgWidth={`${imageWidth}px`} />
 
         <ArticleInfoStyle>
+          {
+            imageWidth < 500 &&
+              <CustomButton onClick={() => addItem(strapiProduct)}>
+                In den Warenkorb
+              </CustomButton>
+          }
           <h1 className="title">{title}</h1>
           <div className="price">CHF {price}</div>
           <hr className="ruler" />
@@ -154,16 +168,13 @@ const SectionStyle = styled.section`
   width: 100%;
   max-width: 1200px;
   margin: 0 auto;
-`
 
-// const BreadcrumbContainerStyle = styled.div`
-//   margin-top: 70px;
-//   padding-top: 20px;
-// `
-// const BreadcrumbLinkStyle = styled.span`
-//   cursor: pointer;
-//   font-weight: 500;
-// `
+  @media screen and (max-width: 600px){
+    max-width: unset;
+    padding-top: 90px;
+    flex-direction: column;
+  }
+`
 
 const ArticleInfoStyle = styled.article`
   width: 100%;
@@ -175,6 +186,10 @@ const ArticleInfoStyle = styled.article`
   & .title {
     font-size: 2rem;
     line-height: 1;
+
+    @media screen and (max-width: 600px){      
+      padding-top: 30px;
+    }
   }
 
   & .price {
@@ -217,6 +232,12 @@ const ArticleInfoStyle = styled.article`
       }
     }
   }
+
+  @media screen and (max-width: 600px){
+    margin-left: unset;
+    padding-top: 30px;
+  }
+
 `
 
 

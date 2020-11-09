@@ -16,7 +16,7 @@ const ZGridListItem = ({ product, categorySlug }) => {
     },
     brand: { brandTitle, slug: brandSlug },
   } = product
-  // console.log({product})
+   //console.log({product})
 
   return (
     <ListItemStyle>

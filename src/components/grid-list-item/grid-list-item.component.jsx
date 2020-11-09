@@ -12,9 +12,9 @@ const GridListItem = ({ product, categorySlug }) => {
     product_image: {
       childImageSharp: { fluid },
     },
-    brand: { title: brandTitle, slug: brandSlug },
+    brand: { brandTitle, slug: brandSlug },
   } = product
-  // console.log({product})
+  console.log({product})
   // console.log({categorySlug})
 
   return (

@@ -97,6 +97,7 @@ export const BreadcrumbContainerStyle = styled.div`
   @media screen and (max-width: 1024px){
     display: block;
     width: 100%;
+    white-space: pre-line;
     text-align: unset;
   }
 `
