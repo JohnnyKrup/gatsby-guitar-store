@@ -23,7 +23,7 @@ const ZGridList = ({ products, categorySlug, showTitle, linkUrl, titleName }) =>
     <>
       {
         showTitle && 
-          <ListTitleStyle><Link to={linkUrl || `/`}>{titleName || `Home`}</Link></ListTitleStyle>
+          <ListTitleStyle><Link to={linkUrl || `/`}>{` ${titleName} ` || `Home`}<span>mehr</span></Link></ListTitleStyle> 
       }      
 
       <SwiperStyle id="main" tag="section" wrapperTag="ul" navigation spaceBetween={0} slidesPerView={itemsPerView}>
@@ -45,12 +45,16 @@ const SwiperStyle = styled(Swiper)`
 
   & .swiper-button-prev{
     color: black;
-    left: 40px;
+    left: 40px;    
   }
 
   & .swiper-button-next{
     color: black;
-    right: 40px;
+    right: 40px;    
+  }
+
+  & .swiper-button-prev:after, .swiper-button-next:after {
+    font-size: 2rem;
   }
 
   @media (max-width: 600px) {    
@@ -77,6 +81,20 @@ const SwiperStyle = styled(Swiper)`
 const ListTitleStyle = styled.h1`
   padding-left: 10%;
   padding-right: 3%;
+  font-size: 2rem;
+
+  & span {
+    text-transform: none;    
+    border-bottom: .3px solid black;    
+    font-size: 0.8rem;
+  }
+
+  @media (max-width: 600px) {    
+    font-size: 1.3rem;
+    & span {
+      font-size: 0.8rem;
+    }    
+  }
 
   /* @media screen and (min-width: 480px){
     padding-left: 18px;

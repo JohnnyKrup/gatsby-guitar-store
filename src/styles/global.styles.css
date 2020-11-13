@@ -66,11 +66,11 @@ input:focus, select:focus, textarea:focus, button:focus {
 
 button {
   -webkit-appearance: button;
-     -moz-appearance: button;
-          appearance: button;
+  -moz-appearance: button;
+  appearance: button;
   -webkit-writing-mode: horizontal-tb !important;
-      -ms-writing-mode: lr-tb !important;
-          writing-mode: horizontal-tb !important;
+  -ms-writing-mode: lr-tb !important;
+  writing-mode: horizontal-tb !important;
   text-rendering: auto;
   color: -internal-light-dark(black, white);
   letter-spacing: normal;
@@ -91,7 +91,7 @@ button {
   border-style: outset;
   border-color: -internal-light-dark(rgb(118, 118, 118), rgb(133, 133, 133));
   -o-border-image: initial;
-     border-image: initial;
+  border-image: initial;
 }
 
 .noselect {

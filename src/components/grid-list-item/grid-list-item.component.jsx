@@ -14,7 +14,7 @@ const GridListItem = ({ product, categorySlug }) => {
     },
     brand: { brandTitle, slug: brandSlug },
   } = product
-  console.log({product})
+  // console.log({product})
   // console.log({categorySlug})
 
   return (

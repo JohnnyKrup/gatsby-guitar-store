@@ -46,10 +46,7 @@ const categoryListsTemplate = ({
           const prods = products.filter(product => product.brand.slug === brand.slug)
           
           return (
-            <CategoryListRowStyle key={idx}>
-              {/* <GridListTitleStyle>
-                <Link to={`/shop/${pageContext.slug}/${brand.slug}`}>{brand.title}</Link>
-                </GridListTitleStyle> */}
+            <CategoryListRowStyle key={idx}>              
               <ZGridList products={prods} categorySlug={pageContext.slug} showTitle linkUrl={`/shop/${pageContext.slug}/${brand.slug}`} titleName={brand.title} />
             </CategoryListRowStyle>
           )

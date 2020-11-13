@@ -1,4 +1,5 @@
 import React from 'react'
+import styled from 'styled-components'
 
 import SwiperCore, {Virtual} from 'swiper'
 import {Swiper, SwiperSlide} from 'swiper/react'

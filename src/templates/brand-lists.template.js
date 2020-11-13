@@ -5,18 +5,32 @@ import GridList from '../components/grid-list/grid-list.component'
 import HeroProduct from '../components/hero/hero-product.component'
 
 import {HeroBarContainerStyle, HeroBarTableStyle, HeroBarTableCellStyle, HeroBarTableCellInnerStyle, HeroBarTitleWrapperStyle, HeroBarTitleStyle, BreadcrumbContainerStyle, BreadcrumbLinkStyle, BrandListContainerStyle} from './template.styles'
+import SearchButtons from '../components/search-buttons/search-buttons-component'
 
+const BrandListsTemplate = ({data: {allStrapiProduct: { nodes }}, pageContext}) => {    
 
-const BrandListsTemplate = ({data: {
-    allStrapiProduct: { nodes: products },
-  }, pageContext}) => {                    
-    console.log({products})    
-    console.log(pageContext)
+  // console.log({nodes})    
+  // console.log(pageContext)
+  
+  // get only the products that match the pageContexts categorySlug
+  const filteredProducts = []
+  nodes.forEach(node => 
+    node.categories.forEach(cat => 
+      cat.slug === pageContext.categorySlug ? filteredProducts.push(node) : null
+    )
+  )
+
+  /**
+   * Since the products need to be filtered and reset
+   * we use a useState for the displayed products in the grid
+   */
+  const [products, setProducts] = React.useState(filteredProducts)
     
-    const filteredProducts = []
-    products.forEach(product => 
-      product.categories.forEach(cat => cat.slug === pageContext.categorySlug ? filteredProducts.push(product) : null)
-    )    
+  // reset functionality
+  const setBackToAll = () => {
+    setProducts(filteredProducts)
+  }
+  
 
   return (
     <Layout>
@@ -41,9 +55,14 @@ const BrandListsTemplate = ({data: {
         </HeroBarContainerStyle>
       </HeroProduct>      
       
+      <SearchButtons 
+        products={filteredProducts}
+        setProducts={setProducts} 
+        setBackToAll={setBackToAll}
+      />
         
       <BrandListContainerStyle>
-        <GridList products={filteredProducts} key={products.strapiId} categorySlug={pageContext.categorySlug}/>
+        <GridList products={products} key={products.strapiId} categorySlug={pageContext.categorySlug}/>
       </BrandListContainerStyle>
     </Layout>
   )
@@ -79,6 +98,9 @@ export const query = graphql`
       categories {
         slug
         title
+      }
+      tags{
+        tag
       }
     }
   }

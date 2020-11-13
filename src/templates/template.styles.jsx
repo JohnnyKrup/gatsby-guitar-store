@@ -135,8 +135,8 @@ export const CategoryListRowStyle = styled.div`
 
 export const BrandListContainerStyle = styled.div`
   background: var(--mainWhite);
-  padding: 5rem 0;
-  margin-top: 70px;
+  padding: 3rem 0;
+  /* margin-top: 70px; */
   width: 100%;
 `
 

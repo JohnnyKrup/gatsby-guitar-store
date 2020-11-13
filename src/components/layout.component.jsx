@@ -15,18 +15,18 @@ const Layout = ({ children }) => {
 
   return (
     <>
-    <Helmet>
-      {
-        // react-helmet plugin allows to add classes dynamically to specific tags i.e. <body>
-        isSidebarOpen && <body className="noscroll-y" />
-      }
-    </Helmet>
-    <LayoutStyle>      
-      <Navbar />
-      {isSidebarOpen && <Sidebar />}
-      <ScrollButton />
-      {children}
-    </LayoutStyle>    
+      <Helmet>
+        {
+          // react-helmet plugin allows to add classes dynamically to specific tags i.e. <body>
+          isSidebarOpen && <body className="noscroll-y" />
+        }
+      </Helmet>
+      <LayoutStyle>      
+        <Navbar />
+        {isSidebarOpen && <Sidebar />}
+        <ScrollButton />
+        {children}
+      </LayoutStyle>    
     </>    
   )
 }
@@ -37,5 +37,6 @@ export const LayoutStyle = styled.main`
   width: 100%;
   display: flex;
   flex-direction: column;
-  align-items: center;  
+  align-items: center;
+  justify-content: flex-start;
 `
