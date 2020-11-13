@@ -19,8 +19,8 @@ const ProductTemplate = ({ data: { strapiProduct } }) => {
 
   let imageWidth = 0
   windowWidth < 600 ? imageWidth = windowWidth - (windowWidth/10) : imageWidth = 500
-  console.log(windowWidth)
-  console.log(imageWidth)
+  // console.log(windowWidth)
+  // console.log(imageWidth)
 
   const {
     strapiId,
@@ -47,7 +47,7 @@ const ProductTemplate = ({ data: { strapiProduct } }) => {
 
   const headerImg = strapiProduct.ImageHeader.childImageSharp.fluid
 
-  console.log(strapiProduct)
+  // console.log(strapiProduct)
 
   return (
     <Layout>

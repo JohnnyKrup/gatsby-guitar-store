@@ -2,7 +2,7 @@ import styled from "styled-components"
 import Img from "gatsby-background-image"
 
 export const CategoryPreviewStyle = styled.section`
-  background: var(--mainGray);
+  background: ${({bgLight}) => (bgLight ? "white": "#f7f7f7")};
   padding: 5rem 0;
   margin-top: 70px;
   width: 100%;

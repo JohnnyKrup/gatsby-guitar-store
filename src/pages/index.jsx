@@ -23,7 +23,7 @@ const HomePage = () => {
         </Banner>
       </Hero>
       <FeaturedProducts />
-      <CategoryPreview />
+      <CategoryPreview hideTitle={false}/>
     </Layout>
   )
 }

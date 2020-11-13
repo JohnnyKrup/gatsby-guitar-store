@@ -28,7 +28,7 @@ const ShopPage = () => {
         <Title title="Shop" />
       </HeroAlternative>
 
-      <CategoryPreview />
+      <CategoryPreview hideTitle={true} bgLight={true}/>
     </Layout>
   )
 }

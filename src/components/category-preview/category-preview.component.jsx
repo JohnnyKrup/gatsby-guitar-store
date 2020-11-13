@@ -38,15 +38,15 @@ const query = graphql`
   }
 `
 
-const CategoryPreview = ({title}) => {
+const CategoryPreview = ({title, hideTitle, bgLight}) => {
   const data = useStaticQuery(query)
   const {
     allStrapiCategory: { categories },
   } = data
 
   return (
-    <CategoryPreviewStyle>
-      <Title title={title || `Shop`} />
+    <CategoryPreviewStyle bgLight={bgLight}>
+      { !hideTitle && <Title title={title || `Shop`} />}
       <TileLayoutStyle>
         {categories.map(category => {
           const {

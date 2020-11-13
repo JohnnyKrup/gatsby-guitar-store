@@ -58,7 +58,7 @@ const query = graphql`
       }
       brand {
         brandTitle: title
-        slug
+        brandSlug: slug
         id
         BrandLogo {
           childImageSharp {
@@ -67,6 +67,9 @@ const query = graphql`
             }
           }
         }
+      }
+      categories {
+        categorySlug : slug
       }
     }
   }
