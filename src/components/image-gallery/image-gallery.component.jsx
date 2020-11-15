@@ -45,6 +45,7 @@ export const MainImageContainerStyle = styled.div`
   width: ${({ imgWidth }) => imgWidth || "300px"};
   border: 1px solid #000;
   margin-bottom: 20px;
+  padding: 10px;
 `
 
 export const MainImageStyle = styled(Img)`
@@ -55,13 +56,14 @@ export const ThumbnailsContainerStyle = styled.div`
   display: flex;
   flex-wrap: wrap;
   width: ${({ imgWidth }) => imgWidth || "300px"};
-  justify-content: ${({ len }) => (len > 3 ? "space-between" : "space-evenly")};
+  justify-content: ${({ len }) => (len > 3 ? "space-between" : "space-evenly")};  
+  
 `
 
 export const ThumbnailStyle = styled(Img)`
   width: 70px;
   border: 1px solid #000;
-  margin-bottom: 10px;
+  margin-bottom: 10px;  
   cursor: pointer;
   opacity: 0.6;
 

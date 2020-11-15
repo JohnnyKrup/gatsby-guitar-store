@@ -60,7 +60,7 @@ const query = graphql`
         brandTitle: title
         brandSlug: slug
         id
-        BrandLogo {
+        brandLogo {
           childImageSharp {
             fluid {
               src

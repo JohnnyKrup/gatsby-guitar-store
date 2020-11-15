@@ -4,17 +4,17 @@ import styled from "styled-components"
 export const ItemStyle = styled.div`
   width: 90%;
   height: 450px;  
-  /* padding: 0px 4% 15px 4%; */
+  padding: 10px;
 
   /* flex: 1 1 auto; */
   justify-self: center;
   align-items: center;
   border: 1px solid black;
-  cursor: pointer;
+  cursor: pointer;  
   
    @media (max-width: 600px) {
     height: 300px;
-    
+    padding: 0px;
   }
 
   @media (min-width: 768px) {
@@ -39,6 +39,32 @@ export const BGImageStyle = styled(BackgroundImage)`
   justify-content: center;
 `
 
+export const HoverStyle = styled.div`
+  width: 100%;
+  height: 100%;
+  background: #fff;
+  opacity: .25;
+
+  & :hover {
+    opacity: 0;
+  }
+`
+
+export const BadgeStyle = styled.div`
+  position: absolute;
+  top: -11px;
+  right: 0;  
+  background: var(--lightBlack);
+  color: #fff;
+  text-transform: capitalize;
+  padding: 5px 10px;
+
+  @media screen and (max-width: 600px){
+    top: -1px;
+    right: 10px;
+  }
+`
+
 export const TextStyle = styled.div`
   height: 90px;
   padding: 0 25px;
@@ -52,6 +78,10 @@ export const TextStyle = styled.div`
   parent container no matter what */
   position: absolute;
   background: #fff;
+
+  & :hover{
+    opacity: 1;
+  }
 
   & .brand {
     text-align: center;

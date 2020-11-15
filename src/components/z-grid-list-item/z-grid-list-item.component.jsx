@@ -58,8 +58,8 @@ const ListItemStyle = styled.article`
 
 const ItemStyle = styled.div`
   width: 100%;
-  height: 450px;  
-  /* padding: 0px 4% 15px 4%; */  
+  height: 450px; 
+  padding: 5px;   
 
   /* flex: 1 1 auto; */
   justify-self: center;
@@ -94,7 +94,7 @@ const BGImageStyle = styled(BackgroundImage)`
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 100%;
+  width: 100%;  
 `
 
 const TextStyle = styled.div`

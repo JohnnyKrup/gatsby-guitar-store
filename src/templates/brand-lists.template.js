@@ -83,8 +83,11 @@ export const query = graphql`
       slug
       strapiId
       title
+      soldBadge
+      newBadge
+      orderedBadge
       brand {
-        BrandLogo {
+        brandLogo {
           childImageSharp {
             fluid {
               ...GatsbyImageSharpFluid_withWebp
