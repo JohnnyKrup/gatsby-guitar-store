@@ -12,8 +12,7 @@ const CategoryListItem = ({ product }) => {
     product_image: {
       childImageSharp: { fluid },
     },
-    brand: { brandTitle, brandSlug },
-    categories,
+    brand: { brandTitle, brandSlug },    
   } = product
 
   let categorySlug = product.categories[0].categorySlug

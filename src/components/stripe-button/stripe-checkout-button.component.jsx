@@ -58,8 +58,7 @@ const StripeCheckoutButton = ({ price }) => {
       shippingAddress
       image={Logo}
       description={`Der Gesamtbetrag ist CHF ${price}`}
-      amount={priceForStripe}
-      panelLabel="Jetzt bezahlen"
+      amount={priceForStripe}      
       token={onToken}
       stripeKey={publishableKey}
     />

@@ -20,7 +20,8 @@ const Login = () => {
               <p>
                 Noch nicht registriert?
                 <br /> Dann registriere dich bitte{" "}
-                <span onClick={() => setIsMember(!isMember)}>hier</span>
+                <span onClick={() => setIsMember(!isMember)}
+                      onKeyDown={() => setIsMember(!isMember)} role="link" tabIndex={0}>hier</span>
               </p>
             </ToggleFormStyle>
           ) : (
@@ -28,7 +29,8 @@ const Login = () => {
               <p>
                 Bereits Kunde? <br />
                 Dann bitte{" "}
-                <span onClick={() => setIsMember(!isMember)}>hier</span>{" "}
+                <span onClick={() => setIsMember(!isMember)}
+                      onKeyDown={() => setIsMember(!isMember)} role="link" tabIndex={0}>hier</span>{" "}
                 anmelden
               </p>
             </ToggleFormStyle>

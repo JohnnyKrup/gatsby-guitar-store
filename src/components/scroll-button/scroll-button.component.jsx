@@ -1,6 +1,6 @@
 import React, { useContext } from "react"
 import { BsChevronUp } from "react-icons/bs"
-import styled, {keyframes} from "styled-components"
+import styled from "styled-components"
 import { UtilityContext } from "../../context/Utility.Context"
 
 const ScrollButton = () => {
@@ -20,7 +20,7 @@ const ScrollButton = () => {
   )
 }
 
-export const ScrollButtonStyle = styled.button`
+const ScrollButtonStyle = styled.button`
   position: fixed;
   right: 0px;
   bottom: 3rem;
@@ -40,26 +40,22 @@ export const ScrollButtonStyle = styled.button`
   
 `
 
-export const ShowScrollButtonStyle = styled.button`
-  z-index: 100;
-  opacity: 1;
-  /* animation: fadeInRight 1s cubic-bezier(.77,0,.175,1) 1;       */
-  /* animation-name: ${fadeInRight};
-  animation-duration: 1s; */
+// const ShowScrollButtonStyle = styled.button`
+//   z-index: 100;
+//   opacity: 1;  
+// `
 
-`
+// const fadeInRight = keyframes`
+// 0% {right: -2rem;}
+//         33% {right: -0.66rem;}
+//         66% {right: -0.33rem;}
+//         100% {right: 0px;}
+// `
 
-const fadeInRight = keyframes`
-0% {right: -2rem;}
-        33% {right: -0.66rem;}
-        66% {right: -0.33rem;}
-        100% {right: 0px;}
-`
-
-const getButtonStyle = props => {
-  if (props.show) {
-    return ShowScrollButtonStyle
-  }
-}
+// const getButtonStyle = props => {
+//   if (props.show) {
+//     return ShowScrollButtonStyle
+//   }
+// }
 
 export default ScrollButton

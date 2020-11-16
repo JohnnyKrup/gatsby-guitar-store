@@ -9,7 +9,7 @@ import CustomButton from "../custom-button/custom-button.component"
 
 import { CardElement, useStripe, useElements } from "@stripe/react-stripe-js"
 
-import submitOrder from "../../strapi/submitOrder"
+// import submitOrder from "../../strapi/submitOrder"
 import styled from "styled-components"
 
 // stripe elements
@@ -19,7 +19,7 @@ const Checkout = props => {
   const [error, setError] = useState("")
 
   const { cartItems, cartTotal, clearCart } = useContext(CartContext)
-  const { user } = useContext(UserContext)
+  // const { user } = useContext(UserContext)
 
   // state values
 

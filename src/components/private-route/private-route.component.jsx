@@ -1,4 +1,4 @@
-import React, { Component } from "react"
+import React from "react"
 import { navigate } from "gatsby"
 import { UserContext } from "../../context/User.Context"
 import { useContext } from "react"

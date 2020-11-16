@@ -15,10 +15,7 @@ exports.onCreatePage = async ({ page, actions }) => {
   // console.log("@@@@@@@@@@@@@@")
   // console.log(`You are running this application in ${process.env.NODE_ENV}-mode.`)
   // console.log("@@@@@@@@@@@@@@")
-
-  // console.log("******************************")
-  // console.log(page.path)
-  // console.log("******************************")
+  
   // page.matchPath is a special key that's used for matching pages
   // only on the client.
   if (page.path.match(/^\/app/)) {
@@ -100,17 +97,6 @@ exports.createPages = async ({ graphql, actions }) => {
         })
       })
     })
-
-  // data &&
-  //   data.allStrapiProduct.products.forEach(product => {
-  //     createPage({
-  //       path: product.slug,
-  //       component: path.resolve("./src/templates/product.template.js"),
-  //       context: { slug: product.slug },
-  //     })
-  //   })
-
-    
 }
 
 /**

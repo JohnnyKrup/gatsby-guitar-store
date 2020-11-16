@@ -1,5 +1,5 @@
 import React, { useContext } from "react"
-import { graphql, navigate } from "gatsby"
+import { graphql } from "gatsby"
 
 import { CartContext } from "../context/Cart.Context"
 import {UtilityContext} from '../context/Utility.Context'
@@ -23,12 +23,12 @@ const ProductTemplate = ({ data: { strapiProduct } }) => {
   // console.log(imageWidth)
 
   const {
-    strapiId,
+    // strapiId,
     title,
-    slug,
+    // slug,
     description,
     price,
-    brand: { brandTitle, brandSlug },
+    brand: { /*brandTitle,*/ brandSlug },
     categories,
     properties: {
       Boden_Zargen,
@@ -45,7 +45,7 @@ const ProductTemplate = ({ data: { strapiProduct } }) => {
     return image.localFile.childImageSharp.fluid
   })
 
-  const headerImg = strapiProduct.ImageHeader.childImageSharp.fluid
+  //const headerImg = strapiProduct.ImageHeader.childImageSharp.fluid
 
   // console.log(strapiProduct)
 

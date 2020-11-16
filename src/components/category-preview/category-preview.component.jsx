@@ -1,5 +1,5 @@
 import React from "react"
-import { graphql, useStaticQuery, navigate, Link } from "gatsby"
+import { graphql, useStaticQuery, navigate } from "gatsby"
 
 import Title from "../title/title.component"
 
@@ -7,8 +7,7 @@ import {
   CategoryPreviewStyle,
   TileLayoutStyle,
   CategoryItemStyle,
-  CategoryBackgroundImageStyle,
-  ContentStyle,
+  CategoryBackgroundImageStyle,  
 } from "./category-preview.styles"
 
 const query = graphql`

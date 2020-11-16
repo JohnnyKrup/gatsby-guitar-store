@@ -11,7 +11,7 @@ const CartIcon = () => {
 
   return (
     <CartIconStyle onClick={() => toggleCartDropdown()}>
-      <img src={logo} />
+      <img src={logo} alt="cart"/>
       <ItemCountStyle>{cartItemQuantity}</ItemCountStyle>
     </CartIconStyle>
   )

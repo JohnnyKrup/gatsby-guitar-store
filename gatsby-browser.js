@@ -1,6 +1,6 @@
 import React from "react"
 
-import { ParallaxProvider } from "react-scroll-parallax"
+// import { ParallaxProvider } from "react-scroll-parallax"
 import { SidebarProvider } from "./src/context/Sidebar.Context"
 import { CartProvider } from "./src/context/Cart.Context"
 import { UserProvider } from "./src/context/User.Context"

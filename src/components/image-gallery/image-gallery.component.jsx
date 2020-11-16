@@ -21,7 +21,8 @@ const ImageGallery = ({ images, imgWidth }) => {
           <ThumbnailsContainerStyle len={len} imgWidth={imgWidth}>
             {images.map((image, idx) => {
               return (
-                <div key={idx} onClick={() => setMainImage(image)}>
+                <div key={idx} onClick={() => setMainImage(image)} 
+                      onKeyDown={() => setMainImage(image)} role="button" tabIndex={idx}>
                   <ThumbnailStyle fluid={image} />
                 </div>
               )

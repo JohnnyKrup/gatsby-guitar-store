@@ -21,16 +21,18 @@ const CartItem = ({ cartItem }) => {
 
       <ColumnStyle>{title}</ColumnStyle>
       <QuantityStyle>
-        <div className="arrow" onClick={() => removeItem(cartItem)}>
+        <div className="arrow" onClick={() => removeItem(cartItem)} 
+              onKeyDown={() => removeItem(cartItem)} role="button" tabIndex={0}>
           &#10094;
         </div>
         <span className="value">{quantity}</span>
-        <div className="arrow" onClick={() => addItem(cartItem)}>
+        <div className="arrow" onClick={() => addItem(cartItem)}
+              onKeyDown={() => addItem(cartItem)} role="button" tabIndex={0}>
           &#10095;
         </div>
       </QuantityStyle>
       <ColumnStyle>{price}</ColumnStyle>
-      <RemoveButtonStyle onClick={() => clearItem(cartItem)}>
+      <RemoveButtonStyle onClick={() => clearItem(cartItem)} onKeyDown={() => clearItem(cartItem)} role="button" tabIndex={0}>
         &#10005;
       </RemoveButtonStyle>
     </CartItemStyle>

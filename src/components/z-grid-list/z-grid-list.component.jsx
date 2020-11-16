@@ -117,36 +117,36 @@ const ListTitleStyle = styled.h1`
   } */
 `
 
- const ListContainerStyle = styled.ul`
-  display: flex;
-  white-space: nowrap;
-  margin: 0;
-  scroll-padding-left: 160px;
-  scroll-behavior: smooth;
-  scroll-snap-type: x mandatory;  
-  width: 100%;
-  flex-wrap: nowrap;
-  overflow-x: hidden;
-  list-style: none;
+//  const ListContainerStyle = styled.ul`
+//   display: flex;
+//   white-space: nowrap;
+//   margin: 0;
+//   scroll-padding-left: 160px;
+//   scroll-behavior: smooth;
+//   scroll-snap-type: x mandatory;  
+//   width: 100%;
+//   flex-wrap: nowrap;
+//   overflow-x: hidden;
+//   list-style: none;
 
-  @media screen and (min-width: 480px){
-    padding-left: 18px;
-    padding-right: 18px;    
-  }
+//   @media screen and (min-width: 480px){
+//     padding-left: 18px;
+//     padding-right: 18px;    
+//   }
 
-  @media screen and (min-width: 768px){
-    padding-left: 24px;
-    padding-right: 24px;    
-  }
+//   @media screen and (min-width: 768px){
+//     padding-left: 24px;
+//     padding-right: 24px;    
+//   }
 
-  @media screen and (min-width: 1024px){
-    padding-left: 28px;
-    padding-right: 28px;    
-  }
+//   @media screen and (min-width: 1024px){
+//     padding-left: 28px;
+//     padding-right: 28px;    
+//   }
 
-  @media screen and (min-width: 1280px){
-    padding-left: calc(50vw - 608px);
-    padding-right: calc(50vw - 608px);    
-  }
-`
+//   @media screen and (min-width: 1280px){
+//     padding-left: calc(50vw - 608px);
+//     padding-right: calc(50vw - 608px);    
+//   }
+// `
 export default ZGridList

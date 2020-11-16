@@ -1,11 +1,11 @@
 import React from "react"
-import { graphql, Link } from "gatsby"
+import { graphql } from "gatsby"
 
 import Layout from "../components/layout.component"
 import ZGridList from "../components/z-grid-list/z-grid-list.component"
 import HeroProduct from '../components/hero/hero-product.component'
 
-import {HeroBarContainerStyle, HeroBarTableStyle, HeroBarTableCellStyle, HeroBarTableCellInnerStyle, HeroBarTitleWrapperStyle, HeroBarTitleStyle, BreadcrumbContainerStyle, BreadcrumbLinkStyle, CategoryListContainerStyle, CategoryListRowStyle, GridListTitleStyle} from './template.styles'
+import {HeroBarContainerStyle, HeroBarTableStyle, HeroBarTableCellStyle, HeroBarTableCellInnerStyle, HeroBarTitleWrapperStyle, HeroBarTitleStyle, BreadcrumbContainerStyle, BreadcrumbLinkStyle, CategoryListContainerStyle, CategoryListRowStyle} from './template.styles'
 
 const categoryListsTemplate = ({
   data: {
