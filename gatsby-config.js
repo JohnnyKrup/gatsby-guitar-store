@@ -24,12 +24,12 @@ module.exports = {
       },
     },
     `gatsby-plugin-sharp`,
-    `gatsby-transformer-sharp`,
+    `gatsby-transformer-sharp`,    
     {
       resolve: `gatsby-source-strapi`,
       options: {
-        //apiURL: process.env.GATSBY_API_URL,
-        apiURL: 'https://strapi-guitar-store.herokuapp.com',
+        apiURL: process.env.GATSBY_API_URL,
+        //apiURL: 'https://strapi-guitar-store.herokuapp.com',
         queryLimit: 5000, // Default to 100
         contentTypes: [`brand`, `category`, `product`],
         // Possibility to login with a strapi user, when content types are not publically available (optional).

@@ -51,7 +51,7 @@ export const HeroBarTableCellInnerStyle = styled.div`
 
   @media screen and (max-width: 480px){
     width: 300px;
-    padding: 35px 10px;
+    padding: 20px 10px;
   }
 `
 export const HeroBarTitleWrapperStyle = styled.div`
@@ -74,7 +74,10 @@ export const HeroBarTitleStyle = styled.h1`
   text-transform: uppercase;
 
   @media screen and (max-width: 480px){
-    line-height: 50px;
+    line-height: 32px;
+    padding-bottom: 12px;
+    letter-spacing: 0.05em;
+    font-size: 20px;
   }
 `
 
@@ -92,6 +95,10 @@ export const BreadcrumbContainerStyle = styled.div`
     display: inline-block;
     vertical-align: center;
     color: var(--lightGray);
+
+    @media screen and (max-width: 480px){
+    font-size: 16px;
+  }
   }
 
   @media screen and (max-width: 1024px){
@@ -112,6 +119,10 @@ export const BreadcrumbLinkStyle = styled(Link)`
 
   &:hover{
     color: var(--mainBlack);
+  }
+
+  @media screen and (max-width: 480px){
+    font-size: 16px;
   }
 `
 
