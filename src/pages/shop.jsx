@@ -1,4 +1,4 @@
-import { useStaticQuery } from "gatsby"
+import { graphql, useStaticQuery } from "gatsby"
 import React from "react"
 import CategoryPreview from "../components/category-preview/category-preview.component"
 import HeroAlternative from "../components/hero/hero-alternative.component"

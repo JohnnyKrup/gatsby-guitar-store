@@ -10,7 +10,9 @@ import Title from '../title/title.component'
 const FeaturedProducts = () => {
   const data = useStaticQuery(query)
   const {allStrapiProduct: {nodes: products}} = data
+  
   console.log({data})
+  
   return (
     <FeaturedSectionStyle>
       <Title title="Herbst Special" />

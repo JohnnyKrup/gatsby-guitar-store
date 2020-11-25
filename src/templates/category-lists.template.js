@@ -6,6 +6,7 @@ import ZGridList from "../components/z-grid-list/z-grid-list.component"
 import HeroProduct from '../components/hero/hero-product.component'
 
 import {HeroBarContainerStyle, HeroBarTableStyle, HeroBarTableCellStyle, HeroBarTableCellInnerStyle, HeroBarTitleWrapperStyle, HeroBarTitleStyle, BreadcrumbContainerStyle, BreadcrumbLinkStyle, CategoryListContainerStyle, CategoryListRowStyle} from './template.styles'
+import { compareValues } from "../utils/helpers"
 
 const categoryListsTemplate = ({
   data: {
@@ -47,7 +48,7 @@ const categoryListsTemplate = ({
           
           return (
             <CategoryListRowStyle key={idx}>              
-              <ZGridList products={prods} categorySlug={pageContext.slug} showTitle linkUrl={`/shop/${pageContext.slug}/${brand.slug}`} titleName={brand.title} />
+              <ZGridList products={prods.sort(compareValues('title', 'desc')).slice(0,5)} categorySlug={pageContext.slug} showTitle linkUrl={`/shop/${pageContext.slug}/${brand.slug}`} titleName={brand.title} />
             </CategoryListRowStyle>
           )
         })        

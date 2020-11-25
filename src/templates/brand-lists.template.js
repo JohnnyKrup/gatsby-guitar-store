@@ -1,8 +1,10 @@
 import React from 'react'
+import { graphql } from 'gatsby'
 
 import Layout from '../components/layout.component'
 import GridList from '../components/grid-list/grid-list.component'
 import HeroProduct from '../components/hero/hero-product.component'
+import {compareValues} from '../utils/helpers'
 
 import {HeroBarContainerStyle, HeroBarTableStyle, HeroBarTableCellStyle, HeroBarTableCellInnerStyle, HeroBarTitleWrapperStyle, HeroBarTitleStyle, BreadcrumbContainerStyle, BreadcrumbLinkStyle, BrandListContainerStyle} from './template.styles'
 import SearchButtons from '../components/search-buttons/search-buttons-component'
@@ -18,13 +20,13 @@ const BrandListsTemplate = ({data: {allStrapiProduct: { nodes }}, pageContext}) 
     node.categories.forEach(cat => 
       cat.slug === pageContext.categorySlug ? filteredProducts.push(node) : null
     )
-  )
+  )  
 
   /**
    * Since the products need to be filtered and reset
    * we use a useState for the displayed products in the grid
    */
-  const [products, setProducts] = React.useState(filteredProducts)
+  const [products, setProducts] = React.useState(filteredProducts.sort(compareValues('title')))
     
   // reset functionality
   const setBackToAll = () => {

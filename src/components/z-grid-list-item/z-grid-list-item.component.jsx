@@ -1,6 +1,7 @@
 import { navigate } from "gatsby"
 import React from "react"
 
+import {truncateString} from '../../utils/helpers'
 import BackgroundImage from "gatsby-background-image"
 import styled from "styled-components"
 
@@ -16,7 +17,7 @@ const ZGridListItem = ({ product, categorySlug }) => {
     },
     brand: { brandTitle, slug: brandSlug },
   } = product
-   //console.log({product})
+   //console.log({product})  
 
   return (
     <ListItemStyle>
@@ -24,7 +25,7 @@ const ZGridListItem = ({ product, categorySlug }) => {
       <BGImageStyle fluid={fluid}>
         <TextStyle>
           <div className="brand">- {brandTitle} -</div>
-          <div className="title">{title}</div>
+          <div className="title">{truncateString(title, 25)}</div>
           <div className="title">CHF {price}</div>
         </TextStyle>
       </BGImageStyle>
