@@ -1,28 +1,32 @@
-import React from 'react'
+import React from "react"
 import { graphql, useStaticQuery } from "gatsby"
 
-import styled from 'styled-components'
+import styled from "styled-components"
 
-import CategoryList from '../category-list/category-list.component'
-import Title from '../title/title.component'
-
+import CategoryList from "../category-list/category-list.component"
+import Title from "../title/title.component"
 
 const FeaturedProducts = () => {
   const data = useStaticQuery(query)
-  const {allStrapiProduct: {nodes: products}} = data
-  
-  console.log({data})
-  
+  const {
+    allStrapiProduct: { nodes: products },
+  } = data
+
+  //console.log({data})
+
   return (
     <FeaturedSectionStyle>
       <Title title="Herbst Special" />
       <FeaturedArticleStyle>
         <h3>Jetzt 20% auf ausgewählte Modelle</h3>
-        <p>Seht euch die Herbst-Specials an, die Aktion ist noch gültig bis zum 30. November, das ist die Gelegenheit für die Schnäppchenjäger unter euch ;)</p>
+        <p>
+          Seht euch die Herbst-Specials an, die Aktion ist noch gültig bis zum
+          30. November, das ist die Gelegenheit für die Schnäppchenjäger unter
+          euch ;)
+        </p>
       </FeaturedArticleStyle>
       <CategoryList products={products} />
     </FeaturedSectionStyle>
-    
   )
 }
 
@@ -38,45 +42,42 @@ export const FeaturedArticleStyle = styled.article`
   text-align: center;
   margin: 0 auto;
   margin-bottom: 20px;
-
-  
 `
 
 const query = graphql`
   {
-  allStrapiProduct(filter: {featured: {eq: true}}) {
-    nodes {
-      strapiId
-      title
-      slug
-      price
-      featured
-      product_image {
-        childImageSharp {
-          fluid {
-            src
-          }
-        }
-      }
-      brand {
-        brandTitle: title
-        brandSlug: slug
-        id
-        brandLogo {
+    allStrapiProduct(filter: { featured: { eq: true } }) {
+      nodes {
+        strapiId
+        title
+        slug
+        price
+        featured
+        product_image {
           childImageSharp {
             fluid {
-              src
+              ...GatsbyImageSharpFluid_withWebp
             }
           }
         }
-      }
-      categories {
-        categorySlug : slug
+        brand {
+          brandTitle: title
+          brandSlug: slug
+          id
+          brandLogo {
+            childImageSharp {
+              fluid {
+                ...GatsbyImageSharpFluid_withWebp
+              }
+            }
+          }
+        }
+        categories {
+          categorySlug: slug
+        }
       }
     }
   }
-}
-
 `
 
 export default FeaturedProducts

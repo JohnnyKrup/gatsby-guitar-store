@@ -43,17 +43,17 @@ export const LogoStyle = styled(Link)`
 export const LinksStyle = styled.div`
   display: none;
 
-  @media screen and (min-width: 800px) {  
+  @media screen and (min-width: 800px) {
     width: 80%;
     height: 100%;
     display: flex;
     align-items: center;
     justify-content: flex-end;
 
-    li {
+    /* li {
       transition: var(--mainTransition);
       height: 0;
-      /* overflow: hidden; */
+      overflow: hidden;
 
       div {
         padding-top: 0;
@@ -63,10 +63,28 @@ export const LinksStyle = styled.div`
         color: var(--lightGray);
         cursor: default;
       }
-    }    
+    }     
+    */
   }
 `
-export const LinkStyle = styled(Link)`  
+export const LinkListItemStyle = styled.li`
+  @media screen and (min-width: 800px) {
+    transition: var(--mainTransition);
+    height: 0;
+    /* overflow: hidden; */
+
+    div {
+      padding-top: 0;
+    }
+
+    & .inactive {
+      color: var(--lightGray);
+      cursor: default;
+    }
+  }
+`
+
+export const LinkStyle = styled(Link)`
   padding: 10px 15px;
   text-transform: uppercase;
   color: var(--darkGray);
@@ -82,14 +100,14 @@ export const MenuButtonStyle = styled.button`
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 1.5rem;      
+  font-size: 1.5rem;
   border: transparent;
-  color: var(--mainBlack);  
+  color: var(--mainBlack);
   transition: var(--mainTransition);
   background-color: var(--mainWhite);
   cursor: pointer;
 
-  @media (min-width: 800px){
+  @media (min-width: 800px) {
     display: none;
   }
 `
@@ -97,7 +115,7 @@ export const MenuButtonStyle = styled.button`
 export const CartListItemStyle = styled.div`
   padding-top: 37px;
 
-  @media (max-width: 800px){
+  @media (max-width: 800px) {
     padding-top: 18px;
   }
 `

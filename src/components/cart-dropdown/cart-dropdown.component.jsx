@@ -20,7 +20,7 @@ const CartDropdown = () => {
   }
 
   return (
-    <CartDropdownStyle>
+    <>
       <CartItemsContainerStyle>
         {cartItems.length ? (
           cartItems.map(cartItem => {
@@ -36,7 +36,7 @@ const CartDropdown = () => {
           ZUM WARENKORB
         </CustomButton>
       ) : null}
-    </CartDropdownStyle>
+    </>
   )
 }
 

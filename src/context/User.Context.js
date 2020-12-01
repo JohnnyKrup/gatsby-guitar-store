@@ -5,12 +5,21 @@ const getUserFromLocalStorage = () => {
     ? JSON.parse(localStorage.getItem("user"))
     : { username: null, token: null }
 }
-const initialState = { user: { username: null, token: null } }
+const initialState = {
+  user: { username: null, token: null },
+  userDropDownHidden: true,
+}
 const UserContext = createContext(initialState)
 
 const UserProvider = ({ children }) => {
   // const [user, setUser] = useState({ username: null, token: null })
   const [user, setUser] = useState(getUserFromLocalStorage())
+  const [userDropdownHidden, setUserDropdownHidden] = useState(true)
+
+  const toggleUserDropdown = () => {
+    console.log(userDropdownHidden)
+    setUserDropdownHidden(!userDropdownHidden)
+  }
 
   const userLogin = user => {
     setUser(user)
@@ -23,7 +32,15 @@ const UserProvider = ({ children }) => {
   }
 
   return (
-    <UserContext.Provider value={{ user, userLogin, userLogout }}>
+    <UserContext.Provider
+      value={{
+        user,
+        userLogin,
+        userLogout,
+        userDropdownHidden,
+        toggleUserDropdown,
+      }}
+    >
       {children}
     </UserContext.Provider>
   )

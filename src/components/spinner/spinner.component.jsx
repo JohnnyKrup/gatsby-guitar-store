@@ -1,21 +1,19 @@
 import React from "react"
 
+import { usePromiseTracker } from "react-promise-tracker"
+
 import styled from "styled-components"
 
-const WithSpinner = WrappedComponent => {
-  const Spinner = ({ loading, ...otherProps }) => {
-    console.log({ loading })
-    console.log({ ...otherProps })
+const Spinner = () => {
+  const { promiseInProgress } = usePromiseTracker()
 
-    return loading ? (
+  return (
+    promiseInProgress && (
       <SpinnerOverlay>
         <SpinnerContainer />
       </SpinnerOverlay>
-    ) : (
-      <WrappedComponent {...otherProps} />
     )
-  }
-  return Spinner
+  )
 }
 
 const SpinnerOverlay = styled.div`
@@ -47,4 +45,4 @@ const SpinnerContainer = styled.div`
   }
 `
 
-export default WithSpinner
+export default Spinner

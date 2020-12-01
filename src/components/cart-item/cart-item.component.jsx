@@ -21,25 +21,40 @@ const CartItem = ({ cartItem }) => {
 
       <ColumnStyle>{title}</ColumnStyle>
       <QuantityStyle>
-        <div className="arrow" onClick={() => removeItem(cartItem)} 
-              onKeyDown={() => removeItem(cartItem)} role="button" tabIndex={0}>
+        <div
+          className="arrow"
+          onClick={() => removeItem(cartItem)}
+          onKeyDown={() => removeItem(cartItem)}
+          role="button"
+          tabIndex={0}
+        >
           &#10094;
         </div>
         <span className="value">{quantity}</span>
-        <div className="arrow" onClick={() => addItem(cartItem)}
-              onKeyDown={() => addItem(cartItem)} role="button" tabIndex={0}>
+        <div
+          className="arrow"
+          onClick={() => addItem(cartItem)}
+          onKeyDown={() => addItem(cartItem)}
+          role="button"
+          tabIndex={0}
+        >
           &#10095;
         </div>
       </QuantityStyle>
       <ColumnStyle>{price}</ColumnStyle>
-      <RemoveButtonStyle onClick={() => clearItem(cartItem)} onKeyDown={() => clearItem(cartItem)} role="button" tabIndex={0}>
+      <RemoveButtonStyle
+        onClick={() => clearItem(cartItem)}
+        onKeyDown={() => clearItem(cartItem)}
+        role="button"
+        tabIndex={0}
+      >
         &#10005;
       </RemoveButtonStyle>
     </CartItemStyle>
   )
 }
 
-export const CartItemStyle = styled.div`
+const CartItemStyle = styled.div`
   width: 100%;
   display: flex;
   min-height: 100px;
@@ -53,7 +68,7 @@ export const CartItemStyle = styled.div`
   }
 `
 
-export const ColumnStyle = styled.span`
+const ColumnStyle = styled.span`
   width: 23%;
 
   @media screen and (max-width: 800px) {
@@ -61,7 +76,7 @@ export const ColumnStyle = styled.span`
   }
 `
 
-export const QuantityStyle = styled.span`
+const QuantityStyle = styled.span`
   width: 23%;
   display: flex;
 
@@ -77,15 +92,15 @@ export const QuantityStyle = styled.span`
     font-size: 12px;
   }
 `
-export const ImageContainerStyle = styled.div`
+const ImageContainerStyle = styled.div`
   width: 23%;
   padding-right: 15px;
 `
 
-export const ImageStyle = styled(Img)`
+const ImageStyle = styled(Img)`
   width: 100%;
 `
-export const RemoveButtonStyle = styled.div`
+const RemoveButtonStyle = styled.div`
   padding-left: 12px;
   cursor: pointer;
 `

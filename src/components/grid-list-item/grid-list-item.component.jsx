@@ -1,6 +1,8 @@
 import { navigate } from "gatsby"
 import React from "react"
 
+import {truncateString} from '../../utils/helpers'
+
 import { ItemStyle, BGImageStyle, TextStyle, HoverStyle, BadgeStyle} from "./grid-list-item.styles"
 
 const GridListItem = ({ product, categorySlug }) => {
@@ -36,7 +38,7 @@ const GridListItem = ({ product, categorySlug }) => {
 
         <TextStyle>
             <div className="brand">- {brandTitle} -</div>
-            <div className="title">{title}</div>
+            <div className="title">{truncateString(title, 25)}</div>
             <div className="title">CHF {price}</div>
           </TextStyle>
       </BGImageStyle>
