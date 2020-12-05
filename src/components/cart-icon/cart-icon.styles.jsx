@@ -11,8 +11,8 @@ export const CartIconStyle = styled.div`
 
   img {
     position: absolute;
-    width: 24px;
-    height: 24px;
+    width: 28px;
+    height: 28px;
   }
 `
 

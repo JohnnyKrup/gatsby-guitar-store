@@ -12,7 +12,6 @@ const initialState = {
 const UserContext = createContext(initialState)
 
 const UserProvider = ({ children }) => {
-  // const [user, setUser] = useState({ username: null, token: null })
   const [user, setUser] = useState(getUserFromLocalStorage())
   const [userDropdownHidden, setUserDropdownHidden] = useState(true)
 

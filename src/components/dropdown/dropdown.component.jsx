@@ -1,5 +1,5 @@
 import React from "react"
-import styled from "styled-components"
+import styled, { css } from "styled-components"
 
 const DropDown = ({
   children,
@@ -7,33 +7,43 @@ const DropDown = ({
   dropDownHeight,
   positionRight,
   bgColor,
+  flexRow,
+  dropDownHidden,
 }) => {
   return (
-    <CartDropdownStyle
+    <DropdownStyle
       dropDownWidth={dropDownWidth}
       dropDownHeight={dropDownHeight}
       positionRight={positionRight}
       bgColor={bgColor}
+      addCSS={transitionCSS}
+      flexRow={flexRow}
+      dropDownHidden={dropDownHidden}
     >
       {children}
-    </CartDropdownStyle>
+    </DropdownStyle>
   )
 }
 
-export const CartDropdownStyle = styled.div`
+/* height: ${({ dropDownHeight }) =>
+    dropDownHeight ? `${dropDownHeight}` : "480px"}; */
+
+const DropdownStyle = styled.div`
   position: absolute;
-  width: ${({ dropDownWidth }) =>
-    dropDownWidth ? `${dropDownWidth}` : "340px"};
-  height: ${({ dropDownHeight }) =>
-    dropDownHeight ? `${dropDownHeight}` : "480px"};
-  display: flex;
-  flex-direction: column;
-  padding: 20px;
+  ${props => props.addCSS}
+  width: ${({ dropDownWidth }) => (dropDownWidth ? dropDownWidth : "340px")};
+  height: 0;
+  display: ${({ dropDownHidden }) => (dropDownHidden ? "none" : "flex")};
+  justify-content: center;
+  flex-direction: ${({ flexRow }) => (flexRow ? "row" : "column")};
+  padding: ${({ dropDownPadding }) =>
+    dropDownPadding ? dropDownPadding : "20px"};
   border: 1px solid black;
   background-color: ${({ bgColor }) => (bgColor ? bgColor : "white")};
-  top: 71px;
+  top: 70px;
   right: ${({ positionRight }) => (positionRight ? positionRight : "40px")};
-  z-index: 5;
+  z-index: 2;
+  transition: height 1.5s ease;
 
   @media (min-width: 320px) {
     width: 300px;
@@ -55,17 +65,9 @@ export const CartDropdownStyle = styled.div`
       dropDownHeight ? `${dropDownHeight}` : "480px"};
   }
 `
-
-// export const CartItemsContainerStyle = styled.div`
-//   height: 480px;
-//   display: flex;
-//   flex-direction: column;
-//   overflow-y: auto;
-// `
-
-export const EmptyMessageStyle = styled.span`
-  font-size: 18px;
-  margin: auto;
+const transitionCSS = css`
+  height: ${({ dropDownHeight }) =>
+    dropDownHeight ? `${dropDownHeight}` : "480px"};
 `
 
 export default DropDown

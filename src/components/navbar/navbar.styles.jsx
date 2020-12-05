@@ -67,6 +67,7 @@ export const LinksStyle = styled.div`
     */
   }
 `
+
 export const LinkListItemStyle = styled.li`
   @media screen and (min-width: 800px) {
     transition: var(--mainTransition);
@@ -94,6 +95,22 @@ export const LinkStyle = styled(Link)`
     color: var(--mainBlack);
   }
 `
+
+export const LoginLinkStyle = styled(Link)`
+  padding: 36px 15px 0 15px;
+  text-transform: uppercase;
+  color: var(--darkGray);
+  cursor: pointer;
+
+  &:hover {
+    color: var(--mainBlack);
+  }
+
+  @media screen and (max-width: 600px) {
+    display: none;
+  }
+`
+
 export const MenuButtonStyle = styled.button`
   width: 3.5rem;
   height: 3.25rem;
@@ -114,6 +131,15 @@ export const MenuButtonStyle = styled.button`
 
 export const CartListItemStyle = styled.div`
   padding-top: 37px;
+
+  @media (max-width: 800px) {
+    padding-top: 18px;
+  }
+`
+
+export const ProfileContainerStyle = styled.div`
+  padding-top: 37px;
+  justify-content: center;
 
   @media (max-width: 800px) {
     padding-top: 18px;

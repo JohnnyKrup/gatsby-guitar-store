@@ -5,6 +5,7 @@ import { IoCloseSharp } from "react-icons/io5"
 
 import { UserContext } from "../../context/User.Context"
 import { CartContext } from "../../context/Cart.Context"
+import { UtilityContext } from "../../context/Utility.Context"
 
 const CustomerProfile = () => {
   const {
@@ -14,6 +15,7 @@ const CustomerProfile = () => {
   } = useContext(UserContext)
 
   const { clearCart } = useContext(CartContext)
+  const { windowWidth, windowHeight } = useContext(UtilityContext)
 
   return (
     <CustomerDropDownStyle>
@@ -24,11 +26,14 @@ const CustomerProfile = () => {
         Hallo <TitleSpanStyle>{username}</TitleSpanStyle>
       </CustomerTitleStyle>
       <hr />
+
       <UserOptionsListStyle>
         <UserOptionsInnerListStyle>
+          {/* SubTitle */}
           <UserOptionsListItemStyle>
             <SubTitleStyle>Einkäufe</SubTitleStyle>
           </UserOptionsListItemStyle>
+          {/* Items */}
           <UserOptionsListItemStyle>
             <Link to="/app/orders" onClick={toggleUserDropdown}>
               Bestellungen
@@ -39,38 +44,59 @@ const CustomerProfile = () => {
               Rechnungen
             </Link>
           </UserOptionsListItemStyle>
+        </UserOptionsInnerListStyle>
+
+        <UserOptionsInnerListStyle>
+          {/* SubTitle */}
           <UserOptionsListItemStyle>
-            <SubTitleStyle>Rückgabe und Garantie</SubTitleStyle>
+            <SubTitleStyle>Rückgabe</SubTitleStyle>
           </UserOptionsListItemStyle>
+          {/* Items */}
           <UserOptionsListItemStyle>
             <Link to="/" onClick={toggleUserDropdown}>
               Artikel zurücksenden
             </Link>
           </UserOptionsListItemStyle>
         </UserOptionsInnerListStyle>
-        <ul>
-          <LogoutOptionStyle>
-            <hr />
-            <div
-              onClick={() => {
-                userLogout()
-                clearCart()
-                toggleUserDropdown()
-              }}
-            >
-              Abmelden
-            </div>
-          </LogoutOptionStyle>
-        </ul>
+
+        <UserOptionsInnerListStyle>
+          {/* SubTitle */}
+          <UserOptionsListItemStyle>
+            <SubTitleStyle>Garantie</SubTitleStyle>
+          </UserOptionsListItemStyle>
+          {/* Items */}
+          <UserOptionsListItemStyle>
+            <Link to="/" onClick={toggleUserDropdown}>
+              Garantiefall melden
+            </Link>
+          </UserOptionsListItemStyle>
+        </UserOptionsInnerListStyle>
+
+        <UserOptionsInnerListStyle>{/* Image */}</UserOptionsInnerListStyle>
       </UserOptionsListStyle>
+      <UserOptionsInnerListLogOutStyle>
+        <hr />
+        <LogoutOptionStyle>
+          <div
+            onClick={() => {
+              userLogout()
+              clearCart()
+              toggleUserDropdown()
+            }}
+          >
+            Abmelden
+          </div>
+        </LogoutOptionStyle>
+      </UserOptionsInnerListLogOutStyle>
     </CustomerDropDownStyle>
   )
 }
 
 const CustomerDropDownStyle = styled.div`
-  width: 100%;
+  width: 80%;
   height: 100%;
-  padding: 10px 0;
+  padding: 5px 0;
+  justify-content: center;
 
   & hr {
     border-width: 0;
@@ -93,9 +119,10 @@ const CloseButtonStyle = styled.div`
 `
 
 const CustomerTitleStyle = styled.h2`
-  padding: 10px 5px;
+  margin-top: -18px;
   color: var(--darkGray);
-  margin-bottom: 0;
+  margin-bottom: 10px;
+  text-align: center;
 `
 
 const TitleSpanStyle = styled.span`
@@ -106,15 +133,37 @@ const TitleSpanStyle = styled.span`
 
 const UserOptionsListStyle = styled.div`
   display: flex;
-  flex-flow: column;
-  height: 90%;
-  overflow-y: hidden;
+  flex-wrap: wrap;
+  flex-flow: "unset";
+  height: 80%;
+  /* overflow-y: hidden; */
+
+  @media screen and (min-width: 600px) {
+    flex-flow: unset;
+  }
+
+  @media screen and (max-width: 600px) {
+    flex-flow: column;
+    height: 85%;
+  }
 `
 
 const UserOptionsInnerListStyle = styled.ul`
   /* height: 100%; */
+  padding-top: 15px;
   min-height: calc(100% - 30px);
-  width: 100%;
+  width: 25%;
+  display: flex;
+  flex-flow: column;
+
+  @media screen and (min-width: 600px) {
+    min-height: calc(100% - 30px);
+  }
+
+  @media screen and (max-width: 600px) {
+    min-height: 10%;
+    width: 100%;
+  }
 `
 
 const UserOptionsListItemStyle = styled.li`
@@ -127,13 +176,31 @@ const UserOptionsListItemStyle = styled.li`
 `
 
 const SubTitleStyle = styled.h3`
-  padding-top: 30px;
+  padding-top: 10px;
   margin-bottom: 5px;
   color: var(--darkGray);
 `
 
+const UserOptionsInnerListLogOutStyle = styled.ul`
+  padding-top: 15px;
+  min-height: 25px;
+  width: 100%;
+  display: flex;
+  flex-flow: column;
+
+  @media screen and (min-width: 600px) {
+    min-height: 25px;
+    padding-top: 5px;
+  }
+
+  @media screen and (max-width: 600px) {
+    min-height: 10%;
+  }
+`
+
 const LogoutOptionStyle = styled.li`
   height: 20px;
+  text-align: center;
 
   & div {
     text-transform: uppercase;

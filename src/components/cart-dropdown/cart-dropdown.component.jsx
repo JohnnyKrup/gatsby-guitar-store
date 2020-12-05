@@ -6,7 +6,6 @@ import CartDropdownItem from "../cart-dropdown-item/cart-dropdown-item.component
 import CustomButton from "../custom-button/custom-button.component"
 
 import {
-  CartDropdownStyle,
   CartItemsContainerStyle,
   EmptyMessageStyle,
 } from "./cart-dropdown.styles"

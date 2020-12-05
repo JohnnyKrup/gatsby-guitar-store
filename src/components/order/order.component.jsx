@@ -69,14 +69,36 @@ const OrderStyle = styled.div`
   margin-bottom: 40px;
   padding: 25px 0;
   background: white;
+  display: flex;
+  flex-flow: column;
+  justify-content: center;
   opacity: 1;
 
   :hover {
-    background: #eeeeee;
-    opacity: 0.99;
     cursor: pointer;
+    background: #f5f5f5;
+    opacity: 0.95;
+  }
+
+  h3 {
+    padding-left: 15px;
+  }
+
+  @media screen and (max-width: 600px) {
+    font-size: 14px;
+    background: #f5f5f5;
+    width: 95%;
+
+    h3 {
+      font-family: "Roboto Condensed", sans-serif;
+      font-weight: 400;
+      font-size: 16px;
+      letter-spacing: 0.05rem;
+      padding-left: 15px;
+    }
   }
 `
+
 const SubTitleStyle = styled.p`
   border-bottom: 1px solid darkgrey;
   padding-bottom: 15px;
@@ -119,6 +141,11 @@ const ImageContainerStyle = styled.div`
   width: 10%;
   padding-right: 15px;
   padding-left: 15px;
+
+  @media screen and (max-width: 600px) {
+    width: 20%;
+    padding-right: 5px;
+  }
 `
 
 const ImageStyle = styled(Img)`

@@ -5,6 +5,7 @@ import { UserContext } from "../../context/User.Context"
 import { SidebarContext } from "../../context/Sidebar.Context"
 
 import CartIcon from "../cart-icon/cart-icon.component"
+import AccountIcon from "../account-icon/account-icon.component"
 import CartDropdown from "../cart-dropdown/cart-dropdown.component"
 import Dropdown from "../dropdown/dropdown.component"
 import CustomerProfile from "../customer-profile/customer-profile.component"
@@ -15,21 +16,20 @@ import {
   LinksStyle,
   LinkListItemStyle,
   LinkStyle,
+  LoginLinkStyle,
   MenuButtonStyle,
   CartListItemStyle,
+  ProfileContainerStyle,
 } from "./navbar.styles"
 
 import logo from "../../images/LogoClose_128.svg"
 import { GoThreeBars } from "react-icons/go"
 
 const Navbar = () => {
-  const { cartHidden, clearCart, cartItems } = useContext(CartContext)
-  const {
-    user,
-    userLogout,
-    userDropdownHidden,
-    toggleUserDropdown,
-  } = useContext(UserContext)
+  const { cartHidden } = useContext(CartContext)
+  const { user, userDropdownHidden, toggleUserDropdown } = useContext(
+    UserContext
+  )
   const sidebarData = useContext(SidebarContext)
 
   return (
@@ -48,47 +48,30 @@ const Navbar = () => {
         <LinkListItemStyle>
           <LinkStyle to="/shop">shop</LinkStyle>
         </LinkListItemStyle>
-        {user.token ? (
-          <LinkListItemStyle>
-            <LinkStyle
-              as="div"
-              // onClick={() => {
-              //   userLogout()
-              //   clearCart()
-              // }}
-              onClick={toggleUserDropdown}
-            >
-              {user.username}
-            </LinkStyle>
-            {userDropdownHidden ? null : (
-              <Dropdown
-                dropDownWidth="30%"
-                dropDownHeight="60vh"
-                positionRight={"2px"}
-                bgColor={`var(--mainBlack)`}
-              >
-                <CustomerProfile />
-              </Dropdown>
-            )}
-          </LinkListItemStyle>
-        ) : (
-          <LinkListItemStyle>
-            <LinkStyle to="/app/login">anmelden</LinkStyle>
-          </LinkListItemStyle>
-        )}
-
-        {/* {user.token && (
-          <LinkListItemStyle>
-            {cartItems.length < 1 ? (
-              <LinkStyle as="div" className="inactive">
-                kasse
-              </LinkStyle>
-            ) : (
-              <LinkStyle to="/app/checkout">kasse</LinkStyle>
-            )}
-          </LinkListItemStyle>
-        )} */}
       </LinksStyle>
+      {user.token ? (
+        <ProfileContainerStyle onClick={toggleUserDropdown}>
+          <AccountIcon />
+          {/* 
+            Instead of null add a <Dropdown dropDownHidden /> component
+            unfortunately display: none and transitions do not work very well together
+          */}
+          {userDropdownHidden ? null : (
+            <Dropdown
+              dropDownWidth="98%"
+              dropDownHeight="30vh"
+              positionRight={"1%"}
+              bgColor={`var(--mainBlack)`}
+              flexRow
+            >
+              <CustomerProfile />
+            </Dropdown>
+          )}
+        </ProfileContainerStyle>
+      ) : (
+        <LoginLinkStyle to="/app/login">anmelden</LoginLinkStyle>
+      )}
+
       <CartListItemStyle>
         <CartIcon />
         {cartHidden ? null : (
@@ -98,6 +81,7 @@ const Navbar = () => {
         )}
       </CartListItemStyle>
 
+      {/* Mobile Menu Icon */}
       {sidebarData && !sidebarData.isSidebarOpen && (
         <MenuButtonStyle onClick={sidebarData.showSidebar}>
           <GoThreeBars />
