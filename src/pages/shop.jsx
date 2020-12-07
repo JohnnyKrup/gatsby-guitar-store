@@ -8,7 +8,7 @@ import Title from "../components/title/title.component"
 
 const query = graphql`
   {
-    file(relativePath: { eq: "shop_bg.jpg" }) {
+    file(relativePath: { eq: "shop_bg.webp" }) {
       childImageSharp {
         fluid(maxWidth: 1920, quality: 90) {
           ...GatsbyImageSharpFluid
@@ -20,7 +20,11 @@ const query = graphql`
 
 const ShopPage = () => {
   const data = useStaticQuery(query)
-  const {file: {childImageSharp: {fluid}}} = data
+  const {
+    file: {
+      childImageSharp: { fluid },
+    },
+  } = data
 
   return (
     <Layout>
@@ -28,7 +32,7 @@ const ShopPage = () => {
         <Title title="Shop" />
       </HeroAlternative>
 
-      <CategoryPreview hideTitle={true} bgLight={true}/>
+      <CategoryPreview hideTitle={true} bgLight={true} />
     </Layout>
   )
 }

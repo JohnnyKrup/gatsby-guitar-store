@@ -5,7 +5,7 @@ import { BackgroundImageStyle } from "./hero.styles"
 
 const query = graphql`
   {
-    file(relativePath: { eq: "Guitar_Hero.jpg" }) {
+    file(relativePath: { eq: "Guitar_Hero.webp" }) {
       childImageSharp {
         fluid(maxWidth: 1920, quality: 90) {
           ...GatsbyImageSharpFluid
