@@ -1,70 +1,63 @@
-import React from 'react'
-import { graphql } from 'gatsby'
+import React from "react"
+import { graphql } from "gatsby"
 
-import Layout from '../components/layout.component'
-import GridList from '../components/grid-list/grid-list.component'
-import HeroProduct from '../components/hero/hero-product.component'
-import {compareValues} from '../utils/helpers'
+import Layout from "../components/layout.component"
+import GridList from "../components/grid-list/grid-list.component"
+import { compareValues } from "../utils/helpers"
 
-import {HeroBarContainerStyle, HeroBarTableStyle, HeroBarTableCellStyle, HeroBarTableCellInnerStyle, HeroBarTitleWrapperStyle, HeroBarTitleStyle, BreadcrumbContainerStyle, BreadcrumbLinkStyle, BrandListContainerStyle} from './template.styles'
-import SearchButtons from '../components/search-buttons/search-buttons-component'
+import { BrandListContainerStyle } from "./template.styles"
+import SearchButtons from "../components/search-buttons/search-buttons-component"
+import Breadcrumb from "../components/breadcrumb/breadcrumb.component"
 
-const BrandListsTemplate = ({data: {allStrapiProduct: { nodes }}, pageContext}) => {    
+const BrandListsTemplate = ({
+  data: {
+    allStrapiProduct: { prods },
+  },
+  pageContext,
+}) => {
+  console.log({ prods })
+  console.log(pageContext)
 
-  // console.log({nodes})    
-  // console.log(pageContext)
-  
   // get only the products that match the pageContexts categorySlug
   const filteredProducts = []
-  nodes.forEach(node => 
-    node.categories.forEach(cat => 
-      cat.slug === pageContext.categorySlug ? filteredProducts.push(node) : null
-    )
-  )  
+  prods.forEach(product =>
+    product.category.slug === pageContext.categorySlug
+      ? filteredProducts.push(product)
+      : null
+  )
 
   /**
    * Since the products need to be filtered and reset
    * we use a useState for the displayed products in the grid
    */
-  const [products, setProducts] = React.useState(filteredProducts.sort(compareValues('title')))
-    
+  const [products, setProducts] = React.useState(
+    filteredProducts.sort(compareValues("title"))
+  )
+
   // reset functionality
   const setBackToAll = () => {
     setProducts(filteredProducts)
   }
-  
 
   return (
     <Layout>
-      <HeroProduct>
-        <HeroBarContainerStyle>
-          <HeroBarTableStyle>
-            <HeroBarTableCellStyle>
-              <HeroBarTableCellInnerStyle>
-                <HeroBarTitleWrapperStyle>
-                  <HeroBarTitleStyle>{pageContext.brandTitle}</HeroBarTitleStyle>
-                </HeroBarTitleWrapperStyle>
-                <BreadcrumbContainerStyle>
-                  <BreadcrumbLinkStyle to={`/shop`}>shop</BreadcrumbLinkStyle>
-                  <span>&nbsp; / &nbsp;</span>
-                  <BreadcrumbLinkStyle to={`/shop/${pageContext.categorySlug}`}>{pageContext.categorySlug}</BreadcrumbLinkStyle>
-                  <span>&nbsp; / &nbsp;</span>
-                  <span>{pageContext.brandTitle}</span>
-                </BreadcrumbContainerStyle>
-              </HeroBarTableCellInnerStyle>
-            </HeroBarTableCellStyle>
-          </HeroBarTableStyle>
-        </HeroBarContainerStyle>
-      </HeroProduct>      
-      
-      <SearchButtons 
+      <Breadcrumb
+        title={pageContext.brandTitle}
+        categorySlug={pageContext.categorySlug}
+      />
+
+      <SearchButtons
         products={filteredProducts}
-        setProducts={setProducts} 
+        setProducts={setProducts}
         setBackToAll={setBackToAll}
       />
-        
+
       <BrandListContainerStyle>
-        <GridList products={products} key={products.strapiId} categorySlug={pageContext.categorySlug}/>
+        <GridList
+          products={products}
+          key={products.strapiId}
+          categorySlug={pageContext.categorySlug}
+        />
       </BrandListContainerStyle>
     </Layout>
   )
@@ -72,44 +65,38 @@ const BrandListsTemplate = ({data: {allStrapiProduct: { nodes }}, pageContext}) 
 
 export const query = graphql`
   query BrandLists($slug: String!) {
-  allStrapiProduct(filter: {brand: {slug: {eq: $slug}}}) {
-    nodes {
-      price
-      product_image {
-        childImageSharp {
-          fluid {
-            ...GatsbyImageSharpFluid_withWebp
-          }
+    allStrapiProduct(filter: { brand: { slug: { eq: $slug } } }) {
+      prods: nodes {
+        category {
+          title
+          slug
         }
-      }
-      slug
-      strapiId
-      title
-      soldBadge
-      newBadge
-      orderedBadge
-      brand {
-        brandLogo {
+        brand {
+          title
+          slug
+        }
+        strapiId
+        title
+        slug
+        price
+        newBadge
+        orderedBadge
+        soldBadge
+        tags {
+          tag
+        }
+        product_image {
           childImageSharp {
             fluid {
               ...GatsbyImageSharpFluid_withWebp
             }
           }
         }
-        id
-        slug
-        brandTitle: title
-      }
-      categories {
-        slug
-        title
-      }
-      tags{
-        tag
       }
     }
   }
-}
 `
+
+// ...GatsbyImageSharpFluid_withWebp
 
 export default BrandListsTemplate

@@ -12,13 +12,15 @@ const CategoryListItem = ({ product }) => {
     product_image: {
       childImageSharp: { fluid },
     },
-    brand: { brandTitle, brandSlug },    
+    brand: { brandTitle, brandSlug },
+    category: { categorySlug },
   } = product
 
-  let categorySlug = product.categories[0].categorySlug
-
   return (
-    <ItemStyle key={strapiId} onClick={() => navigate(`/shop/${categorySlug}/${brandSlug}/${slug}`)}>
+    <ItemStyle
+      key={strapiId}
+      onClick={() => navigate(`/shop/${categorySlug}/${brandSlug}/${slug}`)}
+    >
       <BGImageStyle fluid={fluid}>
         <TextStyle>
           <div className="brand">- {brandTitle} -</div>

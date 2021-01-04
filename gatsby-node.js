@@ -12,16 +12,9 @@ const { createRemoteFileNode } = require(`gatsby-source-filesystem`)
 exports.onCreatePage = async ({ page, actions }) => {
   const { createPage } = actions
 
-  // console.log("@@@@@@@@@@@@@@")
-  // console.log(`You are running this application in ${process.env.NODE_ENV}-mode.`)
-  // console.log("@@@@@@@@@@@@@@")
-  
   // page.matchPath is a special key that's used for matching pages
   // only on the client.
   if (page.path.match(/^\/app/)) {
-    // console.log("########################")
-    // console.log(page)
-    // console.log("########################")
     page.matchPath = "/app/*"
     // Update the page.
     createPage(page)
@@ -32,6 +25,16 @@ exports.createPages = async ({ graphql, actions }) => {
   const { createPage } = actions
   const { data } = await graphql(`
     query {
+      allStrapiBrand {
+        brands: nodes {
+          slug
+          title
+          categories {
+            slug
+          }
+        }
+      }
+
       allStrapiCategory {
         categories: nodes {
           slug
@@ -41,21 +44,11 @@ exports.createPages = async ({ graphql, actions }) => {
       allStrapiProduct {
         products: nodes {
           slug
-          categories {
-            slug
-          }
           brand {
             slug
           }
-        }
-      }
-
-      all: allStrapiCategory {
-        categories: nodes {
-          cSlug: slug
-          brands {
-            bSlug: slug
-            title
+          category {
+            slug
           }
         }
       }
@@ -63,21 +56,25 @@ exports.createPages = async ({ graphql, actions }) => {
   `)
 
   /**
-   * Creation of product pages and category lists
+   * Creation of product pages,  category & brand lists
    */
-  console.log(data)
-
-  data && 
-    data.all.categories.forEach(category => {
-      category.brands.forEach(brand => {
+  // Brand Pages
+  data &&
+    data.allStrapiBrand.brands.forEach(brand => {
+      brand.categories.forEach(cat => {
         createPage({
-          path: `shop/${category.cSlug}/${brand.bSlug}`,
-          component: path.resolve('./src/templates/brand-lists.template.js'),
-          context: {slug: brand.bSlug, brandTitle: brand.title, categorySlug: category.cSlug},
+          path: `shop/${cat.slug}/${brand.slug}`,
+          component: path.resolve("./src/templates/brand-lists.template.js"),
+          context: {
+            slug: brand.slug,
+            brandTitle: brand.title,
+            categorySlug: cat.slug,
+          },
         })
       })
     })
 
+  // Category Pages
   data &&
     data.allStrapiCategory.categories.forEach(category => {
       createPage({
@@ -87,14 +84,13 @@ exports.createPages = async ({ graphql, actions }) => {
       })
     })
 
-  data && 
+  // Product Pages
+  data &&
     data.allStrapiProduct.products.forEach(product => {
-      product.categories.forEach(category => {
-        createPage({
-          path: `shop/${category.slug}/${product.brand.slug}/${product.slug}`,
-          component: path.resolve("./src/templates/product.template.js"),
-          context: { slug: product.slug },
-        })
+      createPage({
+        path: `shop/${product.category.slug}/${product.brand.slug}/${product.slug}`,
+        component: path.resolve("./src/templates/product.template.js"),
+        context: { slug: product.slug },
       })
     })
 }

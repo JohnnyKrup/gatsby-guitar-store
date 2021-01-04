@@ -72,7 +72,7 @@ const query = graphql`
             }
           }
         }
-        categories {
+        category {
           categorySlug: slug
         }
       }

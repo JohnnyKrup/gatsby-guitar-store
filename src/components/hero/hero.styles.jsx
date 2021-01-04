@@ -3,7 +3,7 @@ import BackgroundImage from "gatsby-background-image"
 import styled from "styled-components"
 
 export const BackgroundImageStyle = styled(BackgroundImage)`
-  top: 70px;
+  /* top: 70px; */
   min-height: ${({ home }) => (home ? "calc(100vh - 70px)" : "45vh")};
   width: 100%;
   background: ${props =>

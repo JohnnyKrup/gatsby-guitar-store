@@ -1,6 +1,15 @@
 import styled from "styled-components"
 import { Link } from "gatsby"
 
+export const SVGIcon = styled.img`
+  width: 1em;
+  height: 1em;
+  display: inline-flex;
+  align-items: center;
+  margin: 0 4px;
+  flex: 0 0 auto;
+`
+
 export const NavbarStyle = styled.div`
   position: fixed;
   top: 0;

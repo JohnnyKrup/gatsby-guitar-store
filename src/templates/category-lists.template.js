@@ -3,95 +3,72 @@ import { graphql } from "gatsby"
 
 import Layout from "../components/layout.component"
 import ZGridList from "../components/z-grid-list/z-grid-list.component"
-import HeroProduct from '../components/hero/hero-product.component'
-
-import {HeroBarContainerStyle, HeroBarTableStyle, HeroBarTableCellStyle, HeroBarTableCellInnerStyle, HeroBarTitleWrapperStyle, HeroBarTitleStyle, BreadcrumbContainerStyle, BreadcrumbLinkStyle, CategoryListContainerStyle, CategoryListRowStyle} from './template.styles'
 import { compareValues } from "../utils/helpers"
+import Breadcrumb from "../components/breadcrumb/breadcrumb.component"
+
+import {
+  CategoryListContainerStyle,
+  CategoryListRowStyle,
+} from "./template.styles"
 
 const categoryListsTemplate = ({
   data: {
     allStrapiProduct: { products },
-    allStrapiCategory: {nodes}
+    allStrapiCategory: { nodes: categories },
   },
   pageContext,
-}) => {  
-  const cat = products[0].categories.filter(c => c.slug === pageContext.slug) 
-  // console.log({nodes})
-  // console.log({products})
+}) => {
+  const { title, slug, brands } = categories[0]
+  console.log({ categories })
+  console.log({ brands })
 
   return (
     <Layout>
-      <HeroProduct>
-        <HeroBarContainerStyle>
-          <HeroBarTableStyle>
-            <HeroBarTableCellStyle>
-              <HeroBarTableCellInnerStyle>
-                <HeroBarTitleWrapperStyle>
-                  <HeroBarTitleStyle>{cat[0].catTitle}</HeroBarTitleStyle>
-                </HeroBarTitleWrapperStyle>
-                <BreadcrumbContainerStyle>
-                  <BreadcrumbLinkStyle to={`/shop`}>shop</BreadcrumbLinkStyle>
-                  <span>&nbsp; / &nbsp;</span>                  
-                  <span>{cat[0].catTitle}</span>
-                </BreadcrumbContainerStyle>
-              </HeroBarTableCellInnerStyle>
-            </HeroBarTableCellStyle>
-          </HeroBarTableStyle>
-        </HeroBarContainerStyle>
-      </HeroProduct> 
-
+      <Breadcrumb title={title} />
 
       <CategoryListContainerStyle>
-      {
-        nodes[0].brands.map((brand, idx) => {
-          const prods = products.filter(product => product.brand.slug === brand.slug)
-          
-          return (
-            <CategoryListRowStyle key={idx}>              
-              <ZGridList products={prods.sort(compareValues('title', 'desc')).slice(0,5)} categorySlug={pageContext.slug} showTitle linkUrl={`/shop/${pageContext.slug}/${brand.slug}`} titleName={brand.title} />
-            </CategoryListRowStyle>
-          )
-        })        
-      }
-      </CategoryListContainerStyle>      
+        {brands &&
+          brands.length > 0 &&
+          brands.sort(compareValues("title", "asc")).map((brand, idx) => {
+            const prods = products.filter(
+              product => product.brand.slug === brand.slug
+            )
+
+            return (
+              <CategoryListRowStyle key={idx}>
+                <ZGridList
+                  products={prods
+                    .sort(compareValues("title", "desc"))
+                    .slice(0, 5)}
+                  categorySlug={pageContext.slug}
+                  showTitle
+                  linkUrl={`/shop/${pageContext.slug}/${brand.slug}`}
+                  titleName={brand.title}
+                />
+              </CategoryListRowStyle>
+            )
+          })}
+      </CategoryListContainerStyle>
     </Layout>
   )
 }
 
 export const query = graphql`
   query CategoryLists($slug: String!) {
-    allStrapiProduct(
-      filter: { categories: { elemMatch: { slug: { eq: $slug } } } }
-    ) {
+    allStrapiProduct(filter: { category: { slug: { eq: $slug } } }) {
       products: nodes {
-        categories {
+        category {
           catTitle: title
           slug
-          image_header {
-            childImageSharp {
-              catImg: fluid {
-                ...GatsbyImageSharpFluid_withWebp
-              }
-            }
-          }
         }
-        strapiId
-        title
-        price
-        slug
         brand {
           brandTitle: title
           slug
         }
-        gallery_images {
-          localFile {
-            childImageSharp {
-              fluid {
-                ...GatsbyImageSharpFluid_withWebp
-              }
-            }
-          }
-        }
+        strapiId
+        title
+        slug
+        price
         product_image {
           childImageSharp {
             fluid {
@@ -102,8 +79,9 @@ export const query = graphql`
       }
     }
 
-    allStrapiCategory(filter: {slug: {eq: $slug}}) {
+    allStrapiCategory(filter: { slug: { eq: $slug } }) {
       nodes {
+        title
         slug
         brands {
           title

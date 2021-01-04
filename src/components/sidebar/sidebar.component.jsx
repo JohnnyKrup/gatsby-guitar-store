@@ -1,63 +1,77 @@
-import React, { useContext } from 'react'
-import {graphql, Link, useStaticQuery} from 'gatsby'
+import React, { useContext } from "react"
+import { graphql, Link, useStaticQuery } from "gatsby"
 
-import { SidebarContext } from '../../context/Sidebar.Context'
-import { UserContext } from '../../context/User.Context'
-import {CartContext} from '../../context/Cart.Context'
+import { SidebarContext } from "../../context/Sidebar.Context"
+import { UserContext } from "../../context/User.Context"
+import { CartContext } from "../../context/Cart.Context"
 
-import {MdClose} from 'react-icons/md'
-import styled from 'styled-components'
+import { MdClose } from "react-icons/md"
+import styled from "styled-components"
 
-
-const query = graphql`
-  {allStrapiCategory {
-    nodes {
-      title
-      slug
-      brands {
-        title
-        slug
-      }
-    }
-  }}
-`
+// const query = graphql`
+//   {
+//     allStrapiMenu {
+//       nodes {
+//         title
+//         categories {
+//           title
+//           slug
+//         }
+//         brands {
+//           slug
+//           title
+//         }
+//       }
+//     }
+//   }
+// `
 
 const Sidebar = () => {
-  const {hideSidebar} = useContext(SidebarContext)
-  const {user, userLogout} = useContext(UserContext)
+  const { hideSidebar } = useContext(SidebarContext)
+  const { user, userLogout } = useContext(UserContext)
   const { clearCart } = useContext(CartContext)
-  const data = useStaticQuery(query)  
-  const {allStrapiCategory: {nodes}} = data
+  // const data = useStaticQuery(query)
+  // const {
+  //   allStrapiCategory: { nodes },
+  // } = data
 
   return (
     <SidebarStyle>
       <SidebarContainerStyle>
         <CloseButtonStyle>
-          <MdClose onClick={hideSidebar}/>
+          <MdClose onClick={hideSidebar} />
         </CloseButtonStyle>
         <LinksContainerStyle>
-        <LinksStyle>
-          <MainLinkStyle to="/" onClick={hideSidebar}>home</MainLinkStyle>
-          <MainLinkStyle to="/about" onClick={hideSidebar}>über uns</MainLinkStyle>          
+          <LinksStyle>
+            <MainLinkStyle to="/" onClick={hideSidebar}>
+              home
+            </MainLinkStyle>
+            <MainLinkStyle to="/about" onClick={hideSidebar}>
+              über uns
+            </MainLinkStyle>
 
-          {user.token ? (          
-            <MainLinkStyle
-              as="div"
-              onClick={() => {
-                userLogout()
-                clearCart()
-              }}
-            >
-              abmelden
-            </MainLinkStyle>          
-          ) : (          
-            <MainLinkStyle to="/app/login" onClick={hideSidebar}>anmelden</MainLinkStyle>          
-          )}
+            {user.token ? (
+              <MainLinkStyle
+                as="div"
+                onClick={() => {
+                  userLogout()
+                  clearCart()
+                }}
+              >
+                abmelden
+              </MainLinkStyle>
+            ) : (
+              <MainLinkStyle to="/app/login" onClick={hideSidebar}>
+                anmelden
+              </MainLinkStyle>
+            )}
 
-          <MainLinkStyle to="/shop" onClick={hideSidebar}>shop</MainLinkStyle>
-          {
+            <MainLinkStyle to="/shop" onClick={hideSidebar}>
+              shop
+            </MainLinkStyle>
+            {/* {
             nodes.map((link, index) => {
-             const {title, slug, brands} = link;
+             const {title, categories, brands} = link;
              const links = (
              <>
                <LinkStyle to={`/shop/${slug}`} onClick={hideSidebar} key={index}>
@@ -77,10 +91,9 @@ const Sidebar = () => {
               ) 
               return links
             }
-            )}
-        </LinksStyle>
+            )} */}
+          </LinksStyle>
         </LinksContainerStyle>
-        
       </SidebarContainerStyle>
     </SidebarStyle>
   )
@@ -110,7 +123,6 @@ const SidebarContainerStyle = styled.div`
   border-radius: 2px;
   position: relative;
   padding: 3rem 0;
-  
 `
 
 const CloseButtonStyle = styled.button`
@@ -126,43 +138,43 @@ const CloseButtonStyle = styled.button`
 
 const LinksContainerStyle = styled.div`
   height: 100%;
-  overflow-y: auto;  
+  overflow-y: auto;
   overflow-x: hidden;
 `
 
 const LinksStyle = styled.div`
-  display: grid;  
+  display: grid;
   /* gap: 1rem 2rem; */
-  
+
   @media (min-width: 800px) {
-    grid-template-columns: 1fr 1fr;      
-  }  
+    grid-template-columns: 1fr 1fr;
+  }
 `
 
 const MainLinkStyle = styled(Link)`
-    /* display: grid;
+  /* display: grid;
     grid-template-columns: auto 1fr;
     gap: 0.75rem;
     grid-gap: 0.75rem; */
-    text-align: center;
-    color: #0a2540;
-    text-transform: capitalize;
-    font-weight: 700;
-    font-size: 1.2rem;
-    margin-bottom: 0.5rem;    
+  text-align: center;
+  color: #0a2540;
+  text-transform: capitalize;
+  font-weight: 700;
+  font-size: 1.2rem;
+  margin-bottom: 0.5rem;
 `
 
-const LinkStyle = styled(Link)` 
+const LinkStyle = styled(Link)`
   text-align: center;
   color: #0a2540;
   text-transform: capitalize;
   font-weight: 500;
-  font-size: 1.2rem;  
+  font-size: 1.2rem;
   margin-bottom: 0.5rem;
 `
 
 const SubLinkListStyle = styled.div`
-  width: 80vw;  
+  width: 80vw;
   margin-bottom: 1rem;
 `
 

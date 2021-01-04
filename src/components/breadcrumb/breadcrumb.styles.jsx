@@ -124,37 +124,3 @@ export const BreadcrumbLinkStyle = styled(Link)`
     font-size: 16px;
   }
 `
-
-// Category List Styles
-
-export const CategoryListContainerStyle = styled.div`
-  background: var(--mainWhite);
-  padding: 5rem 0;
-  width: 100%;
-`
-
-export const CategoryListRowStyle = styled.div`
-  width: 100%;
-  margin-bottom: 30px;
-`
-
-// Brand List Styles
-
-export const BrandListContainerStyle = styled.div`
-  background: var(--mainWhite);
-  padding: 3rem 0;
-  /* margin-top: 70px; */
-  width: 100%;
-`
-
-// Grid Style
-
-export const GridListTitleStyle = styled.h1`
-  margin: 0 auto;
-  padding: 0 5.75%;
-  max-width: 1200px;
-
-  @media (min-width: 1200px) {
-    padding: 0 2.75%;
-  }
-`
