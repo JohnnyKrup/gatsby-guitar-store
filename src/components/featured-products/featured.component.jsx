@@ -3,7 +3,7 @@ import { graphql, useStaticQuery } from "gatsby"
 
 import styled from "styled-components"
 
-import CategoryList from "../category-list/category-list.component"
+import GridList from "../grid-list/grid-list.component"
 import Title from "../title/title.component"
 
 const FeaturedProducts = () => {
@@ -16,16 +16,16 @@ const FeaturedProducts = () => {
 
   return (
     <FeaturedSectionStyle>
-      <Title title="Herbst Special" />
+      <Title title="Winter Special" />
       <FeaturedArticleStyle>
         <h3>Jetzt 20% auf ausgewählte Modelle</h3>
         <p>
           Seht euch die Herbst-Specials an, die Aktion ist noch gültig bis zum
-          30. November, das ist die Gelegenheit für die Schnäppchenjäger unter
+          28. Februar, das ist die Gelegenheit für die Schnäppchenjäger unter
           euch ;)
         </p>
       </FeaturedArticleStyle>
-      <CategoryList products={products} />
+      <GridList products={products} showPrice={true} />
     </FeaturedSectionStyle>
   )
 }

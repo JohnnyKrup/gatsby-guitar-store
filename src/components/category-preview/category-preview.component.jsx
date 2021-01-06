@@ -3,11 +3,13 @@ import { graphql, useStaticQuery, navigate } from "gatsby"
 
 import Title from "../title/title.component"
 
+import { compareValues } from "../../utils/helpers"
+
 import {
   CategoryPreviewStyle,
   TileLayoutStyle,
   CategoryItemStyle,
-  CategoryBackgroundImageStyle,  
+  CategoryBackgroundImageStyle,
 } from "./category-preview.styles"
 
 const query = graphql`
@@ -37,7 +39,7 @@ const query = graphql`
   }
 `
 
-const CategoryPreview = ({title, hideTitle, bgLight}) => {
+const CategoryPreview = ({ title, hideTitle, bgLight }) => {
   const data = useStaticQuery(query)
   const {
     allStrapiCategory: { categories },
@@ -45,9 +47,9 @@ const CategoryPreview = ({title, hideTitle, bgLight}) => {
 
   return (
     <CategoryPreviewStyle bgLight={bgLight}>
-      { !hideTitle && <Title title={title || `Shop`} />}
+      {!hideTitle && <Title title={title || `Shop`} />}
       <TileLayoutStyle>
-        {categories.map(category => {
+        {categories.sort(compareValues("title")).map((category, idx) => {
           const {
             id,
             title,
@@ -65,7 +67,7 @@ const CategoryPreview = ({title, hideTitle, bgLight}) => {
             // <Link to={`/shop/${slug}`}>
             <CategoryItemStyle
               key={id}
-              className={`item-${id}`}
+              className={`item-${idx + 1}`}
               onClick={() => navigate(`/shop/${slug}`)}
               isImageLarge={isImageLarge}
             >

@@ -1,5 +1,5 @@
 import React, { useState } from "react"
-import { Link } from "gatsby"
+import { Link, navigate } from "gatsby"
 import Img from "gatsby-image"
 
 import { NavigationContext } from "../../../context/NavigationContext"
@@ -10,6 +10,7 @@ import chevronRight from "../../../images/chevronRight.svg"
 
 const MegaMenu = () => {
   const [activeCategory, setActiveCategory] = useState(null)
+  const [activeCategorySlug, setActiveCategorySlug] = useState(null)
   const [activeBrand, setActiveBrand] = useState(null)
   const {
     isMegamenuHidden,
@@ -35,6 +36,7 @@ const MegaMenu = () => {
                   key={idx}
                   onClick={() => {
                     setActiveCategory(category.catTitle)
+                    setActiveCategorySlug(category.catSlug)
                     loadActiveBrands(category.brands)
                   }}
                 >
@@ -50,7 +52,12 @@ const MegaMenu = () => {
           <MainMenuNavContainer>
             <MainMenuNav>
               {activeBrands && activeBrands.length > 0 && (
-                <MenuNavItem>
+                <MenuNavItem
+                  onClick={() => {
+                    navigate("/shop/" + activeCategorySlug)
+                    toggleMegamenu()
+                  }}
+                >
                   {`Alle ${activeCategory}`}{" "}
                   <MenuNavItemIcon src={chevronRight} />
                 </MenuNavItem>
@@ -83,7 +90,6 @@ const MegaMenu = () => {
                     childImageSharp: { fluid },
                   },
                 } = prod
-                console.log({ prod })
                 return (
                   <MenuProductItemContainer
                     onClick={() => toggleMegamenu()}

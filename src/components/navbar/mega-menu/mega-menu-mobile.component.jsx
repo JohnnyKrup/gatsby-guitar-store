@@ -108,12 +108,12 @@ const MegaMenuMobile = () => {
                 // brands - list
                 activeBrands &&
                   activeBrands.length > 0 &&
-                  activeBrands.map(brand => {
+                  activeBrands.map((brand, idx) => {
                     let brandLink = `/shop/${activeCategorySlug}/${brand.brandSlug}`
 
                     return (
                       <MobileMenuListBtn
-                        key={brand.strapiId}
+                        key={idx}
                         onClick={() => {
                           toggleMobileMenu()
                           navigate(brandLink)

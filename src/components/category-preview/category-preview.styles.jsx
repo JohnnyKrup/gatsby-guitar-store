@@ -2,7 +2,7 @@ import styled from "styled-components"
 import Img from "gatsby-background-image"
 
 export const CategoryPreviewStyle = styled.section`
-  background: ${({bgLight}) => (bgLight ? "white": "#f7f7f7")};
+  background: ${({ bgLight }) => (bgLight ? "white" : "#f7f7f7")};
   padding: 5rem 0;
   margin-top: 70px;
   width: 100%;
@@ -13,9 +13,6 @@ export const TileLayoutStyle = styled.div`
   width: 90vw;
   max-width: var(--fullWidth);
   margin: 0 auto;
-  gap: 1rem;
-  /* safari workaround */
-  grid-gap: 1rem;
   grid-template-rows: auto auto;
   grid-auto-rows: auto;
 
@@ -25,21 +22,19 @@ export const TileLayoutStyle = styled.div`
 
   @media (min-width: 768px) {
     grid-template-columns: 1fr 1fr;
+    grid-template-rows: 250px 250px 250px 250px 250px 250px 250px;
   }
 
   @media (min-width: 992px) {
     grid-template-columns: 1fr 1fr 1fr;
-    grid-template-rows: auto;
+    grid-template-rows: 220px 220px 220px 220px 220px 220px 250px;
     grid-auto-rows: auto;
-  }
-
-  @media (min-width: 1200px) {
-    display: grid;
     grid-template-areas:
       "a b c"
-      "d d d"
-      "e e e"
-      "f g h";
+      "d e f"
+      "g h i"
+      "j k l"
+      "m m m";
 
     .item-1 {
       grid-area: a;
@@ -65,11 +60,41 @@ export const TileLayoutStyle = styled.div`
     .item-8 {
       grid-area: h;
     }
+    .item-9 {
+      grid-area: i;
+    }
+    .item-10 {
+      grid-area: j;
+    }
+    .item-11 {
+      grid-area: k;
+    }
+    .item-12 {
+      grid-area: l;
+    }
+    .item-13 {
+      grid-area: m;
+    }
+  }
+
+  @media (min-width: 1200px) {
+    display: grid;
+    grid-template-rows: 450px 450px 450px 450px 450px 450px 300px;
+    grid-auto-rows: auto;
+    grid-template-areas:
+      "a b c"
+      "a e c"
+      "d e f"
+      "g h i"
+      "g k i"
+      "j k l"
+      "m m m";
   }
 `
 export const CategoryItemStyle = styled.article`
   min-width: 30%;
-  height: ${({ isImageLarge }) => (isImageLarge ? "380px" : "600px")};
+  /* height: ${({ isImageLarge }) => (isImageLarge ? "380px" : "600px")}; */
+  /* height: 360px; */
   flex: 1 1 auto;
   display: flex;
   align-items: center;
@@ -109,16 +134,16 @@ export const CategoryItemStyle = styled.article`
   }
 
   &:hover {
-    cursor: pointer;   
+    cursor: pointer;
 
     & .content {
       opacity: 0.9;
     }
   }
 
-  &.large {
+  /* &.large {
     height: 380px;
-  }
+  } */
 
   &:first-child {
     margin-right: 7.5px;
@@ -135,11 +160,16 @@ export const CategoryItemStyle = styled.article`
   }
 
   @media screen and (min-width: 992px) {
-    height: 200px;
+    height: auto;
   }
 
+  /* @media screen and (min-width: 1200px) {
+    height: ${({ isImageLarge }) =>
+    isImageLarge ? "380px" : "600px"};
+  } */
+
   @media screen and (min-width: 1200px) {
-    height: ${({ isImageLarge }) => (isImageLarge ? "380px" : "600px")};
+    height: auto;
   }
 `
 

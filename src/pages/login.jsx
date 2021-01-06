@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import React, { useState, useEffect } from "react"
 
 import styled from "styled-components"
 
@@ -7,8 +7,12 @@ import SignIn from "../components/sign-in/sign-in.component"
 import SignUp from "../components/sign-up/sign-up.component"
 import Hero from "../components/hero/hero-alternative.component"
 
-const LoginPage = () => {
+const LoginPage = ({ location }) => {
   const [isMember, setIsMember] = useState(true)
+
+  useEffect(() => {
+    location.state.fromRegister ? setIsMember(false) : setIsMember(true)
+  }, [location.state])
 
   return (
     <Layout>
@@ -20,8 +24,15 @@ const LoginPage = () => {
               <p>
                 Noch nicht registriert?
                 <br /> Dann registriere dich bitte{" "}
-                <span onClick={() => setIsMember(!isMember)} 
-                      onKeyDown={() => setIsMember(!isMember)} role="link" tabIndex={0}>hier</span>
+                <span
+                  onClick={() => setIsMember(!isMember)}
+                  onKeyDown={() => setIsMember(!isMember)}
+                  role="link"
+                  tabIndex={0}
+                >
+                  hier
+                </span>
+                .
               </p>
             </ToggleFormStyle>
           ) : (
@@ -29,9 +40,15 @@ const LoginPage = () => {
               <p>
                 Bereits Kunde? <br />
                 Dann bitte{" "}
-                <span onClick={() => setIsMember(!isMember)} 
-                      onKeyDown={() => setIsMember(!isMember)} role="link" tabIndex={0}>hier</span>{" "}
-                anmelden
+                <span
+                  onClick={() => setIsMember(!isMember)}
+                  onKeyDown={() => setIsMember(!isMember)}
+                  role="link"
+                  tabIndex={0}
+                >
+                  hier
+                </span>{" "}
+                anmelden.
               </p>
             </ToggleFormStyle>
           )}
@@ -67,6 +84,10 @@ export const ToggleFormStyle = styled.div`
   span {
     font-weight: 700;
     cursor: pointer;
+  }
+
+  span:focus {
+    outline: none;
   }
 `
 

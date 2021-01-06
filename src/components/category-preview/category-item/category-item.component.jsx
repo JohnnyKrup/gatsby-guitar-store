@@ -17,7 +17,7 @@ const CategoryItem = ({ title, image, slug, isImageLarge }) => {
       className={`item-${id}`}
       onClick={() => navigate(`/shop/${slug}`)}
     >
-      <CategoryBackgroundImageStyle />
+      {/* <CategoryBackgroundImageStyle /> */}
       <ContentStyle>
         <h1 className="title">{title}</h1>
         <span className="subtitle">DETAILS</span>

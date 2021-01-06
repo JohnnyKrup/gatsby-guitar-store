@@ -1,7 +1,7 @@
-import React from 'react'
-import styled from 'styled-components'
+import React from "react"
+import styled from "styled-components"
 
-const SearchButtons = ({products, setProducts, setBackToAll}) => {
+const SearchButtons = ({ products, setProducts, setBackToAll }) => {
   const [index, setIndex] = React.useState(0)
 
   const tempTags = []
@@ -9,19 +9,14 @@ const SearchButtons = ({products, setProducts, setBackToAll}) => {
     product.tags.forEach(tag => tempTags.push(tag))
   })
 
-  const tags = [
-    "alle", 
-    ...new Set(
-      tempTags.map(tag => tag.tag)
-      )    
-  ]
+  const tags = ["alle", ...new Set(tempTags.map(tag => tag.tag))]
 
-  console.log({products})
-  console.log({tags})
+  console.log({ products, setProducts, setBackToAll })
+  console.log({ tags })
 
-  const showProducts = (tag, tagIndex) => {    
+  const showProducts = (tag, tagIndex) => {
     setIndex(tagIndex)
-    if(tag === "alle"){
+    if (tag === "alle") {
       setBackToAll()
     } else {
       const tempProducts = products.filter(product => {
@@ -30,27 +25,25 @@ const SearchButtons = ({products, setProducts, setBackToAll}) => {
         // const tempTags = product.tags.map(tag => tag.tag)
         // return tempTags.includes(tag) ? product : null
       })
-      console.log({tag})
-      console.log({tempProducts})
+      console.log({ tag })
+      console.log({ tempProducts })
       setProducts(tempProducts)
     }
   }
 
   return (
     <SerchButtonContainerStyle>
-      {
-        tags.map((tag, tagIndex) => {
-          return (
-            <button
-              key={tagIndex}
-              className={index === tagIndex ? "active" : undefined}
-              onClick={() => showProducts(tag, tagIndex)}
-            >
-              {tag}
-            </button>
-          )
-        })
-      }
+      {tags.map((tag, tagIndex) => {
+        return (
+          <button
+            key={tagIndex}
+            className={index === tagIndex ? "active" : undefined}
+            onClick={() => showProducts(tag, tagIndex)}
+          >
+            {tag}
+          </button>
+        )
+      })}
     </SerchButtonContainerStyle>
   )
 }
@@ -80,7 +73,7 @@ const SerchButtonContainerStyle = styled.section`
     box-shadow: 0px 1.4px 0 #aaa;
   }
 
-  @media screen and (max-width: 600px){
+  @media screen and (max-width: 600px) {
     margin-top: 140px;
   }
 `

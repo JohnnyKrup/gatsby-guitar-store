@@ -31,7 +31,7 @@ export const TileLayoutStyle = styled.div`
   justify-items: center;
 
   @media (max-width: 600px) {
-    grid-template-columns: 1fr;        
+    grid-template-columns: 1fr;
   }
 
   @media (min-width: 768px) {
@@ -44,7 +44,7 @@ export const TileLayoutStyle = styled.div`
     grid-template-rows: auto;
   }
 
-  @media (min-width: 1200px) {
+  /* @media (min-width: 1200px) {
     display: grid;
     grid-template-areas:
       "a b c"
@@ -75,6 +75,33 @@ export const TileLayoutStyle = styled.div`
     }
     .item-8 {
       grid-area: h;
+    }
+  } */
+
+  @media (min-width: 1200px) {
+    display: grid;
+    grid-template-areas:
+      "a b c"
+      "a e c"
+      "d e f";
+
+    .item-1 {
+      grid-area: a;
+    }
+    .item-2 {
+      grid-area: b;
+    }
+    .item-3 {
+      grid-area: c;
+    }
+    .item-4 {
+      grid-area: d;
+    }
+    .item-5 {
+      grid-area: e;
+    }
+    .item-6 {
+      grid-area: f;
     }
   }
 `

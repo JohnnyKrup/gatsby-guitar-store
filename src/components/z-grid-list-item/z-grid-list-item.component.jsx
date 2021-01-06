@@ -1,10 +1,9 @@
 import { navigate } from "gatsby"
 import React from "react"
 
-import {truncateString} from '../../utils/helpers'
+import { truncateString } from "../../utils/helpers"
 import BackgroundImage from "gatsby-background-image"
 import styled from "styled-components"
-
 
 const ZGridListItem = ({ product, categorySlug }) => {
   const {
@@ -17,19 +16,22 @@ const ZGridListItem = ({ product, categorySlug }) => {
     },
     brand: { brandTitle, slug: brandSlug },
   } = product
-   //console.log({product})  
+  //console.log({product})
 
   return (
     <ListItemStyle>
-    <ItemStyle key={strapiId} onClick={() => navigate(`/shop/${categorySlug}/${brandSlug}/${slug}`)}>
-      <BGImageStyle fluid={fluid}>
-        <TextStyle>
-          <div className="brand">- {brandTitle} -</div>
-          <div className="title">{truncateString(title, 25)}</div>
-          <div className="title">CHF {price}</div>
-        </TextStyle>
-      </BGImageStyle>
-    </ItemStyle>
+      <ItemStyle
+        key={strapiId}
+        onClick={() => navigate(`/shop/${categorySlug}/${brandSlug}/${slug}`)}
+      >
+        <BGImageStyle fluid={fluid}>
+          <TextStyle>
+            <div className="brand">- {brandTitle} -</div>
+            <div className="title">{truncateString(title, 25)}</div>
+            {/* <div className="price">CHF {price}</div> */}
+          </TextStyle>
+        </BGImageStyle>
+      </ItemStyle>
     </ListItemStyle>
   )
 }
@@ -44,12 +46,12 @@ const ListItemStyle = styled.article`
   /* this makes the overflow possible */
   flex-shrink: 0;
 
-  @media screen and (max-width: 600px){
+  @media screen and (max-width: 600px) {
     max-width: 90%;
     flex-basis: 90%;
   }
 
-  @media screen and (min-width: 768px){
+  @media screen and (min-width: 768px) {
     /* max-width: 33%;
     flex-basis: 33%; */
     padding-left: 8px;
@@ -59,8 +61,8 @@ const ListItemStyle = styled.article`
 
 const ItemStyle = styled.div`
   width: 100%;
-  height: 450px; 
-  padding: 5px;   
+  height: 450px;
+  padding: 5px;
 
   /* flex: 1 1 auto; */
   justify-self: center;
@@ -68,16 +70,27 @@ const ItemStyle = styled.div`
   border: 1px solid black;
   cursor: pointer;
   width: calc(100vw / 5);
-  
-   @media (max-width: 600px) {
-    height: 300px;    
+
+  @media (max-width: 600px) {
+    height: 300px;
     width: 100%;
   }
 
   @media (min-width: 768px) {
     width: 100%;
     height: 350px;
-    margin-bottom: 10px;    
+    margin-bottom: 10px;
+
+    div {
+      opacity: 0;
+    }
+
+    :hover {
+      div {
+        opacity: 0.85;
+        transform: opacity 0.5s ease-in;
+      }
+    }
   }
 
   @media (min-width: 992px) {
@@ -95,33 +108,45 @@ const BGImageStyle = styled(BackgroundImage)`
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 100%;  
+  background-size: auto 100%;
 `
 
 const TextStyle = styled.div`
-  height: 90px;
+  /* height: 90px; */
+  height: 100%;
+  width: 100%;
   padding: 0 25px;
+  top: 0;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  border: 1px solid black;
-  opacity: 0.85;
+  border-top: 0px solid black;
   /* thanks to this positioning the content div remains in the middle of the 
   parent container no matter what */
   position: absolute;
-  background: #fff;
+  background: var(--mainWhite);
+  opacity: 0;
 
-  & .brand {
+  & .brand,
+  .price {
     text-align: center;
     text-transform: uppercase;
+
+    @media (max-width: 600px) {
+      display: none;
+    }
   }
 
   & .title {
     font-weight: 700;
     text-align: center;
   }
-`
 
+  @media (max-width: 600px) {
+    height: 25px;
+    opacity: 0.85;
+  }
+`
 
 export default ZGridListItem

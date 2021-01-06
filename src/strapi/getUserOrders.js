@@ -20,3 +20,18 @@ const getUserOrders = async ({ name, userToken }) => {
 }
 
 export default getUserOrders
+
+export const getSimilarProducts = async ({ similarProducts }) => {
+  let q = ""
+  similarProducts.forEach(prod => {
+    q = q.concat("slug=", prod.slug, "&")
+  })
+
+  // const query = qs.stringify({_where: {"product.slug": slug}})
+
+  const response = await axios.get(
+    `${url}/products?${q.substr(0, q.length - 1)}`
+  )
+
+  return response
+}

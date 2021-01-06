@@ -2,7 +2,7 @@ import styled from "styled-components"
 
 export const CategoryItemStyle = styled.div`
   min-width: 30%;
-  height: ${({ isImageLarge }) => (isImageLarge ? "380px" : "600px")};
+  /* height: ${({ isImageLarge }) => (isImageLarge ? "380px" : "600px")}; */
   flex: 1 1 auto;
   display: flex;
   align-items: center;

@@ -13,8 +13,12 @@ const PrebarNavbar = () => {
         <PreBarButtonWrapper id="signIn">
           <PreBarInnerButtonWrapper>
             <SignInRegisterLinksWrapper>
-              <SignInLink to="/">Anmelden</SignInLink>
-              <RegisterLink to="/">Registrieren</RegisterLink>
+              <SignInLink to="/login" state={{ fromRegister: false }}>
+                Anmelden
+              </SignInLink>
+              <RegisterLink to="/login" state={{ fromRegister: true }}>
+                Registrieren
+              </RegisterLink>
             </SignInRegisterLinksWrapper>
           </PreBarInnerButtonWrapper>
         </PreBarButtonWrapper>

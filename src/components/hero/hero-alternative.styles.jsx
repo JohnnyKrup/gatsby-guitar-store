@@ -3,9 +3,8 @@ import BackgroundImage from "gatsby-background-image"
 import styled from "styled-components"
 
 export const BackgroundImageStyle = styled(BackgroundImage)`
-  top: 70px;
   min-height: ${({ fullscreen }) =>
-    fullscreen ? "calc(100vh - 90px)" : "25vh"};
+    fullscreen ? "calc(100vh - 103px)" : "25vh"};
   width: 100vw;
   background: ${props =>
     props.fullscreen

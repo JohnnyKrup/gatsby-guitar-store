@@ -1,4 +1,4 @@
-import React, { useContext } from "react"
+import React, { useContext, useEffect, useState } from "react"
 import { graphql } from "gatsby"
 
 import { CartContext } from "../context/Cart.Context"
@@ -9,12 +9,16 @@ import styled from "styled-components"
 import Layout from "../components/layout.component"
 import CustomButton from "../components/custom-button/custom-button.component"
 import ImageGallery from "../components/image-gallery/image-gallery.component"
-import CategoryList from "../components/category-list/category-list.component"
+import GridList from "../components/grid-list/grid-list.component"
 import Breadcrumb from "../components/breadcrumb/breadcrumb.component"
+
+import getSimilarProducts from "../strapi/getSimilarProducts"
+import { trackPromise } from "react-promise-tracker"
 
 const ProductTemplate = ({ data: { strapiProduct } }) => {
   const { addItem } = useContext(CartContext)
   const { windowWidth } = useContext(UtilityContext)
+  const [similarProducts, setSimilarProducts] = useState([])
 
   const {
     title,
@@ -36,10 +40,6 @@ const ProductTemplate = ({ data: { strapiProduct } }) => {
     },
   } = strapiProduct
 
-  // console.log(windowWidth)
-  // console.log(imageWidth)
-  // console.log({ strapiProduct })
-
   let imageWidth = 0
   windowWidth < 600
     ? (imageWidth = windowWidth - windowWidth / 10)
@@ -49,9 +49,20 @@ const ProductTemplate = ({ data: { strapiProduct } }) => {
     return image.localFile.childImageSharp.fluid
   })
 
-  const similarProducts = SimilarProducts.products
+  // console.log({ SimilarProducts })
 
-  // console.log(strapiProduct)
+  useEffect(() => {
+    if (SimilarProducts.length > 0) {
+      const sProd = SimilarProducts[0].products
+      trackPromise(
+        getSimilarProducts(sProd).then(products => {
+          setSimilarProducts(products.data)
+        })
+      )
+    }
+  }, [SimilarProducts])
+
+  console.log({ similarProducts })
 
   return (
     <Layout>
@@ -138,10 +149,10 @@ const ProductTemplate = ({ data: { strapiProduct } }) => {
           </ArticleInfoStyle>
         </SectionStyle>
         {similarProducts && similarProducts.length > 0 && (
-          <div id="SimilarProducts">
+          <SectionStyle id="SimilarProducts">
             <h2>Ähnliche Produkte</h2>
-            <CategoryList products={similarProducts} />
-          </div>
+            {/* <GridList products={similarProducts} /> */}
+          </SectionStyle>
         )}
       </SectionWrapperStyle>
     </Layout>
@@ -249,27 +260,16 @@ export const query = graphql`
       discountedPrice
       SimilarProducts {
         products {
-          id
           title
           slug
-          soldBadge
-          orderedBadge
-          newBadge
-          product_image {
-            childImageSharp {
-              fluid {
-                ...GatsbyImageSharpFluid_withWebp
-              }
-            }
-          }
         }
       }
       brand {
-        title
+        brandTitle: title
         brandSlug: slug
       }
       category {
-        title
+        categoryTitle: title
         categorySlug: slug
       }
       Property {

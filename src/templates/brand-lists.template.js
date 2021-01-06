@@ -21,7 +21,7 @@ const BrandListsTemplate = ({
   // get only the products that match the pageContexts categorySlug
   const filteredProducts = []
   prods.forEach(product =>
-    product.category.slug === pageContext.categorySlug
+    product.category.categorySlug === pageContext.categorySlug
       ? filteredProducts.push(product)
       : null
   )
@@ -31,7 +31,7 @@ const BrandListsTemplate = ({
    * we use a useState for the displayed products in the grid
    */
   const [products, setProducts] = React.useState(
-    filteredProducts.sort(compareValues("title"))
+    filteredProducts.sort(compareValues("title", "asc"))
   )
 
   // reset functionality
@@ -53,11 +53,7 @@ const BrandListsTemplate = ({
       />
 
       <BrandListContainerStyle>
-        <GridList
-          products={products}
-          key={products.strapiId}
-          categorySlug={pageContext.categorySlug}
-        />
+        <GridList products={products} />
       </BrandListContainerStyle>
     </Layout>
   )
@@ -68,12 +64,12 @@ export const query = graphql`
     allStrapiProduct(filter: { brand: { slug: { eq: $slug } } }) {
       prods: nodes {
         category {
-          title
-          slug
+          categoryTitle: title
+          categorySlug: slug
         }
         brand {
-          title
-          slug
+          brandTitle: title
+          brandSlug: slug
         }
         strapiId
         title

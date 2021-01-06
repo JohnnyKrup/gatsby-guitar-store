@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react"
-import { useStaticQuery } from "gatsby"
+import { graphql, useStaticQuery } from "gatsby"
 
 import { compareValues } from "../utils/helpers"
 
@@ -81,10 +81,10 @@ const NavigationProvider = ({ children }) => {
   } = useStaticQuery(query)
 
   useEffect(() => {
-    console.log("useEffect Start")
+    // console.log("useEffect Start")
     setAllProducts(products.sort(compareValues("title", "asc")))
     setMenus(nodes.sort(compareValues("title", "asc")))
-    console.log("useEffect End")
+    // console.log("useEffect End")
   }, [])
 
   const loadActiveCategories = categories => {
