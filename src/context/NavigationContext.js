@@ -70,6 +70,7 @@ const NavigationProvider = ({ children }) => {
   const [isMobileSearchHidden, setMobileSeachHidden] = useState(true)
   const [activeMenu, setActiveMenu] = useState("")
   const [activeCategories, setActiveCategories] = useState([])
+  const [activeCategory, setActiveCategory] = useState("")
   const [activeBrands, setActiveBrands] = useState([])
   const [activeProducts, setActiveProducts] = useState([])
   const [allProducts, setAllProducts] = useState([])
@@ -90,6 +91,9 @@ const NavigationProvider = ({ children }) => {
   const loadActiveCategories = categories => {
     clearActiveItems()
     setActiveCategories(categories.sort(compareValues("catTitle", "asc")))
+    // first time loaded automatically set the first category
+    setActiveCategory(categories[0].catTitle)
+    loadActiveBrands(categories[0].brands)
   }
 
   const loadActiveBrands = brands => {
@@ -149,6 +153,8 @@ const NavigationProvider = ({ children }) => {
         toggleMobileSearch,
         menus,
         activeCategories,
+        activeCategory,
+        setActiveCategory,
         activeBrands,
         activeProducts,
         loadActiveCategories,

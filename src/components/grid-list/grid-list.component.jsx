@@ -6,7 +6,7 @@ import GridListItem from "../grid-list-item/grid-list-item.component"
 import { TileLayoutStyle } from "./grid-list.styles"
 
 const GridList = ({ products, showTitle, linkUrl, titleName }) => {
-  console.log({ products })
+  // console.log({ products })
   // console.log(categorySlug)
   return (
     <div>

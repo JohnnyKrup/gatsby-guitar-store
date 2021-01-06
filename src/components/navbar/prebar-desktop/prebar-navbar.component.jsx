@@ -1,5 +1,6 @@
-import React from "react"
+import React, { useContext } from "react"
 
+import { UserContext } from "../../../context/User.Context"
 import MobileNavbar from "../prebar-mobile/mobile-navbar.component"
 import NavbarDropdown from "../navbar-dropdown/navbar-dropdown.component"
 
@@ -7,15 +8,22 @@ import styled from "styled-components"
 import { Link } from "gatsby"
 
 const PrebarNavbar = () => {
+  const { user, userLogout } = useContext(UserContext)
+
   return (
     <PreBarHeader>
       <PreBarInner>
         <PreBarButtonWrapper id="signIn">
           <PreBarInnerButtonWrapper>
             <SignInRegisterLinksWrapper>
-              <SignInLink to="/login" state={{ fromRegister: false }}>
-                Anmelden
-              </SignInLink>
+              {user.token !== null ? (
+                <LogoutLink onClick={() => userLogout()}>Abmelden</LogoutLink>
+              ) : (
+                <SignInLink to="/login" state={{ fromRegister: false }}>
+                  Anmelden
+                </SignInLink>
+              )}
+
               <RegisterLink to="/login" state={{ fromRegister: true }}>
                 Registrieren
               </RegisterLink>
@@ -82,6 +90,12 @@ const SignInRegisterLinksWrapper = styled.div`
     /* padding-top: 11px; */
     float: right;
   }
+`
+
+const LogoutLink = styled.div`
+  padding: 2px 10px;
+  margin-left: -15px;
+  color: black;
 `
 
 const SignInLink = styled(Link)`

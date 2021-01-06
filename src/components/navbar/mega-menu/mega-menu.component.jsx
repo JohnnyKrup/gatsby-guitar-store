@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import React, { useEffect, useState } from "react"
 import { Link, navigate } from "gatsby"
 import Img from "gatsby-image"
 
@@ -9,18 +9,28 @@ import cancel from "../../../images/cancel-thin.svg"
 import chevronRight from "../../../images/chevronRight.svg"
 
 const MegaMenu = () => {
-  const [activeCategory, setActiveCategory] = useState(null)
+  // const [activeCategory, setActiveCategory] = useState(null)
   const [activeCategorySlug, setActiveCategorySlug] = useState(null)
   const [activeBrand, setActiveBrand] = useState(null)
+  const [activeBrandSlug, setActiveBrandSlug] = useState(null)
   const {
     isMegamenuHidden,
     toggleMegamenu,
     activeCategories,
+    activeCategory,
+    setActiveCategory,
     activeBrands,
     loadActiveBrands,
     activeProducts,
     loadActiveProducts,
   } = React.useContext(NavigationContext)
+
+  // disbale scrolling while the megamenu is open
+  useEffect(() => {
+    isMegamenuHidden
+      ? (document.body.style.overflow = "unset")
+      : (document.body.style.overflow = "hidden")
+  }, [isMegamenuHidden])
 
   return (
     <Wrapper>
@@ -71,7 +81,9 @@ const MegaMenu = () => {
                       key={idx}
                       onClick={() => {
                         loadActiveProducts(brand.brandTitle, activeCategory)
+
                         setActiveBrand(brand.brandTitle)
+                        setActiveBrandSlug(brand.brandSlug)
                       }}
                     >
                       {brand.brandTitle} <MenuNavItemIcon src={chevronRight} />
@@ -82,6 +94,24 @@ const MegaMenu = () => {
             <MainMenuNavEmpty />
           </MainMenuNavContainer>
           <MainMenuNavProduct>
+            {activeProducts && activeProducts.length > 0 && (
+              <MenuProductItemContainer style={{ cursor: "pointer" }}>
+                <MenuProductItemLink
+                  to={`/shop/${activeCategorySlug}/${activeBrandSlug}`}
+                  onClick={() => {
+                    toggleMegamenu()
+                  }}
+                >
+                  <MenuNavItemIcon
+                    src={chevronRight}
+                    style={{ right: "unset" }}
+                  />
+                  <span
+                    style={{ marginLeft: "33px" }}
+                  >{`Alle ${activeBrand}`}</span>
+                </MenuProductItemLink>
+              </MenuProductItemContainer>
+            )}
             {activeProducts &&
               activeProducts.length > 0 &&
               activeProducts.map(prod => {
@@ -173,7 +203,8 @@ const DropdownTopMenuItem = styled.li`
   font-weight: 400;
   font-size: 14px;
   line-height: 18px;
-  margin: 10px 15px;
+  margin: 8px 15px;
+  padding-top: 3px;
   cursor: pointer;
 
   border-bottom: ${props =>
