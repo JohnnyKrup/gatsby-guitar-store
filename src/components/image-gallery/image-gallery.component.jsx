@@ -21,8 +21,13 @@ const ImageGallery = ({ images, imgWidth }) => {
           <ThumbnailsContainerStyle len={len} imgWidth={imgWidth}>
             {images.map((image, idx) => {
               return (
-                <div key={idx} onClick={() => setMainImage(image)} 
-                      onKeyDown={() => setMainImage(image)} role="button" tabIndex={idx}>
+                <div
+                  key={idx}
+                  onClick={() => setMainImage(image)}
+                  onKeyDown={() => setMainImage(image)}
+                  role="button"
+                  tabIndex={idx}
+                >
                   <ThumbnailStyle fluid={image} />
                 </div>
               )
@@ -38,7 +43,7 @@ export const ArticleImageStyle = styled.article`
   width: 100%;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
 `
 
@@ -57,14 +62,13 @@ export const ThumbnailsContainerStyle = styled.div`
   display: flex;
   flex-wrap: wrap;
   width: ${({ imgWidth }) => imgWidth || "300px"};
-  justify-content: ${({ len }) => (len > 3 ? "space-between" : "space-evenly")};  
-  
+  justify-content: ${({ len }) => (len > 3 ? "space-between" : "space-evenly")};
 `
 
 export const ThumbnailStyle = styled(Img)`
   width: 70px;
   border: 1px solid #000;
-  margin-bottom: 10px;  
+  margin-bottom: 10px;
   cursor: pointer;
   opacity: 0.6;
 

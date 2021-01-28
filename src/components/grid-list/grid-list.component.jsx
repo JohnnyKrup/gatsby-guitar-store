@@ -4,25 +4,28 @@ import { Link } from "gatsby"
 import GridListItem from "../grid-list-item/grid-list-item.component"
 
 import { TileLayoutStyle } from "./grid-list.styles"
+import GridListItemSimilar from "../grid-list-item/grid-list-item-similar.component"
 
-const GridList = ({ products, showTitle, linkUrl, titleName }) => {
-  // console.log({ products })
-  // console.log(categorySlug)
+const GridList = ({ products, showTitle, linkUrl, titleName, similar }) => {
   return (
-    <div>
+    <>
       {showTitle && (
         <h1>
           <Link to={linkUrl || `/`}>{titleName || `Home`}</Link>
         </h1>
       )}
-      <TileLayoutStyle>
+      <TileLayoutStyle similar={similar}>
         {products &&
           products.length > 0 &&
-          products.map(product => {
-            return <GridListItem product={product} key={product.strapiId} />
+          products.map((product, idx) => {
+            return !similar ? (
+              <GridListItem product={product} key={product.strapiId} />
+            ) : (
+              <GridListItemSimilar product={product} key={idx} />
+            )
           })}
       </TileLayoutStyle>
-    </div>
+    </>
   )
 }
 

@@ -71,6 +71,7 @@ const NavigationProvider = ({ children }) => {
   const [activeMenu, setActiveMenu] = useState("")
   const [activeCategories, setActiveCategories] = useState([])
   const [activeCategory, setActiveCategory] = useState("")
+  const [activeCategorySlug, setActiveCategorySlug] = useState("")
   const [activeBrands, setActiveBrands] = useState([])
   const [activeProducts, setActiveProducts] = useState([])
   const [allProducts, setAllProducts] = useState([])
@@ -93,6 +94,7 @@ const NavigationProvider = ({ children }) => {
     setActiveCategories(categories.sort(compareValues("catTitle", "asc")))
     // first time loaded automatically set the first category
     setActiveCategory(categories[0].catTitle)
+    setActiveCategorySlug(categories[0].catSlug)
     loadActiveBrands(categories[0].brands)
   }
 
@@ -155,6 +157,8 @@ const NavigationProvider = ({ children }) => {
         activeCategories,
         activeCategory,
         setActiveCategory,
+        activeCategorySlug,
+        setActiveCategorySlug,
         activeBrands,
         activeProducts,
         loadActiveCategories,

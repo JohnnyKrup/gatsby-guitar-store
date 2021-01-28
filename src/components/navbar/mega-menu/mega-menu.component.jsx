@@ -9,8 +9,6 @@ import cancel from "../../../images/cancel-thin.svg"
 import chevronRight from "../../../images/chevronRight.svg"
 
 const MegaMenu = () => {
-  // const [activeCategory, setActiveCategory] = useState(null)
-  const [activeCategorySlug, setActiveCategorySlug] = useState(null)
   const [activeBrand, setActiveBrand] = useState(null)
   const [activeBrandSlug, setActiveBrandSlug] = useState(null)
   const {
@@ -19,6 +17,8 @@ const MegaMenu = () => {
     activeCategories,
     activeCategory,
     setActiveCategory,
+    activeCategorySlug,
+    setActiveCategorySlug,
     activeBrands,
     loadActiveBrands,
     activeProducts,
@@ -81,7 +81,6 @@ const MegaMenu = () => {
                       key={idx}
                       onClick={() => {
                         loadActiveProducts(brand.brandTitle, activeCategory)
-
                         setActiveBrand(brand.brandTitle)
                         setActiveBrandSlug(brand.brandSlug)
                       }}

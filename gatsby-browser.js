@@ -1,6 +1,5 @@
 import React from "react"
 
-// import { ParallaxProvider } from "react-scroll-parallax"
 import { NavigationProvider } from "./src/context/NavigationContext"
 import { SidebarProvider } from "./src/context/Sidebar.Context"
 import { CartProvider } from "./src/context/Cart.Context"

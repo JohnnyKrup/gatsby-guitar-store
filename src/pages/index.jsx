@@ -16,6 +16,7 @@ const HomePage = () => {
           title="dieGitarre.ch"
           subtitle="seit über 25 jahren"
           info="das grösste Fachgeschäft für akustische Gitarren in der Schweiz"
+          isLowerCase={true}
         >
           <CustomButton onClick={() => navigate("/shop")} isCentered inverted>
             Zum Shop
@@ -23,7 +24,7 @@ const HomePage = () => {
         </Banner>
       </Hero>
       <FeaturedProducts />
-      <CategoryPreview hideTitle={false}/>
+      <CategoryPreview hideTitle={false} />
     </Layout>
   )
 }

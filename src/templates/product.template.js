@@ -62,7 +62,7 @@ const ProductTemplate = ({ data: { strapiProduct } }) => {
     }
   }, [SimilarProducts])
 
-  console.log({ similarProducts })
+  console.log({ description })
 
   return (
     <Layout>
@@ -150,8 +150,14 @@ const ProductTemplate = ({ data: { strapiProduct } }) => {
         </SectionStyle>
         {similarProducts && similarProducts.length > 0 && (
           <SectionStyle id="SimilarProducts">
-            <h2>Ähnliche Produkte</h2>
-            {/* <GridList products={similarProducts} /> */}
+            <SimilarInfoStyle>
+              <h2 className="similar-title">Ähnliche Produkte</h2>
+              <GridList
+                products={similarProducts}
+                similar
+                style={{ width: "100%", padding: "0" }}
+              />
+            </SimilarInfoStyle>
           </SectionStyle>
         )}
       </SectionWrapperStyle>
@@ -172,6 +178,12 @@ const SectionStyle = styled.section`
   width: 100%;
   max-width: 1200px;
   margin: 0 auto;
+
+  /* .media {
+    width: 500px;
+    height: 350px;
+    margin-top: 25px;    
+  } */
 
   @media screen and (max-width: 600px) {
     max-width: unset;
@@ -236,6 +248,28 @@ const ArticleInfoStyle = styled.article`
         font-style: normal;
         font-weight: 300;
       }
+    }
+  }
+
+  @media screen and (max-width: 600px) {
+    margin-left: unset;
+    padding-top: 30px;
+  }
+`
+
+const SimilarInfoStyle = styled.div`
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 25px;
+
+  & .similar-title {
+    font-size: 1.8rem;
+    line-height: 1;
+
+    @media screen and (max-width: 600px) {
+      padding-top: 30px;
     }
   }
 

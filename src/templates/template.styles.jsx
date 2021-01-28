@@ -145,6 +145,33 @@ export const BrandListContainerStyle = styled.div`
   padding: 3rem 0;
   /* margin-top: 70px; */
   width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+`
+
+export const BrandInfoWrapper = styled.div`
+  width: 100%;
+  margin: 0 auto;
+  max-width: var(--fullWidth);
+  padding: 0 30px;
+  display: flex;
+`
+
+export const BrandInfoStyle = styled.div`
+  display: block;
+  position: relative;
+  padding: 30px;
+  background: #fff;
+  color: #525252;
+  border: 1px solid #eaeaea;
+  margin-bottom: 0;
+
+  ::before {
+    content: "";
+    display: block;
+    overflow: hidden;
+  }
 `
 
 // Grid Style

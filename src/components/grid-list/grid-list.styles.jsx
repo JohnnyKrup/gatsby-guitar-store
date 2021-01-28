@@ -6,8 +6,9 @@ export const TileLayoutStyle = styled.div`
   display: grid;
   width: 100%;
   max-width: var(--fullWidth);
-  padding: 0 2%;
+  padding: ${props => (props.similar ? `0` : `0 2%`)};
   gap: 1rem;
+
   /* safari workaround */
   grid-gap: 1rem;
   grid-template-rows: auto auto;
@@ -15,7 +16,7 @@ export const TileLayoutStyle = styled.div`
   justify-items: center;
 
   @media (max-width: 600px) {
-    grid-template-columns: 1fr;        
+    grid-template-columns: 1fr;
   }
 
   @media (min-width: 768px) {
@@ -26,5 +27,6 @@ export const TileLayoutStyle = styled.div`
   @media (min-width: 992px) {
     grid-template-columns: 1fr 1fr 1fr;
     grid-template-rows: auto;
-  }  
+    width: 100%;
+  }
 `

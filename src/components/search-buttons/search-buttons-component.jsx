@@ -50,10 +50,10 @@ const SearchButtons = ({ products, setProducts, setBackToAll }) => {
 
 const SerchButtonContainerStyle = styled.section`
   display: flex;
-  margin-bottom: 0;
+  margin: 25px 0;
   justify-content: center;
   flex-wrap: wrap;
-  margin-top: 90px;
+
   button {
     margin: 0.5rem;
     text-transform: capitalize;

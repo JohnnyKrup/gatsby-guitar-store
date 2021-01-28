@@ -5,18 +5,23 @@ import Layout from "../components/layout.component"
 import GridList from "../components/grid-list/grid-list.component"
 import { compareValues } from "../utils/helpers"
 
-import { BrandListContainerStyle } from "./template.styles"
+import {
+  BrandListContainerStyle,
+  BrandInfoWrapper,
+  BrandInfoStyle,
+} from "./template.styles"
 import SearchButtons from "../components/search-buttons/search-buttons-component"
 import Breadcrumb from "../components/breadcrumb/breadcrumb.component"
 
 const BrandListsTemplate = ({
   data: {
     allStrapiProduct: { prods },
+    strapiBrand,
   },
   pageContext,
 }) => {
   console.log({ prods })
-  console.log(pageContext)
+  console.log({ strapiBrand })
 
   // get only the products that match the pageContexts categorySlug
   const filteredProducts = []
@@ -25,6 +30,8 @@ const BrandListsTemplate = ({
       ? filteredProducts.push(product)
       : null
   )
+
+  const brandHeader = strapiBrand.brandHeaderImage.childImageSharp.fluid
 
   /**
    * Since the products need to be filtered and reset
@@ -46,13 +53,21 @@ const BrandListsTemplate = ({
         categorySlug={pageContext.categorySlug}
       />
 
-      <SearchButtons
-        products={filteredProducts}
-        setProducts={setProducts}
-        setBackToAll={setBackToAll}
-      />
-
       <BrandListContainerStyle>
+        {pageContext.categorySlug === "western" ? (
+          <BrandInfoWrapper>
+            <BrandInfoStyle>
+              <p>{strapiBrand.brandInfo}</p>
+            </BrandInfoStyle>
+          </BrandInfoWrapper>
+        ) : null}
+
+        <SearchButtons
+          products={filteredProducts}
+          setProducts={setProducts}
+          setBackToAll={setBackToAll}
+        />
+
         <GridList products={products} />
       </BrandListContainerStyle>
     </Layout>
@@ -88,6 +103,21 @@ export const query = graphql`
             }
           }
         }
+      }
+    }
+    strapiBrand(slug: { eq: $slug }) {
+      title
+      slug
+      brandInfo
+      brandHeaderImage {
+        childImageSharp {
+          fluid {
+            src
+          }
+        }
+      }
+      categories {
+        title
       }
     }
   }

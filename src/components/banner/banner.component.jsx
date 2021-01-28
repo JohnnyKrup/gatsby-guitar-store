@@ -6,11 +6,11 @@ import {
   BannerTitleStyle,
 } from "./banner.styles"
 
-const Banner = ({ title, subtitle, info, children }) => {
+const Banner = ({ title, subtitle, info, children, isLowerCase }) => {
   return (
     <BannerStyle>
       <BannerSubTitleStyle>{subtitle}</BannerSubTitleStyle>
-      <BannerTitleStyle>{title}</BannerTitleStyle>
+      <BannerTitleStyle isLowerCase={isLowerCase}>{title}</BannerTitleStyle>
       <BannerParagraphStyle>{info}</BannerParagraphStyle>
       {children}
     </BannerStyle>

@@ -1,59 +1,70 @@
 import React from "react"
 
 import { navigate } from "gatsby"
-import BackgroundImage from "gatsby-background-image"
 
 import styled from "styled-components"
 
 import { truncateString } from "../../utils/helpers"
 
-const GridListItem = ({ product, showPrice }) => {
+const GridListItemSimilar = ({ product, showPrice, idx }) => {
   const {
-    strapiId,
     price,
     title,
     slug,
     orderedBadge,
     newBadge,
     soldBadge,
-    product_image: {
-      childImageSharp: { fluid },
-    },
+    product_image: { formats },
     brand,
     category,
   } = product
-  // console.log({ product })
-  // console.log({categorySlug})
+
+  console.log({ product })
+
+  const bgImage = formats.small ? formats.small.url : ""
+  const bgImageMobile = formats.thumbnail.url
+
+  // console.log({ bgImage })
 
   return (
-    <ItemStyle
-      key={strapiId}
-      onClick={() =>
-        navigate(`/shop/${category.categorySlug}/${brand.brandSlug}/${slug}`)
-      }
-    >
-      <BGImageStyle fluid={fluid}>
+    <SimilarStyle>
+      <ItemStyle
+        key={idx}
+        onClick={() => navigate(`/shop/${category.slug}/${brand.slug}/${slug}`)}
+      >
         {orderedBadge && <BadgeStyle>coming</BadgeStyle>}
         {soldBadge && <BadgeStyle>sold</BadgeStyle>}
         {newBadge && <BadgeStyle>new</BadgeStyle>}
+        <BackgroundImageStyle bgImage={bgImage} bgImageMobile={bgImageMobile} />
+      </ItemStyle>
 
-        <TextHolder>
-          <TextWrapper>
-            <GridText>
-              <div className="brand">- {brand.brandTitle} -</div>
-              <div className="title">{truncateString(title, 25)}</div>
-              {showPrice && <div className="price">CHF {price}</div>}
-            </GridText>
-          </TextWrapper>
-        </TextHolder>
-      </BGImageStyle>
-    </ItemStyle>
+      <TextHolder>
+        <TextWrapper>
+          <GridText>
+            <div className="brand">- {brand.title} -</div>
+            <div className="title">{truncateString(title, 25)}</div>
+            {showPrice && <div className="price">CHF {price}</div>}
+          </GridText>
+        </TextWrapper>
+      </TextHolder>
+    </SimilarStyle>
   )
 }
 
+const SimilarStyle = styled.div`
+  position: relative;
+  display: flex;
+  flex-direction: column;
+
+  @media (max-width: 600px) {
+    margin-bottom: 35px;
+  }
+`
+
 const ItemStyle = styled.div`
+  position: relative;
   width: 100%;
-  height: 450px;
+  height: 300px;
   padding: 5px;
 
   /* flex: 1 1 auto; */
@@ -66,7 +77,6 @@ const ItemStyle = styled.div`
   @media (max-width: 600px) {
     height: 300px;
     width: 100%;
-    margin-bottom: 35px;
   }
 
   @media (min-width: 768px) {
@@ -80,23 +90,29 @@ const ItemStyle = styled.div`
   }
 
   @media (min-width: 1200px) {
-    height: 550px;
+    height: 300px;
     width: 100%;
   }
 `
 
-const BGImageStyle = styled(BackgroundImage)`
+const BackgroundImageStyle = styled.div`
+  background-image: ${props =>
+    `url(${process.env.GATSBY_API_URL}${props.bgImage})`};
+  background-repeat: no-repeat;
+  background-size: contain;
   height: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background-size: auto 100%;
+  width: 100%;
+
+  @media (max-width: 600px) {
+    background-image: ${props =>
+      `url(${process.env.GATSBY_API_URL}${props.bgImage})`};
+  }
 `
 
 const BadgeStyle = styled.div`
   position: absolute;
-  top: -6px;
-  right: 0;
+  top: 0;
+  right: 5px;
   background: var(--lightBlack);
   color: #fff;
   text-transform: capitalize;
@@ -104,7 +120,7 @@ const BadgeStyle = styled.div`
   z-index: 2000;
 
   @media screen and (max-width: 600px) {
-    top: 16px;
+    top: 22px;
     right: -18px;
     width: 75px;
     text-align: center;
@@ -113,27 +129,15 @@ const BadgeStyle = styled.div`
 `
 
 const TextHolder = styled.div`
-  position: absolute;
+  position: relative;
   display: block;
   width: 100%;
   height: 100%;
-  top: 0;
-  left: 0;
-  opacity: 0;
+  opacity: 1;
   text-align: center;
-  box-sizing: border-box;
-  background-color: var(--mainWhite);
-  transition: all 0.4s;
-
-  :hover {
-    opacity: 0.9;
-  }
 
   @media (max-width: 600px) {
     height: 25px;
-    opacity: 0.75;
-    top: unset;
-    bottom: -35px;
   }
 `
 
@@ -151,13 +155,6 @@ const GridText = styled.div`
   height: 100%;
   width: 100%;
   vertical-align: middle;
-
-  opacity: 0;
-  transition: opacity 0.4s 0.25s;
-
-  :hover {
-    opacity: 1;
-  }
 
   & .brand,
   .price {
@@ -179,4 +176,4 @@ const GridText = styled.div`
   }
 `
 
-export default GridListItem
+export default GridListItemSimilar

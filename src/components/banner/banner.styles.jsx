@@ -28,12 +28,13 @@ export const BannerTitleStyle = styled.h1`
   margin-bottom: 2rem;
   padding: 0 1rem;
   letter-spacing: 6px;
+  text-transform: ${props => (props.isLowerCase ? "none" : "uppercase")};
 
   @media screen and (max-width: 420px) {
-    font-size: 3.0rem;
+    font-size: 3rem;
     padding: 0 auto;
     letter-spacing: 4px;
-  }  
+  }
 `
 
 export const BannerParagraphStyle = styled.p`
@@ -43,7 +44,7 @@ export const BannerParagraphStyle = styled.p`
 
   @media screen and (max-width: 420px) {
     width: 80%;
-    font-size: 1.0rem;
+    font-size: 1rem;
   }
 
   @media screen and (min-width: 768px) {
