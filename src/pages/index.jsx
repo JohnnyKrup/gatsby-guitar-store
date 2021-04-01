@@ -14,7 +14,7 @@ import MENU_QUERY from "../queries/menu/menu"
 const HomePage = () => {
   return (
     <Layout>
-      <ApolloQuery query={MENU_QUERY} id={null}>
+      <ApolloQuery query={MENU_QUERY}>
         {({ data: menus }) => {
           // console.log({ menus })
           return null
