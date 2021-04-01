@@ -1,5 +1,7 @@
 import React from "react"
 
+import { ApolloProvider } from "@apollo/client"
+import client from "./src/utils/apolloClient"
 import { NavigationProvider } from "./src/context/NavigationContext"
 import { SidebarProvider } from "./src/context/Sidebar.Context"
 import { CartProvider } from "./src/context/Cart.Context"
@@ -7,8 +9,6 @@ import { UserProvider } from "./src/context/User.Context"
 import { UtilityProvider } from "./src/context/Utility.Context"
 // import { Elements } from "@stripe/react-stripe-js"
 // import { loadStripe } from "@stripe/stripe-js"
-import { ApolloProvider } from "@apollo/client"
-import client from "./src/utils/apolloClient"
 
 import "./src/styles/global.styles.css"
 
