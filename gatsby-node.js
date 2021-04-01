@@ -31,6 +31,7 @@ exports.createPages = async ({ graphql, actions }) => {
           title
           isActive
           categories {
+            isActive
             slug
           }
         }
@@ -65,17 +66,22 @@ exports.createPages = async ({ graphql, actions }) => {
   // Brand Pages
   data &&
     data.allStrapiBrand.brands.forEach(brand => {
-      if (brand.isActive && brand.categories.isActive) {
+      if (brand.isActive) {
         brand.categories.forEach(cat => {
-          createPage({
-            path: `shop/${cat.slug}/${brand.slug}`,
-            component: path.resolve("./src/templates/brand-lists.template.js"),
-            context: {
-              slug: brand.slug,
-              brandTitle: brand.title,
-              categorySlug: cat.slug,
-            },
-          })
+          console.log({ cat })
+          if (cat.isActive) {
+            createPage({
+              path: `shop/${cat.slug}/${brand.slug}`,
+              component: path.resolve(
+                "./src/templates/brand-lists.template.js"
+              ),
+              context: {
+                slug: brand.slug,
+                brandTitle: brand.title,
+                categorySlug: cat.slug,
+              },
+            })
+          }
         })
       }
     })

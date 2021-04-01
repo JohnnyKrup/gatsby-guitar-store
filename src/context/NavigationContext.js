@@ -91,7 +91,7 @@ const NavigationProvider = ({ children }) => {
     setAllProducts(products.sort(compareValues("title", "asc")))
     setMenus(nodes.sort(compareValues("title", "asc")))
     // console.log("useEffect End")
-  }, [])
+  }, [nodes, products])
 
   const loadActiveCategories = categories => {
     clearActiveItems()

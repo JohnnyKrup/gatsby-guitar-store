@@ -99,7 +99,11 @@ const Team = () => {
                       <h2>{name}</h2>
                       <p dangerouslySetInnerHTML={{ __html: text }} />
                       <p>
-                        <a href={`https://${url}`} target="_blank">
+                        <a
+                          href={`https://${url}`}
+                          target="_blank"
+                          rel="noreferrer"
+                        >
                           {url}
                         </a>
                       </p>

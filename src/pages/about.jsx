@@ -21,7 +21,7 @@ const query = graphql`
 const AboutPage = () => {
   const data = useStaticQuery(query)
 
-  console.log({ data })
+  // console.log({ data })
 
   const {
     file: {

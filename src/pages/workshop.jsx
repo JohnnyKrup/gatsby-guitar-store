@@ -139,7 +139,7 @@ const Workshop = () => {
                   <p>
                     Die Reparaturliste für die Schätzung der ausstehenden Kosten
                     kannst du{" "}
-                    <a href={publicURL} target="_blank">
+                    <a href={publicURL} target="_blank" rel="noreferrer">
                       <LinkColor>hier</LinkColor>
                     </a>{" "}
                     anschauen.

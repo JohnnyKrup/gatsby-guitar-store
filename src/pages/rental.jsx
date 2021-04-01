@@ -93,7 +93,7 @@ const Rental = () => {
                     </p>
                     <p>
                       Den Mietvertrag kannst du{" "}
-                      <a href={publicURL} target="_blank">
+                      <a href={publicURL} target="_blank" rel="noreferrer">
                         <LinkColor>hier</LinkColor>
                       </a>{" "}
                       anschauen.

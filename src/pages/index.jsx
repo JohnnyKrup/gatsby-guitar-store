@@ -16,7 +16,7 @@ const HomePage = () => {
     <Layout>
       <ApolloQuery query={MENU_QUERY} id={null}>
         {({ data: menus }) => {
-          console.log({ menus })
+          // console.log({ menus })
           return null
         }}
       </ApolloQuery>

@@ -59,7 +59,7 @@ const ProductTemplate = ({ data: { strapiProduct }, pageContext }) => {
       })
     )
     console.log({ galleryImages })
-  }, [])
+  }, [strapiProduct.gallery_images, galleryImages])
 
   useEffect(() => {
     console.log("useEffect should run only once")
@@ -97,7 +97,12 @@ const ProductTemplate = ({ data: { strapiProduct }, pageContext }) => {
 
           <ArticleInfoStyle>
             <h1 className="title">{title}</h1>
-            <div className="price">CHF {price}</div>
+            {discountedPrice && discountedPrice > 0 ? (
+              <div className="price">Neu CHF {discountedPrice}</div>
+            ) : (
+              <div className="price">CHF {price}</div>
+            )}
+
             <hr className="ruler" />
             <p
               className="description"

@@ -5,7 +5,7 @@ import { IoCloseSharp } from "react-icons/io5"
 
 import { UserContext } from "../../context/User.Context"
 import { CartContext } from "../../context/Cart.Context"
-import { UtilityContext } from "../../context/Utility.Context"
+// import { UtilityContext } from "../../context/Utility.Context"
 
 const CustomerProfile = () => {
   const {
@@ -15,7 +15,7 @@ const CustomerProfile = () => {
   } = useContext(UserContext)
 
   const { clearCart } = useContext(CartContext)
-  const { windowWidth, windowHeight } = useContext(UtilityContext)
+  // const { windowWidth, windowHeight } = useContext(UtilityContext)
 
   return (
     <CustomerDropDownStyle>

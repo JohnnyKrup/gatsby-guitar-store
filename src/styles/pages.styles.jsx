@@ -228,3 +228,17 @@ export const PageList = styled.ul`
 export const PageListItem = styled.li`
   list-style-type: square;
 `
+
+export const ContactFormStyle = styled.div`
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+
+  @media screen and (max-width: 800px) {
+    width: 80vw;
+  }
+
+  .title {
+    margin: 10px 0;
+  }
+`

@@ -1,5 +1,5 @@
 import React, { useContext } from "react"
-import { graphql, Link, useStaticQuery } from "gatsby"
+import { Link } from "gatsby"
 
 import { SidebarContext } from "../../context/Sidebar.Context"
 import { UserContext } from "../../context/User.Context"
@@ -8,32 +8,10 @@ import { CartContext } from "../../context/Cart.Context"
 import { MdClose } from "react-icons/md"
 import styled from "styled-components"
 
-// const query = graphql`
-//   {
-//     allStrapiMenu {
-//       nodes {
-//         title
-//         categories {
-//           title
-//           slug
-//         }
-//         brands {
-//           slug
-//           title
-//         }
-//       }
-//     }
-//   }
-// `
-
 const Sidebar = () => {
   const { hideSidebar } = useContext(SidebarContext)
   const { user, userLogout } = useContext(UserContext)
   const { clearCart } = useContext(CartContext)
-  // const data = useStaticQuery(query)
-  // const {
-  //   allStrapiCategory: { nodes },
-  // } = data
 
   return (
     <SidebarStyle>
@@ -69,29 +47,6 @@ const Sidebar = () => {
             <MainLinkStyle to="/shop" onClick={hideSidebar}>
               shop
             </MainLinkStyle>
-            {/* {
-            nodes.map((link, index) => {
-             const {title, categories, brands} = link;
-             const links = (
-             <>
-               <LinkStyle to={`/shop/${slug}`} onClick={hideSidebar} key={index}>
-                {title}                
-                </LinkStyle>
-                <SubLinkListStyle>
-                {
-                  brands.map((subLink, index) => {
-                    const {title, slug: brandSlug} = subLink;
-                    return <SubLinkStyle to={`/shop/${slug}/${brandSlug}`} onClick={hideSidebar} key={index}>
-                    {title}
-                    </SubLinkStyle>
-                  })
-                }
-                </SubLinkListStyle>
-              </>
-              ) 
-              return links
-            }
-            )} */}
           </LinksStyle>
         </LinksContainerStyle>
       </SidebarContainerStyle>
@@ -144,7 +99,6 @@ const LinksContainerStyle = styled.div`
 
 const LinksStyle = styled.div`
   display: grid;
-  /* gap: 1rem 2rem; */
 
   @media (min-width: 800px) {
     grid-template-columns: 1fr 1fr;
@@ -152,10 +106,6 @@ const LinksStyle = styled.div`
 `
 
 const MainLinkStyle = styled(Link)`
-  /* display: grid;
-    grid-template-columns: auto 1fr;
-    gap: 0.75rem;
-    grid-gap: 0.75rem; */
   text-align: center;
   color: #0a2540;
   text-transform: capitalize;
@@ -164,28 +114,28 @@ const MainLinkStyle = styled(Link)`
   margin-bottom: 0.5rem;
 `
 
-const LinkStyle = styled(Link)`
-  text-align: center;
-  color: #0a2540;
-  text-transform: capitalize;
-  font-weight: 500;
-  font-size: 1.2rem;
-  margin-bottom: 0.5rem;
-`
+// const LinkStyle = styled(Link)`
+//   text-align: center;
+//   color: #0a2540;
+//   text-transform: capitalize;
+//   font-weight: 500;
+//   font-size: 1.2rem;
+//   margin-bottom: 0.5rem;
+// `
 
-const SubLinkListStyle = styled.div`
-  width: 80vw;
-  margin-bottom: 1rem;
-`
+// const SubLinkListStyle = styled.div`
+//   width: 80vw;
+//   margin-bottom: 1rem;
+// `
 
-const SubLinkStyle = styled(Link)`
-  display: grid;
-  grid-template-columns: 1fr;
-  text-align: center;
-  color: #0a5560;
-  text-transform: capitalize;
-  font-weight: 500;
-  font-size: 1.2rem;
-`
+// const SubLinkStyle = styled(Link)`
+//   display: grid;
+//   grid-template-columns: 1fr;
+//   text-align: center;
+//   color: #0a5560;
+//   text-transform: capitalize;
+//   font-weight: 500;
+//   font-size: 1.2rem;
+// `
 
 export default Sidebar
