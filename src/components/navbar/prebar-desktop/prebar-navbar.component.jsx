@@ -6,19 +6,20 @@ import NavbarDropdown from "../navbar-dropdown/navbar-dropdown.component"
 
 import styled from "styled-components"
 import { Link } from "gatsby"
+import { maintenance, store } from "../../../utils/URL"
 
-const store = [
-  { name: "Team", url: "team" },
-  { name: "Über uns", url: "about" },
-  { name: "Kontakt", url: "contact" },
-  { name: "Öffnungszeiten", url: "contact" },
-]
+// const store = [
+//   { name: "Team", url: "team" },
+//   { name: "Über uns", url: "about" },
+//   { name: "Kontakt", url: "contact" },
+//   { name: "Öffnungszeiten", url: "contact" },
+// ]
 
-const maintenance = [
-  { name: "Beratung & Garantie", url: "consultation" },
-  { name: "Miete", url: "rental" },
-  { name: "Reparaturen", url: "workshop" },
-]
+// const maintenance = [
+//   { name: "Beratung & Garantie", url: "consultation" },
+//   { name: "Miete", url: "rental" },
+//   { name: "Reparaturen", url: "workshop" },
+// ]
 
 const PrebarNavbar = () => {
   const { user, userLogout } = useContext(UserContext)

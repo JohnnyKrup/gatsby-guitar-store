@@ -1,5 +1,5 @@
 import React from "react"
-import { useStaticQuery } from "gatsby"
+import { graphql, useStaticQuery } from "gatsby"
 
 import Layout from "../components/layout.component"
 import BreadCrumb from "../components/breadcrumb/breadcrumb.component"
@@ -40,7 +40,7 @@ const query = graphql`
     }
     allFile(filter: { relativeDirectory: { eq: "workshop" } }) {
       galleryPhotos: nodes {
-        childImageSharp {
+        cis: childImageSharp {
           fluid {
             ...GatsbyImageSharpFluid_withWebp
           }
@@ -59,12 +59,12 @@ const Workshop = () => {
     allFile: { galleryPhotos },
   } = useStaticQuery(query)
 
-  const photos = galleryPhotos.map(photo => {
-    console.log({ photo })
-    return photo.childImageSharp.fluid
-  })
+  // const photos = galleryPhotos.map(photo => {
+  //   console.log({ photo })
+  //   return photo.childImageSharp.fluid
+  // })
 
-  console.log({ photos })
+  // console.log({ photos })
 
   return (
     <Layout bgColor="#ececec">
@@ -96,13 +96,17 @@ const Workshop = () => {
                       eines neuen Instrumentes.
                     </p>
                     <GalleryContainer>
-                      {photos.map((p, idx) => {
-                        return (
-                          <ImageContainer key={idx}>
-                            <GatsbyImage fluid={p} />
-                          </ImageContainer>
-                        )
-                      })}
+                      {galleryPhotos &&
+                        galleryPhotos.map((photo, idx) => {
+                          const {
+                            cis: { fluid },
+                          } = photo
+                          return (
+                            <ImageContainer key={idx}>
+                              <GatsbyImage fluid={fluid} />
+                            </ImageContainer>
+                          )
+                        })}
                     </GalleryContainer>
                     <p>
                       <strong>Spezialanfertigungen:</strong>

@@ -65,7 +65,7 @@ exports.createPages = async ({ graphql, actions }) => {
   // Brand Pages
   data &&
     data.allStrapiBrand.brands.forEach(brand => {
-      if (brand.isActive) {
+      if (brand.isActive && brand.categories.isActive) {
         brand.categories.forEach(cat => {
           createPage({
             path: `shop/${cat.slug}/${brand.slug}`,

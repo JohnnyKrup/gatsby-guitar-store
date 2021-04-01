@@ -7,6 +7,7 @@ import GoogleMap from "../maps/maps.component"
 
 import plus from "../../images/plus-thin.svg"
 import minus from "../../images/minus-thin.svg"
+import { maintenance, store } from "../../utils/URL"
 
 const Footer = () => {
   const [isAccordionFirmaHidden, setIsAccordionFirmaHidden] = useState(true)
@@ -38,7 +39,7 @@ const Footer = () => {
           <FooterLinksWrapper>
             <FooterLinkMenu>
               <FooterLinkMenuTitle onClick={() => handleAccordion("firma")}>
-                Firma
+                Geschäft
                 <MobileMenuListBtnIcon
                   src={isAccordionFirmaHidden ? plus : minus}
                   alt={`Menu öffnen`}
@@ -48,12 +49,16 @@ const Footer = () => {
                 isAccordionFirmaHidden={isAccordionFirmaHidden}
               >
                 <FooterMenuAccordionList>
-                  <FooterMenuAccordionListItem>
-                    <FooterLink to="/">Über uns</FooterLink>
-                  </FooterMenuAccordionListItem>
-                  <FooterMenuAccordionListItem>
-                    <FooterLink to="/">Team</FooterLink>
-                  </FooterMenuAccordionListItem>
+                  {store &&
+                    store.map((link, idx) => {
+                      return (
+                        <FooterMenuAccordionListItem key={idx}>
+                          <FooterLink to={`/${link.url}`}>
+                            {link.name}
+                          </FooterLink>
+                        </FooterMenuAccordionListItem>
+                      )
+                    })}
                 </FooterMenuAccordionList>
               </FooterMenuAccordionFirma>
             </FooterLinkMenu>
@@ -69,12 +74,16 @@ const Footer = () => {
                 isAccordionServiceHidden={isAccordionServiceHidden}
               >
                 <FooterMenuAccordionList>
-                  <FooterMenuAccordionListItem>
-                    <FooterLink to="/">Werkstatt</FooterLink>
-                  </FooterMenuAccordionListItem>
-                  <FooterMenuAccordionListItem>
-                    <FooterLink to="/">Miete</FooterLink>
-                  </FooterMenuAccordionListItem>
+                  {maintenance &&
+                    maintenance.map((link, idx) => {
+                      return (
+                        <FooterMenuAccordionListItem key={idx}>
+                          <FooterLink to={`/${link.url}`}>
+                            {link.name}
+                          </FooterLink>
+                        </FooterMenuAccordionListItem>
+                      )
+                    })}
                 </FooterMenuAccordionList>
               </FooterMenuAccordionService>
             </FooterLinkMenu>

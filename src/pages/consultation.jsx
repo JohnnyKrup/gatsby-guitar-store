@@ -1,5 +1,5 @@
 import React from "react"
-import { useStaticQuery } from "gatsby"
+import { graphql, useStaticQuery } from "gatsby"
 
 import Layout from "../components/layout.component"
 import BreadCrumb from "../components/breadcrumb/breadcrumb.component"
@@ -121,8 +121,8 @@ const Consultation = () => {
                   </p>
 
                   <p>
-                    Möchten Sie sicher sein, dass Sie das richtige Instrument
-                    gewählt haben?
+                    Möchten du sicher sein, dass du das richtige Instrument
+                    gewählt hast?
                   </p>
                 </AsidePanel>
               </ContentAside>

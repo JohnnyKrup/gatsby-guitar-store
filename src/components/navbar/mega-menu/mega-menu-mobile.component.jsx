@@ -5,6 +5,7 @@ import { UtilityContext } from "../../../context/Utility.Context"
 import { NavigationContext } from "../../../context/NavigationContext"
 
 import styled from "styled-components"
+import { store, maintenance } from "../../../utils/URL"
 
 import chevronRight from "../../../images/chevronRight.svg"
 
@@ -76,10 +77,32 @@ const MegaMenuMobile = () => {
                       })
                   }
                   {/* MobileLinkLists - Maybe can be added to Strapi as a component */}
-                  <MobileMenuLink to="/">Hilfe</MobileMenuLink>
-                  <MobileMenuLink to="/">Kontaktiert uns</MobileMenuLink>
-                  <MobileMenuLink to="/about">Über uns</MobileMenuLink>
-                  <MobileMenuLink to="/">Stellenangebote</MobileMenuLink>
+                  <LinkTitle>Service</LinkTitle>
+                  {maintenance &&
+                    maintenance.map((link, idx) => {
+                      return (
+                        <MobileMenuLink
+                          to={`/${link.url}`}
+                          key={idx}
+                          onClick={toggleMobileMenu}
+                        >
+                          {link.name}
+                        </MobileMenuLink>
+                      )
+                    })}
+                  <LinkTitle>Geschäft</LinkTitle>
+                  {store &&
+                    store.map((link, idx) => {
+                      return (
+                        <MobileMenuLink
+                          to={`/${link.url}`}
+                          key={idx}
+                          onClick={toggleMobileMenu}
+                        >
+                          {link.name}
+                        </MobileMenuLink>
+                      )
+                    })}
                   {/* MobileLinkLists - Maybe can be added to Strapi as a component */}
                 </MobileMenuList>
               </MobileMenuContainerList>
@@ -285,6 +308,10 @@ const MobileBrandListHeaderBtn = styled(MobileMenuListBtn)`
 const MobileMenuListBtnIconBack = styled(MobileMenuListBtnIcon)`
   transform: rotateY(180deg);
   left: 15px;
+`
+
+const LinkTitle = styled.h3`
+  margin: 15px 0 0 20px;
 `
 
 export default MegaMenuMobile
