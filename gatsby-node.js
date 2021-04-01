@@ -29,6 +29,7 @@ exports.createPages = async ({ graphql, actions }) => {
         brands: nodes {
           slug
           title
+          isActive
           categories {
             slug
           }
@@ -38,6 +39,7 @@ exports.createPages = async ({ graphql, actions }) => {
       allStrapiCategory {
         categories: nodes {
           slug
+          isActive
         }
       }
 
@@ -46,9 +48,11 @@ exports.createPages = async ({ graphql, actions }) => {
           slug
           brand {
             slug
+            isActive
           }
           category {
             slug
+            isActive
           }
         }
       }
@@ -61,37 +65,43 @@ exports.createPages = async ({ graphql, actions }) => {
   // Brand Pages
   data &&
     data.allStrapiBrand.brands.forEach(brand => {
-      brand.categories.forEach(cat => {
-        createPage({
-          path: `shop/${cat.slug}/${brand.slug}`,
-          component: path.resolve("./src/templates/brand-lists.template.js"),
-          context: {
-            slug: brand.slug,
-            brandTitle: brand.title,
-            categorySlug: cat.slug,
-          },
+      if (brand.isActive) {
+        brand.categories.forEach(cat => {
+          createPage({
+            path: `shop/${cat.slug}/${brand.slug}`,
+            component: path.resolve("./src/templates/brand-lists.template.js"),
+            context: {
+              slug: brand.slug,
+              brandTitle: brand.title,
+              categorySlug: cat.slug,
+            },
+          })
         })
-      })
+      }
     })
 
   // Category Pages
   data &&
     data.allStrapiCategory.categories.forEach(category => {
-      createPage({
-        path: `shop/${category.slug}`,
-        component: path.resolve("./src/templates/category-lists.template.js"),
-        context: { slug: category.slug },
-      })
+      if (category.isActive) {
+        createPage({
+          path: `shop/${category.slug}`,
+          component: path.resolve("./src/templates/category-lists.template.js"),
+          context: { slug: category.slug },
+        })
+      }
     })
 
   // Product Pages
   data &&
     data.allStrapiProduct.products.forEach(product => {
-      createPage({
-        path: `shop/${product.category.slug}/${product.brand.slug}/${product.slug}`,
-        component: path.resolve("./src/templates/product.template.js"),
-        context: { slug: product.slug },
-      })
+      if (product.brand.isActive && product.category.isActive) {
+        createPage({
+          path: `shop/${product.category.slug}/${product.brand.slug}/${product.slug}`,
+          component: path.resolve("./src/templates/product.template.js"),
+          context: { slug: product.slug },
+        })
+      }
     })
 }
 
@@ -111,11 +121,11 @@ exports.onCreateNode = async ({
   let multiImages = node.gallery_images
 
   //console.log("node.internal.type: ", node.internal.type)
-  if (node.internal.type === "StrapiProduct") {
+  if (node.internal.type !== null && node.internal.type === "StrapiProduct") {
     //console.log("#####")
     if (multiImages.length > 0) {
       //console.log("images.length: ", multiImages.length)
-      multiImages.forEach(image => console.log(image))
+      // multiImages.forEach(image => console.log(image))
       const images = await Promise.all(
         multiImages.map(img =>
           createRemoteFileNode({
@@ -130,8 +140,12 @@ exports.onCreateNode = async ({
           })
         )
       )
+      // multiImages.forEach((image, idx) => {
+      //   image.localFile___NODE = images[idx].id
+      // })
+
       multiImages.forEach((image, idx) => {
-        image.localFile___NODE = images[idx].id
+        image.multipleFiles___NODE = images[idx].id
       })
     }
   }

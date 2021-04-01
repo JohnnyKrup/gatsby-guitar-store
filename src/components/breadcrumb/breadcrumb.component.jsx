@@ -11,7 +11,7 @@ import {
   BreadcrumbLinkStyle,
 } from "./breadcrumb.styles"
 
-const Breadcrumb = ({ title, categorySlug, brandSlug }) => {
+const Breadcrumb = ({ title, categorySlug, brandSlug, isShopPage }) => {
   return (
     <HeroBarContainerStyle>
       <HeroBarTableStyle>
@@ -21,7 +21,12 @@ const Breadcrumb = ({ title, categorySlug, brandSlug }) => {
               <HeroBarTitleStyle>{title}</HeroBarTitleStyle>
             </HeroBarTitleWrapperStyle>
             <BreadcrumbContainerStyle>
-              <BreadcrumbLinkStyle to={`/shop`}>shop</BreadcrumbLinkStyle>
+              {isShopPage ? (
+                <BreadcrumbLinkStyle to={`/shop`}>shop</BreadcrumbLinkStyle>
+              ) : (
+                <BreadcrumbLinkStyle to={`/`}>home</BreadcrumbLinkStyle>
+              )}
+
               {categorySlug && (
                 <>
                   <span>&nbsp; / &nbsp;</span>

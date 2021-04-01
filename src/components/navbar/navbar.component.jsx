@@ -23,7 +23,7 @@ const NavbarStyle = styled.div`
   left: 0;
   right: 0;
   margin: 0 auto;
-  z-index: 900;
+  z-index: 9;
   background: white;
 `
 

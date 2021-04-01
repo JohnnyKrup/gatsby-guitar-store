@@ -18,13 +18,15 @@ const query = graphql`
   }
 `
 
-const ShopPage = () => {
+const ShopPage = props => {
   const data = useStaticQuery(query)
   const {
     file: {
       childImageSharp: { fluid },
     },
   } = data
+
+  console.log({ props })
 
   return (
     <Layout>

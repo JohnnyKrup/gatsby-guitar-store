@@ -1,5 +1,5 @@
 import React, { useState, useContext } from "react"
-import { Link } from "gatsby"
+import { Link, useStaticQuery, graphql, navigate } from "gatsby"
 
 import { NavigationContext } from "../../../context/NavigationContext"
 import { CartContext } from "../../../context/Cart.Context"
@@ -7,21 +7,56 @@ import CartIcon from "../../cart-icon/cart-icon.component"
 import Dropdown from "../../dropdown/dropdown.component"
 import CartDropdown from "../../cart-dropdown/cart-dropdown.component"
 
+import { useFlexSearch } from "react-use-flexsearch"
+
 import styled from "styled-components"
 import { SVGIcon } from "../navbar.styles"
 import searchBtn from "../../../images/search-thin.svg"
 import logo from "../../../images/LogoClose_128.svg"
 import accountBtn from "../../../images/account.svg"
 
+const gQuery = graphql`
+  {
+    localSearchProducts {
+      store
+      index
+    }
+  }
+`
+
 const MainbarDesktop = () => {
   const [activeMenu, setActiveMenu] = useState("")
+  const [query, setQuery] = useState(null)
+  const [values, setValues] = useState({})
 
   const { toggleMegamenu, loadActiveCategories, menus } = useContext(
     NavigationContext
   )
   const { cartHidden } = useContext(CartContext)
 
-  // console.log({ menus })
+  const queryData = useStaticQuery(gQuery)
+  const {
+    localSearchProducts: { index, store },
+  } = queryData
+  const results = useFlexSearch(query, index, store)
+
+  // console.log({ query })
+
+  /**
+   * Set the value of the search field
+   * and update the query string for the dropdown list
+   */
+  const handleChange = e => {
+    setValues({ query: e.target.value })
+    setQuery(e.target.value)
+  }
+
+  /**
+   * Prevent the form from refreshing the page on Enter
+   */
+  const handleSubmit = e => {
+    e.preventDefault()
+  }
 
   return (
     <HiddenTablet id="main-nav-desktop">
@@ -48,7 +83,7 @@ const MainbarDesktop = () => {
             })}
           </HeaderBarCategoriesContainer>
           <HeaderSearchContainer id="Search">
-            <HeaderSearchForm>
+            <HeaderSearchForm autoComplete="off" onSubmit={handleSubmit}>
               <HeaderSearchInputContainer>
                 <HeaderSearchBtn>
                   <SVGIcon
@@ -58,10 +93,25 @@ const MainbarDesktop = () => {
                   />
                 </HeaderSearchBtn>
                 <HeaderSearchInput
+                  name="query"
                   type="search"
                   placeholder="SUCHE (z.B. 'Martin 000')"
+                  onChange={handleChange}
                 />
               </HeaderSearchInputContainer>
+              <SearchResultWrapper query={query}>
+                <SearchResultList>
+                  {results.map((result, idx) => {
+                    return (
+                      <SearchResultItem key={idx}>
+                        <Link to={result.path} replace>
+                          {result.title}
+                        </Link>
+                      </SearchResultItem>
+                    )
+                  })}
+                </SearchResultList>
+              </SearchResultWrapper>
             </HeaderSearchForm>
           </HeaderSearchContainer>
           <HeaderIconContainer id="IconsRight">
@@ -75,15 +125,16 @@ const MainbarDesktop = () => {
               </HeaderIconCalloutWrapper>
             </HeaderIcon>
           </HeaderIconContainer>
-          <HeaderIconContainer>
+
+          <HeaderIconContainer className="snipcart-checkout">
             <HeaderIcon>
               <HeaderIconCalloutWrapper>
                 <CartIcon />
-                {cartHidden ? null : (
+                {/* {cartHidden ? null : (
                   <Dropdown>
                     <CartDropdown />
                   </Dropdown>
-                )}
+                )} */}
               </HeaderIconCalloutWrapper>
             </HeaderIcon>
           </HeaderIconContainer>
@@ -237,6 +288,39 @@ const HeaderSearchInput = styled.input`
   flex: 1 0 0;
   border-radius: 1px 0 0 1px;
   font-size: 16px;
+`
+
+const SearchResultWrapper = styled.div`
+  position: absolute;
+  top: 34px;
+  margin-top: 12px;
+  left: -16px;
+  width: 100vw;
+  background: #fff;
+  z-index: 901;
+  display: ${props =>
+    props.query === null || props.query === "" ? "none" : "block"};
+  /* display: block;  */
+
+  @media (min-width: 768px) {
+    left: 0;
+    width: 100%;
+  }
+`
+
+const SearchResultList = styled.ul`
+  padding: 0;
+  visibility: visible;
+`
+
+const SearchResultItem = styled.li`
+  font-weight: 400;
+  color: #000;
+  cursor: pointer;
+  padding: 15px;
+  border-bottom: 2px solid #f2f2f2;
+  font-size: 15px;
+  position: relative;
 `
 
 const HeaderIconContainer = styled.div`

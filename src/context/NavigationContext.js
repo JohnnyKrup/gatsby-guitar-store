@@ -22,10 +22,12 @@ const query = graphql`
         category {
           title
           slug
+          isActive
         }
         brand {
           title
           slug
+          isActive
         }
         strapiId
         title
@@ -52,9 +54,11 @@ const query = graphql`
         categories {
           catTitle: title
           catSlug: slug
+          isActive
           brands {
             brandTitle: title
             brandSlug: slug
+            isActive
           }
         }
       }
@@ -91,7 +95,11 @@ const NavigationProvider = ({ children }) => {
 
   const loadActiveCategories = categories => {
     clearActiveItems()
-    setActiveCategories(categories.sort(compareValues("catTitle", "asc")))
+    setActiveCategories(
+      categories
+        .filter(cat => cat.isActive === true)
+        .sort(compareValues("catTitle", "asc"))
+    )
     // first time loaded automatically set the first category
     setActiveCategory(categories[0].catTitle)
     setActiveCategorySlug(categories[0].catSlug)
@@ -101,7 +109,11 @@ const NavigationProvider = ({ children }) => {
   const loadActiveBrands = brands => {
     setActiveBrands([])
     setActiveProducts([])
-    setActiveBrands(brands.sort(compareValues("brandTitle", "asc")))
+    setActiveBrands(
+      brands
+        .filter(brand => brand.isActive === true)
+        .sort(compareValues("brandTitle", "asc"))
+    )
   }
 
   const loadActiveProducts = (brand, category) => {

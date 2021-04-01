@@ -2,23 +2,24 @@ import React, { useContext, useEffect, useState } from "react"
 import { graphql } from "gatsby"
 
 import { CartContext } from "../context/Cart.Context"
-import { UtilityContext } from "../context/Utility.Context"
+
+import ImageGallery from "react-image-gallery"
+import "../styles/image-gallery.styles.css"
 
 import styled from "styled-components"
 
 import Layout from "../components/layout.component"
 import CustomButton from "../components/custom-button/custom-button.component"
-import ImageGallery from "../components/image-gallery/image-gallery.component"
 import GridList from "../components/grid-list/grid-list.component"
 import Breadcrumb from "../components/breadcrumb/breadcrumb.component"
 
 import getSimilarProducts from "../strapi/getSimilarProducts"
 import { trackPromise } from "react-promise-tracker"
 
-const ProductTemplate = ({ data: { strapiProduct } }) => {
+const ProductTemplate = ({ data: { strapiProduct }, pageContext }) => {
   const { addItem } = useContext(CartContext)
-  const { windowWidth } = useContext(UtilityContext)
   const [similarProducts, setSimilarProducts] = useState([])
+  const [galleryImages, setGalleryImages] = useState([])
 
   const {
     title,
@@ -26,6 +27,9 @@ const ProductTemplate = ({ data: { strapiProduct } }) => {
     price,
     discountedPrice,
     SimilarProducts,
+    product_image: {
+      childImageSharp: { fluid },
+    },
     brand: { brandSlug },
     category: { categorySlug },
     Property: {
@@ -40,18 +44,25 @@ const ProductTemplate = ({ data: { strapiProduct } }) => {
     },
   } = strapiProduct
 
-  let imageWidth = 0
-  windowWidth < 600
-    ? (imageWidth = windowWidth - windowWidth / 10)
-    : (imageWidth = 500)
+  useEffect(() => {
+    console.log("images effect")
+    setGalleryImages(
+      strapiProduct.gallery_images.map(image => {
+        console.log({ image })
+        let webp = image.multipleFiles.childImageSharp.fluid
+        console.log(webp.srcWebp)
 
-  const images = strapiProduct.gallery_images.map(image => {
-    return image.localFile.childImageSharp.fluid
-  })
-
-  // console.log({ SimilarProducts })
+        return {
+          srcSet: webp.srcSetWebp,
+          thumbnail: webp.srcWebp,
+        }
+      })
+    )
+    console.log({ galleryImages })
+  }, [])
 
   useEffect(() => {
+    console.log("useEffect should run only once")
     if (SimilarProducts.length > 0) {
       const sProd = SimilarProducts[0].products
       trackPromise(
@@ -62,7 +73,8 @@ const ProductTemplate = ({ data: { strapiProduct } }) => {
     }
   }, [SimilarProducts])
 
-  console.log({ description })
+  // console.log(`localhost:8000${fluid.srcWebp}`)
+  console.log("images/Guitar_Hero.jpg")
 
   return (
     <Layout>
@@ -71,17 +83,19 @@ const ProductTemplate = ({ data: { strapiProduct } }) => {
           title={title}
           categorySlug={categorySlug}
           brandSlug={brandSlug}
+          isShopPage={true}
         />
 
         <SectionStyle>
-          <ImageGallery images={images} imgWidth={`${imageWidth}px`} />
+          {galleryImages !== null && (
+            <ImageGallery
+              items={galleryImages}
+              showNav={false}
+              showPlayButton={false}
+            />
+          )}
 
           <ArticleInfoStyle>
-            {imageWidth < 500 && (
-              <CustomButton onClick={() => addItem(strapiProduct)}>
-                In den Warenkorb
-              </CustomButton>
-            )}
             <h1 className="title">{title}</h1>
             <div className="price">CHF {price}</div>
             <hr className="ruler" />
@@ -143,7 +157,17 @@ const ProductTemplate = ({ data: { strapiProduct } }) => {
                 )}
               </ul>
             </div>
-            <CustomButton onClick={() => addItem(strapiProduct)}>
+            <CustomButton
+              onClick={() => addItem(strapiProduct)}
+              className="snipcart-add-item"
+              data-item-id={title}
+              data-item-price={price}
+              // data-item-url={`/${categorySlug}/${brandSlug}/${pageContext.slug}`}
+              data-item-url="https://die-gitarre-gatsby.netlify.app/"
+              data-item-description={description}
+              data-item-image={fluid.srcWebp}
+              data-item-name={title}
+            >
               In den Warenkorb
             </CustomButton>
           </ArticleInfoStyle>
@@ -324,7 +348,7 @@ export const query = graphql`
         }
       }
       gallery_images {
-        localFile {
+        multipleFiles {
           childImageSharp {
             fluid {
               ...GatsbyImageSharpFluid_withWebp

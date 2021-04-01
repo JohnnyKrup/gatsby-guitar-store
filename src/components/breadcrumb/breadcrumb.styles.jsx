@@ -9,6 +9,7 @@ export const HeroBarContainerStyle = styled.div`
   height: 100px;
   display: inline-block;
   vertical-align: center;
+  background-color: var(--mainWhite);
 `
 export const HeroBarTableStyle = styled.div`
   position: relative;

@@ -14,7 +14,7 @@ import {
 
 const query = graphql`
   {
-    allStrapiCategory {
+    allStrapiCategory(filter: { isActive: { eq: true } }) {
       categories: nodes {
         id: strapiId
         title

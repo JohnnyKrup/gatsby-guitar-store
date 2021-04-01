@@ -1,7 +1,8 @@
 import React from "react"
 import { graphql, useStaticQuery } from "gatsby"
 
-import { BackgroundImageStyle } from "./hero-alternative.styles"
+import BackgroundImage from "gatsby-background-image"
+import styled from "styled-components"
 
 const query = graphql`
   {
@@ -28,9 +29,32 @@ const HeroAlternative = ({ img, className, children, fullscreen }) => {
       fluid={img || fluid}
       fullscreen={fullscreen}
     >
-      {children}
+      <Gradient fullscreen={fullscreen}>{children}</Gradient>
     </BackgroundImageStyle>
   )
 }
+
+const BackgroundImageStyle = styled(BackgroundImage)`
+  min-height: ${({ fullscreen }) =>
+    fullscreen ? "calc(100vh - 103px)" : "25vh"};
+  width: 100%;
+  background-position: center;
+  background-size: cover;
+`
+
+const Gradient = styled.div`
+  min-height: ${({ fullscreen }) =>
+    fullscreen ? "calc(100vh - 103px)" : "25vh"};
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  background: ${props =>
+    props.fullscreen
+      ? "linear-gradient(rgba(256, 256, 256, 1), rgba(256, 256, 256, 0.7))"
+      : "none"};
+`
 
 export default HeroAlternative

@@ -16,7 +16,7 @@ const ZGridListItem = ({ product, categorySlug }) => {
     },
     brand: { brandTitle, slug: brandSlug },
   } = product
-  //console.log({product})
+  console.log({ product })
 
   return (
     <ListItemStyle>
@@ -28,6 +28,7 @@ const ZGridListItem = ({ product, categorySlug }) => {
           <TextStyle>
             <div className="brand">- {brandTitle} -</div>
             <div className="title">{truncateString(title, 25)}</div>
+            {/* <div className="title">{title}</div> */}
             {/* <div className="price">CHF {price}</div> */}
           </TextStyle>
         </BGImageStyle>

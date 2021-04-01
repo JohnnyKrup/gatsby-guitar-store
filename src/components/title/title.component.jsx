@@ -6,7 +6,8 @@ const Title = ({ title }) => {
   return (
     <TitleContainerStyle>
       <h2>
-        <span>/</span> {title}
+        {/* <span>/</span> {title} */}
+        {title}
       </h2>
     </TitleContainerStyle>
   )

@@ -5,44 +5,42 @@ import styled from "styled-components"
 import chevronDown from "../../../images/chevronDown.svg"
 import { SVGIcon } from "../navbar.styles"
 
-const NavbarDropdown = () => {
-  const [isDropdownHelpHidden, setIsDropdownHelpHidden] = useState(true)
-  // console.log({ isDropdownHelpHidden })
+const NavbarDropdown = ({ name, listItems }) => {
+  const [isDropdownHidden, setIsDropdownHidden] = useState(true)
+  // console.log({ isDropdownHidden })
 
   return (
     <NavbarDropdownWrapper
-      id="help"
-      onClick={() => setIsDropdownHelpHidden(!isDropdownHelpHidden)}
+      onClick={() => setIsDropdownHidden(!isDropdownHidden)}
     >
       <CalloutWrapper>
-        <ActionButtonContainer hiddenTablet id="helpBtn">
+        <ActionButtonContainer hiddenTablet>
           {" "}
-          Hilfe <SVGIconDropdown src={chevronDown} alt="Hilfe" />
+          {name} <SVGIconDropdown src={chevronDown} alt={name} />
         </ActionButtonContainer>
 
-        <CalloutTriangle
-          isDropdownHelpHidden={isDropdownHelpHidden}
-        ></CalloutTriangle>
+        <CalloutTriangle isDropdownHidden={isDropdownHidden}></CalloutTriangle>
         <CalloutPanel
-          isDropdownHelpHidden={isDropdownHelpHidden}
+          isDropdownHidden={isDropdownHidden}
           style={{ top: "42px" }}
         >
           <ul className="header-dropdown-list">
-            <ListItem>
-              <ListItemContent to="/">Hilfe</ListItemContent>
-            </ListItem>
-            <ListItem>
-              <ListItemContent to="/">Kontaktiert uns</ListItemContent>
-            </ListItem>
-            <ListItem>
-              <ListItemContent to="/">Über uns</ListItemContent>
-            </ListItem>
-            <ListItem>
-              <ListItemContent to="/">Stellenangebote</ListItemContent>
-            </ListItem>
+            {listItems.map((item, idx) => {
+              return (
+                <ListItem key={idx}>
+                  <ListItemContent to={`/${item.url}`}>
+                    {item.name}
+                  </ListItemContent>
+                </ListItem>
+              )
+            })}
           </ul>
         </CalloutPanel>
       </CalloutWrapper>
+      <Background
+        onClick={() => setIsDropdownHidden(true)}
+        isDropdownHidden={isDropdownHidden}
+      />
     </NavbarDropdownWrapper>
   )
 }
@@ -96,8 +94,8 @@ const CalloutTriangle = styled.span`
   border: none;
   overflow: hidden;
   bottom: -10px;
-  opacity: ${props => (props.isDropdownHelpHidden ? "0" : "1")};
-  visibility: ${props => (props.isDropdownHelpHidden ? "hidden" : "visible")};
+  opacity: ${props => (props.isDropdownHidden ? "0" : "1")};
+  visibility: ${props => (props.isDropdownHidden ? "hidden" : "visible")};
   left: 50%;
   position: absolute;
   transform: translateX(-50%);
@@ -121,9 +119,9 @@ const CalloutPanel = styled.div`
   background-color: white;
   color: black;
   cursor: auto;
-  opacity: ${props => (props.isDropdownHelpHidden ? "0" : "1")};
-  visibility: ${props => (props.isDropdownHelpHidden ? "hidden" : "visible")};
-  right: ${props => (props.isDropdownHelpHidden ? "0" : "5px")};
+  opacity: ${props => (props.isDropdownHidden ? "0" : "1")};
+  visibility: ${props => (props.isDropdownHidden ? "hidden" : "visible")};
+  right: ${props => (props.isDropdownHidden ? "0" : "5px")};
   padding: 25px;
   position: absolute;
   top: 0;
@@ -142,6 +140,19 @@ const ListItem = styled.li`
 const ListItemContent = styled(Link)`
   display: block;
   padding: 15px 0;
+`
+
+const Background = styled.div`
+  position: fixed;
+  display: ${props => (props.isDropdownHidden ? "none" : "flex")};
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  /* background-color: rgba(15, 15, 15, 0.8); */
+  background-color: transparent;
+  cursor: default;
 `
 
 export default NavbarDropdown

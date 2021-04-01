@@ -29,25 +29,28 @@ const categoryListsTemplate = ({
       <CategoryListContainerStyle>
         {brands &&
           brands.length > 0 &&
-          brands.sort(compareValues("title", "asc")).map((brand, idx) => {
-            const prods = products.filter(
-              product => product.brand.slug === brand.slug
-            )
+          brands
+            .filter(b => b.isActive === true)
+            .sort(compareValues("title", "asc"))
+            .map((brand, idx) => {
+              const prods = products.filter(
+                product => product.brand.slug === brand.slug
+              )
 
-            return (
-              <CategoryListRowStyle key={idx}>
-                <ZGridList
-                  products={prods
-                    .sort(compareValues("title", "desc"))
-                    .slice(0, 5)}
-                  categorySlug={pageContext.slug}
-                  showTitle
-                  linkUrl={`/shop/${pageContext.slug}/${brand.slug}`}
-                  titleName={brand.title}
-                />
-              </CategoryListRowStyle>
-            )
-          })}
+              return (
+                <CategoryListRowStyle key={idx}>
+                  <ZGridList
+                    products={prods
+                      .sort(compareValues("title", "desc"))
+                      .slice(0, 5)}
+                    categorySlug={pageContext.slug}
+                    showTitle
+                    linkUrl={`/shop/${pageContext.slug}/${brand.slug}`}
+                    titleName={brand.title}
+                  />
+                </CategoryListRowStyle>
+              )
+            })}
       </CategoryListContainerStyle>
     </Layout>
   )
@@ -60,10 +63,12 @@ export const query = graphql`
         category {
           catTitle: title
           slug
+          isActive
         }
         brand {
           brandTitle: title
           slug
+          isActive
         }
         strapiId
         title
@@ -79,13 +84,15 @@ export const query = graphql`
       }
     }
 
-    allStrapiCategory(filter: { slug: { eq: $slug } }) {
+    allStrapiCategory(filter: { slug: { eq: $slug }, isActive: { eq: true } }) {
       nodes {
         title
         slug
+        isActive
         brands {
           title
           slug
+          isActive
         }
       }
     }

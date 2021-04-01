@@ -51,6 +51,7 @@ const BrandListsTemplate = ({
       <Breadcrumb
         title={pageContext.brandTitle}
         categorySlug={pageContext.categorySlug}
+        isShopPage={true}
       />
 
       <BrandListContainerStyle>
@@ -81,10 +82,12 @@ export const query = graphql`
         category {
           categoryTitle: title
           categorySlug: slug
+          isActive
         }
         brand {
           brandTitle: title
           brandSlug: slug
+          isActive
         }
         strapiId
         title

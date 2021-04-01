@@ -7,6 +7,19 @@ import NavbarDropdown from "../navbar-dropdown/navbar-dropdown.component"
 import styled from "styled-components"
 import { Link } from "gatsby"
 
+const store = [
+  { name: "Team", url: "team" },
+  { name: "Über uns", url: "about" },
+  { name: "Kontakt", url: "contact" },
+  { name: "Öffnungszeiten", url: "contact" },
+]
+
+const maintenance = [
+  { name: "Beratung & Garantie", url: "consultation" },
+  { name: "Miete", url: "rental" },
+  { name: "Reparaturen", url: "workshop" },
+]
+
 const PrebarNavbar = () => {
   const { user, userLogout } = useContext(UserContext)
 
@@ -30,7 +43,8 @@ const PrebarNavbar = () => {
             </SignInRegisterLinksWrapper>
           </PreBarInnerButtonWrapper>
         </PreBarButtonWrapper>
-        <NavbarDropdown />
+        <NavbarDropdown name="Geschäft" listItems={store} />
+        <NavbarDropdown name="Service" listItems={maintenance} />
       </PreBarInner>
       <MobileNavbar />
     </PreBarHeader>
