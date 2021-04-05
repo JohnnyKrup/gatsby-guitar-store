@@ -14,7 +14,7 @@ export const truncateString = (str, n) => {
   if (typeof str !== "string") {
     return null
   }
-  console.log("truncate function")
+  // console.log("truncate function")
   return str.length > n ? `${str.substr(0, n - 1)}\u2026` : str
 }
 
@@ -32,7 +32,7 @@ export const compareValues = (key, order = "asc") => {
       sortOrder = 1
     }
 
-    console.log("sort function")
+    // console.log("sort function")
     // by * by -1 the sort order is changed in the opposite way
     return order === "desc" ? sortOrder * -1 : sortOrder
   }

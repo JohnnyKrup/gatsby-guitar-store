@@ -1,7 +1,12 @@
 import React from "react"
 
 import { ApolloProvider } from "@apollo/client"
-import client from "./src/utils/apolloClient"
+import {
+  apolloClient,
+  apolloEmptiClient,
+  client,
+  aClient,
+} from "./src/utils/apolloClient"
 import { NavigationProvider } from "./src/context/NavigationContext"
 import { SidebarProvider } from "./src/context/Sidebar.Context"
 import { CartProvider } from "./src/context/Cart.Context"

@@ -9,6 +9,21 @@
 const path = require(`path`)
 const { createRemoteFileNode } = require(`gatsby-source-filesystem`)
 
+exports.onCreateWebpackConfig = ({ stage, loaders, actions }) => {
+  if (stage === "build-html" || stage === "develop-html") {
+    actions.setWebpackConfig({
+      module: {
+        rules: [
+          {
+            test: /bad-module/,
+            use: loaders.null(),
+          },
+        ],
+      },
+    })
+  }
+}
+
 exports.onCreatePage = async ({ page, actions }) => {
   const { createPage } = actions
 
@@ -68,7 +83,7 @@ exports.createPages = async ({ graphql, actions }) => {
     data.allStrapiBrand.brands.forEach(brand => {
       if (brand.isActive) {
         brand.categories.forEach(cat => {
-          console.log({ cat })
+          // console.log({ cat })
           if (cat.isActive) {
             createPage({
               path: `shop/${cat.slug}/${brand.slug}`,

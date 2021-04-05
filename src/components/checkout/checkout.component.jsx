@@ -7,7 +7,7 @@ import Title from "../title/title.component"
 import FormInput from "../form-input/form-input.component"
 import CustomButton from "../custom-button/custom-button.component"
 
-import { CardElement, useStripe, useElements } from "@stripe/react-stripe-js"
+// import { CardElement, useStripe, useElements } from "@stripe/react-stripe-js"
 
 // import submitOrder from "../../strapi/submitOrder"
 import styled from "styled-components"
@@ -23,40 +23,40 @@ const Checkout = props => {
 
   // state values
 
-  const stripe = useStripe()
-  const elements = useElements()
+  // const stripe = useStripe()
+  // const elements = useElements()
 
   const isEmpty = !name
 
-  const handleSubmit = async e => {
-    e.preventDefault()
+  // const handleSubmit = async e => {
+  //   e.preventDefault()
 
-    if (!stripe || !elements) {
-      // Stripe.js has not loaded yet. Make sure to disable
-      // form submission until Stripe.js has loaded.
-      return
-    }
+  //   if (!stripe || !elements) {
+  //     // Stripe.js has not loaded yet. Make sure to disable
+  //     // form submission until Stripe.js has loaded.
+  //     return
+  //   }
 
-    const cardElement = elements.getElement(CardElement)
+  //   const cardElement = elements.getElement(CardElement)
 
-    const { error, paymentMethod } = await stripe.createPaymentMethod({
-      type: "card",
-      card: cardElement,
-    })
+  //   const { error, paymentMethod } = await stripe.createPaymentMethod({
+  //     type: "card",
+  //     card: cardElement,
+  //   })
 
-    error
-      ? console.log("[error]", error)
-      : console.log("[PaymentMethod]", paymentMethod)
-  }
+  //   error
+  //     ? console.log("[error]", error)
+  //     : console.log("[PaymentMethod]", paymentMethod)
+  // }
 
   return (
     <CheckoutSectionStyle>
       <Title title="Kasse" />
-      <CheckoutFormStyle onSubmit={handleSubmit}>
+      {/* <CheckoutFormStyle onSubmit={handleSubmit}>
         <h3>
           Gesamtbetrag : <span>CHF {cartTotal}</span>
         </h3>
-        {/* Add all fields for the address, later */}
+        // Add all fields for the address, later 
         <FormInput
           name="name"
           type="text"
@@ -95,17 +95,18 @@ const Checkout = props => {
             </CustomButton>
           </div>
         )}
-      </CheckoutFormStyle>
+      </CheckoutFormStyle> 
+      */}
     </CheckoutSectionStyle>
   )
 }
 
-export const CheckoutSectionStyle = styled.section`
+const CheckoutSectionStyle = styled.section`
   margin-top: 120px;
   width: 50vw;
 `
 
-export const CheckoutFormStyle = styled.form`
+const CheckoutFormStyle = styled.form`
   width: 100%;
   /* background-color: var(--offWhite); */
   padding: 5%;

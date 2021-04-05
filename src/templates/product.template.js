@@ -48,9 +48,9 @@ const ProductTemplate = ({ data: { strapiProduct }, pageContext }) => {
     console.log("images effect")
     setGalleryImages(
       strapiProduct.gallery_images.map(image => {
-        console.log({ image })
+        // console.log({ image })
         let webp = image.multipleFiles.childImageSharp.fluid
-        console.log(webp.srcWebp)
+        // console.log(webp.srcWebp)
 
         return {
           srcSet: webp.srcSetWebp,
@@ -58,8 +58,8 @@ const ProductTemplate = ({ data: { strapiProduct }, pageContext }) => {
         }
       })
     )
-    console.log({ galleryImages })
-  }, [strapiProduct.gallery_images, galleryImages])
+    // console.log({ galleryImages })
+  }, [])
 
   useEffect(() => {
     console.log("useEffect should run only once")
@@ -71,10 +71,10 @@ const ProductTemplate = ({ data: { strapiProduct }, pageContext }) => {
         })
       )
     }
-  }, [SimilarProducts])
+  }, [])
 
   // console.log(`localhost:8000${fluid.srcWebp}`)
-  console.log("images/Guitar_Hero.jpg")
+  // console.log("images/Guitar_Hero.jpg")
 
   return (
     <Layout>

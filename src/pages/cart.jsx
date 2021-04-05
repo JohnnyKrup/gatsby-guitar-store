@@ -1,19 +1,19 @@
 import React from "react"
 
-import { CartContext } from "../context/Cart.Context"
+// import { CartContext } from "../context/Cart.Context"
 
 import Layout from "../components/layout.component"
-import CartItem from "../components/cart-item/cart-item.component"
-import StripeCheckoutButton from "../components/stripe-button/stripe-checkout-button.component"
+// import CartItem from "../components/cart-item/cart-item.component"
+// import StripeCheckoutButton from "../components/stripe-button/stripe-checkout-button.component"
 import styled from "styled-components"
 
 const CartPage = () => {
-  const { cartItems, cartTotal } = React.useContext(CartContext)
+  // const { cartItems, cartTotal } = React.useContext(CartContext)
   // console.log({ cartItems })
 
   return (
     <Layout>
-      <CartPageStyle>
+      {/* <CartPageStyle>
         <CartHeaderStyle>
           <div className="header-block">
             <span>Produkt</span>
@@ -48,15 +48,15 @@ const CartPage = () => {
           <div className="payment">
             <span>Visa: </span> 4000 0566 5566 5556 / EXP: 01/25 / CVC: 123
           </div>
-        </TestDataStyle>
+        </TestDataStyle> */}
 
-        <StripeCheckoutButton price={cartTotal} />
-      </CartPageStyle>
+      {/* <StripeCheckoutButton price={cartTotal} /> */}
+      {/* </CartPageStyle> */}
     </Layout>
   )
 }
 
-export const CartPageStyle = styled.div`
+const CartPageStyle = styled.div`
   width: 70%;
   min-height: 90vh;
   display: flex;
@@ -69,7 +69,7 @@ export const CartPageStyle = styled.div`
   }
 `
 
-export const CartHeaderStyle = styled.div`
+const CartHeaderStyle = styled.div`
   width: 100%;
   padding: 10px 0;
   display: flex;
@@ -93,7 +93,7 @@ export const CartHeaderStyle = styled.div`
     }
   }
 `
-export const CartTotalStyle = styled.div`
+const CartTotalStyle = styled.div`
   margin-top: 30px;
   margin-left: auto;
   font-size: 36px;
@@ -102,7 +102,7 @@ export const CartTotalStyle = styled.div`
     font-size: 20px;
   }
 `
-export const TestDataStyle = styled.div`
+const TestDataStyle = styled.div`
   margin: 20px 0;
   color: red;
 

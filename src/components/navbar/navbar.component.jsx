@@ -6,9 +6,18 @@ import SearchbarMobile from "./searchbar-mobile/searchbar-mobile.component"
 
 import styled from "styled-components"
 
+// import ApolloQuery from "../apollo-query/apollo-query.component"
+// import MENU_QUERY from "../../queries/menu/menu"
+
 const Navbar = () => {
   return (
     <NavbarStyle>
+      {/* <ApolloQuery query={MENU_QUERY}>
+        {({ data: menus }) => {
+          // console.log({ menus })
+          return null
+        }}
+      </ApolloQuery> */}
       <PrebarNavbar />
       <MainNavbar />
       <SearchbarMobile />
